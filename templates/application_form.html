@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>КИК &middot; Заявка на арендное жилье по программе КЗ 2020</title>
+        <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="gridforms/gridforms.js"></script>
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <style type="text/css">
+        body {font-family:arial, sans-serif}
+        </style>
+    </head>
+    <body>
+    <h1>КИК: Заявка на арендное жилье по программе "Казахстан 2020"</h1>
+    <form class="grid-form">
+        <fieldset>
+            <legend>Пожалуйста, выберите программу</legend>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label>Программа</label>
+                    <select>
+                        <option value="kz_2020" title="">Доступное жилье - 2020</option>
+                        <option value="other" title="">Другая программа</option>
+                    </select>
+                </div>
+            </div>
+
+            <div data-row-span="3">
+                <div data-field-span="1">
+                    <label>Регион</label>
+                    <select>
+                        <option value="kz_2020" title="">Алматинская обл.</option>
+                    </select>
+                </div>
+                <div data-field-span="1">
+                    <label>Город</label>
+                    <select>
+                        <option value="kz_2020" title="">Алматы</option>
+                        <option value="other" title="">Талдыкорган</option>
+                    </select>
+                </div>
+                <div data-field-span="1">
+                    <label>Жилой комплекс</label>
+                    <select>
+                        <option value="kz_2020" title="">Атамекен</option>
+                        <option value="other" title="">Сатурн 401</option>
+                        <option value="other" title="">Северное сияние</option>
+                    </select>
+                </div>
+            </div>
+
+            <div data-row-span="2">
+                <div data-field-span="1">
+                    <label>Количество комнат</label>
+                    <label><input type="radio" name="customer-title[]">1</label> &nbsp;
+                    <label><input type="radio" name="customer-title[]">2-x</label> &nbsp;
+                    <label><input type="radio" name="customer-title[]">3-х</label>
+                </div>
+                <div data-field-span="1">
+                    <label for="">Номер квартиры</label>
+                    <select>
+                        <option value="kz_2020" title="">32</option>
+                        <option value="other" title="">54</option>
+                        <option value="other" title="">317</option>
+                    </select>
+                </div>
+            </div>
+            <div data-row-span="3">
+                <div data-field-span="1">
+                    <label>Подъезд</label>
+                    <input readonly type="text" value="1-ый (с западной стороны)">
+                </div>
+                <div data-field-span="1">
+                    <label>Этаж</label>
+                    <input readonly type="text" value="6">
+                </div>
+                <div data-field-span="1">
+                    <label>Квадратура</label>
+                    <span>130 м<sup>2</sup></span>
+                </div>
+            </div>
+
+            <div data-row-span="1">
+                <div data-field-span="1">
+                <label>Стоимость аренды за 1 м<sup>2</sup>при сроке аренды в</label>
+                    <label><input type="checkbox">5 лет за 3160,72 тенге</label> &nbsp;
+                    <label><input type="checkbox">7 лет за 2469.60 тенге</label>
+                    <label><input type="checkbox">12 лет за 1800.10 тенге</label>
+                </div>
+            </div>
+
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label>Процентная ставка</label>
+                    <span>18%</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <br><br>
+
+        <fieldset>
+            <legend>Анкета (демографические данные)</legend>
+
+            <div data-row-span="3">
+                <div data-field-span="1">
+                    <label>Фамилия</label>
+                    <input type="text">
+                </div>
+                <div data-field-span="1">
+                    <label>Имя</label>
+                    <input type="text">
+                </div>
+                <div data-field-span="1">
+                    <label>Отчество</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div data-row-span="2">
+                 <div data-field-span="1">
+                    <label>Дата рождения</label>
+                    <input type="text">
+                </div>
+                 <div data-field-span="1">
+                    <label>Национальность</label>
+                     <select>
+                        <option value="kz_2020" title="">Русский</option>
+                        <option value="other" title="">Казах</option>
+                        <option value="other" title="">...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div data-row-span="4">
+                <div data-field-span="2" data-field-error="Please enter a valid email address">
+                    <label>Семеный статус</label>
+                    <label><input type="radio" name="customer-title[]"> Женат</label> &nbsp;
+                    <label><input type="radio" name="customer-title[]"> Холост</label> &nbsp;
+                    <label><input type="radio" name="customer-title[]"> Разведен</label>
+                </div>
+                <div data-field-span="1">
+                    <label>адрес проживания</label>
+                    <input type="text">
+                </div>
+                <div data-field-span="1">
+                    <label>Номер телефона</label>
+                    <input type="text">
+                </div>
+            </div>
+            <a href="#">Еще анкета</a>
+        </fieldset>
+        <br><br>
+
+        <fieldset>
+            <legend>Информация о доходах/расходах</legend>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Доход по основному месту работы</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Доходы по доп. Месту работы</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Доходы в виде диведендов</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Доход в виде вознагражд. И регулярных страховых выплта</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Пенсионные выплаты и стипендии</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Доход в виде арендной платы</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Алементы</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    <label for="">Другие доходы</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div data-row-span="1">
+                <div data-field-span="1">
+                    Итого 2 800 000 тенге
+                </div>
+            </div>
+            <br>
+            <fieldset>
+                <legend>Коэффициенты (авто)</legend>
+                <div data-row-span="2">
+                    <div data-field-span="1">
+                        <label for="">О/Д</label>
+                        <span>66%</span>
+                    </div>
+                    <div data-field-span="1">
+                        <label for="">П/Д</label>
+                        <span>44.12%</span>
+                    </div>
+                </div>
+            </fieldset>
+        </fieldset>
+        <br><br>
+        <a href="#">Отменить</a> или &nbsp;
+        <button>Отправить на согласование</button>
+        <button>Согласовать</button>
+
+</body>
+</html>
