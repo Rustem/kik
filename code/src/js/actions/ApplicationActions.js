@@ -5,7 +5,7 @@ var ApplicationWebAPI = require('../api/ApplicationWebAPI');
 module.exports = {
   create: function(object){
     AppDispatcher.handleAction({
-      actionType: ActionTypes.CREATE_APPLICATION,
+      type: ActionTypes.CREATE_APPLICATION,
       object: object
     });
     ApplicationWebAPI.create(object, function(object){

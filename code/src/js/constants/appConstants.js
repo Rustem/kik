@@ -5,6 +5,10 @@ var appConstants = {
 		APP_LOAD_SUCCESS: null,
 		CREATE_APPLICATION: null,
 		CREATE_APPLICATION_SUCCESS: null,
+		CREATE_APPLICATION_FAIL: null,
+		LOG_IN: null,
+		LOG_IN_SUCCESS: null,
+		LOG_IN_FAIL: null,
 	})
 };
 
