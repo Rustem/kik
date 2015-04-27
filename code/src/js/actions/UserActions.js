@@ -21,7 +21,7 @@ module.exports = {
               type: ActionTypes.LOG_IN_FAIL,
               error: error
           });
-          reject(error)
+          reject(error);
       });
     });
   },
