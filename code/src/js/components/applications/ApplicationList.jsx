@@ -1,6 +1,3 @@
-var SessionStore = require('../../stores/SessionStore');
-var ApplicationStore =require('../../stores/ApplicationStore');
-
 ApplicationListItem = React.createClass({
 	PropTypes: {
 		idx: React.PropTypes.number,
@@ -18,19 +15,8 @@ ApplicationListItem = React.createClass({
 })
 
 ApplicationList = React.createClass({
-	statics: {
-	    willTransitionTo: function (transition, params) {
-	      if (!SessionStore.current_user()) {
-	        transition.abort();
-	        transition.redirect('login', {}, {});
-	      }
-	    },
-	},
-
-	getInitialState: function() {
-		return {
-			applications: ApplicationStore.getZero(),
-		}
+	PropTypes: {
+		applications: React.PropTypes.array,
 	},
 
 	renderItem: function(application, idx) {
@@ -39,7 +25,7 @@ ApplicationList = React.createClass({
 
 	render: function() {
 		return  <div>
-					{this.state.applications.map(this.renderItem)}
+					{this.props.applications.map(this.renderItem)}
 				</div>
 	}
 });

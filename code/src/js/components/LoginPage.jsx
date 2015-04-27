@@ -7,9 +7,10 @@ var LoginPage = React.createClass({
     mixins: [React.State],
     statics: {
         willTransitionTo: function (transition, params) {
+            console.log(SessionStore.current_user())
           if (SessionStore.current_user()) {
             transition.abort();
-            transition.redirect('application_list', {}, {});
+            transition.redirect('hub', {}, {});
           }
         },
     },
