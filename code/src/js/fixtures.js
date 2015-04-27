@@ -34,6 +34,24 @@ module.exports = {
         position: 22,
       },
     ]));
-  }
+
+    localStorage.setItem('applications', JSON.stringify([
+      {
+        id: 'appl_0',
+        status: 0,
+      },
+      {
+        id: 'appl_1',
+        status: 1,
+      },
+      {
+        id: 'appl_2',
+        status: 1,
+      },
+      
+    ]));
+  },
+
+  
 
 };
