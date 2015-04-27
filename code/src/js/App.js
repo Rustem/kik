@@ -1,3 +1,4 @@
+window.React = require('react');
 var Router = require('react-router');
 var AppActions = require('./actions/AppActions');
 var ApplicationWebAPI = require('./api/ApplicationWebAPI');
