@@ -4,8 +4,8 @@ var Routes = Router.Routes;
 var DefaultRoute = Router.DefaultRoute;
 var Redirect = Router.Redirect;
 
-var Index = React.createFactory(require('./components/Index.jsx'));
-var ApplicationList = React.createFactory(require('./components/applications/ApplicationList.jsx'));
+var Index = require('./components/Index.jsx');
+var ApplicationList = require('./components/applications/ApplicationList.jsx');
 
 var routes = (
     <Route name="index" path="/" handler={Index}>

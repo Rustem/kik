@@ -2,6 +2,21 @@ module.exports = {
 
   init: function() {
 
+    localStorage.setItem('users', JSON.stringify([
+      {
+        id: 'user_1',
+        email: 'sayan@sataifilm.kz',
+        name: 'Sayan Bekkarimov',
+        type: 0
+      },
+      {
+        id: 'user_2',
+        email: 'a.zholdasov@gmail.com',
+        name: 'Aman Zholdasov',
+        type: 0
+      },
+    ]));
+
     // localStorage.setItem('products', JSON.stringify([
     //   {
     //     id: 'prod_1',
