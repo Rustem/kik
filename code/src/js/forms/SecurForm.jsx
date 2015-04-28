@@ -2,13 +2,13 @@ var forms = require('newforms');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
-var LegalFormDefinition = forms.Form.extend({
+var SecurFormDefinition = forms.Form.extend({
   text: forms.CharField({
     widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
   }),
 });
 
-var LegalForm = React.createClass({
+var SecurForm = React.createClass({
 	mixins:[AppContextMixin],
 	propTypes: {
 		application: React.PropTypes.object,
@@ -18,11 +18,11 @@ var LegalForm = React.createClass({
 	onHandleSubmit: function(e) {
 		e.preventDefault();
 
-	    var form = this.refs.LegalForm.getForm();
+	    var form = this.refs.SecurForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
 	    	var rv = form.cleanedData;
-	    	rv['type'] = ConclusionTypes.LEGAL;
+	    	rv['type'] = ConclusionTypes.SECUR;
 	    	rv['application_id'] = this.props.application.id;
 	      	rv['author_id'] = this.getUser.id;
 	      	this.props.onHandleSubmit(rv);
@@ -31,10 +31,10 @@ var LegalForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={LegalFormDefinition} ref="LegalForm"/>
+			        <forms.RenderForm form={SecurFormDefinition} ref="SecurForm"/>
 			        <button>Отправить</button>
 			    </form>
     },
 });
 
-module.exports = LegalForm;
+module.exports = SecurForm;

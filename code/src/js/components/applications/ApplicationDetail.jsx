@@ -3,6 +3,7 @@ var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
+var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
 var ConclusionActions = require('../../actions/ConclusionActions');
 
 
@@ -30,11 +31,11 @@ ApplicationDetail = React.createClass({
 			case 1:
 				return null;
 			case 20:
-				return <RiskConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />
+				return <RiskConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 21:
 				return <LegalConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 22:
-				return null;
+				return <SecurConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 		}
 		return null
 	},
