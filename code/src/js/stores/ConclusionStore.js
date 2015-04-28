@@ -34,6 +34,10 @@ var ConclusionStore = objectAssign({}, EventEmitter.prototype, {
     return _.where(_conclusions, { application_id: application.id });
   },
 
+  getByApplicationAndType: function(application, type) {
+    return _.where(this.getByApplication(application), { type: type });
+  }
+
 });
 
 ConclusionStore.dispatchToken = AppDispatcher.register(function(payload){

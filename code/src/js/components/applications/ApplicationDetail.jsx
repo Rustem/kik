@@ -1,7 +1,7 @@
 var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
-var RiskForm = require('../../forms/RiskForm.jsx');
+var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var ConclusionActions = require('../../actions/ConclusionActions');
 
 
@@ -29,7 +29,7 @@ ApplicationDetail = React.createClass({
 			case 1:
 				return null;
 			case 20:
-				return <RiskForm application={application} onHandleSubmit={this.onRiskSubmit} />
+				return <RiskConclusion application={application} onHandleSubmit={this.onRiskSubmit} />
 			case 21:
 				return null;
 			case 22:
