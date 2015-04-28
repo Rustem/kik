@@ -20,9 +20,17 @@ module.exports = {
 
         var current_user = _.findWhere(users, { 'email': object.email });
 
-        localStorage.setItem('current_user', JSON.stringify(current_user));
+        if(current_user)
+            localStorage.setItem('current_user', JSON.stringify(current_user));
         setTimeout(function(){
             success(current_user);
+        }, 0);
+    },
+
+    logout: function(object, success, failure) {
+        localStorage.removeItem('current_user');
+        setTimeout(function(){
+            success(undefined);
         }, 0);
     },
 

@@ -48,6 +48,10 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload) {
             SessionStore.setCurrent(action.object);
             SessionStore.emitChange();
             break;
+        case ActionTypes.LOG_OUT_SUCCESS:
+            SessionStore.setCurrent(action.object);
+            SessionStore.emitChange();
+            break;
     }
 });
 
