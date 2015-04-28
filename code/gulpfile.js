@@ -7,7 +7,9 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
 var streamify = require('gulp-streamify');
- 
+
+var i = 0;
+
 var path = {
   HTML: 'src/index.html',
   MINIFIED_OUT: 'build.min.js',
@@ -46,7 +48,8 @@ gulp.task('watch', ['replaceHTMLsrc'], function() {
     watcher.bundle()
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST_SRC));
-      console.log('Updated');
+      console.log('Updated: ' , i);
+      i+=1;
   })
     .bundle()
     .pipe(source(path.OUT))

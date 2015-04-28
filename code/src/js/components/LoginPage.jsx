@@ -4,13 +4,11 @@ var LogInForm = require('../forms/LogInForm.jsx');
 var UserActions = require('../actions/UserActions');
 
 var LoginPage = React.createClass({
-    mixins: [React.State],
     statics: {
         willTransitionTo: function (transition, params) {
-            console.log(SessionStore.current_user())
           if (SessionStore.current_user()) {
             transition.abort();
-            transition.redirect('hub', {}, {});
+            transition.redirect('index', {}, {});
           }
         },
     },
@@ -20,8 +18,10 @@ var LoginPage = React.createClass({
 
     onLogIn: function(object) {
         var promise = UserActions.login(object);
-        promise.done(
-            this.context.router.transitionTo('index'));
+        promise.done(function() {
+            this.context.router.transitionTo('index');
+            
+        }.bind(this));
     },
 
     render: function() {
