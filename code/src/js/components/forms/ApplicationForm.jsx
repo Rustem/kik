@@ -1,38 +1,38 @@
+var forms = require('newforms');
 var GridForms = require('newforms-gridforms');
-var {GridForm, Section, Row, Field} = GridForms;
+var GridForm = GridForms.GridForms;
+var Section = GridForms.Section;
+var Row = GridForms.Row;
+var Field = GridForms.Field;
 
 
-var ApplicationForm = React.createClass({
+var ApplicationForm = forms.Form.extend({
+  username: forms.CharField(),
+  email: forms.EmailField(),
+  password: forms.CharField({widget: forms.PasswordInput}),
+  confirmPassword: forms.CharField({widget: forms.PasswordInput}),
+  acceptTerms: forms.BooleanField({required: true})
+});
+
+
+var ApplicationFormView = React.createClass({
+
   render: function() {
     return (
       <form onSubmit={this._onSubmit}>
-        <forms.RenderForm form={ProductForm} ref="signupForm">
+
+        <forms.RenderForm form={ApplicationForm} >
           <GridForm>
-            <Section name="Add to inventory">
-              <Row>
-                <Field name="productName" span="3"/>
-                <Field name="tags"/>
-              </Row>
-              <Row>
-                <Field name="vendor"/>
-                <Field name="productType"/>
-              </Row>
-              <Row>
-                <Field name="productDescription"/>
-              </Row>
-              <Row>
-                <Field name="sku"/>
-                <Field name="initialStockLevel"/>
-                <Field name="costPrice"/>
-                <Field name="wholesalePrice"/>
-                <Field name="retailPrice"/>
-              </Row>
-            </Section>
+
           </GridForm>
         </forms.RenderForm>
+
         <button type='submit'>Red Button!</button>
       </form>
     );
   },
 
 });
+
+
+module.exports = ApplicationFormView;

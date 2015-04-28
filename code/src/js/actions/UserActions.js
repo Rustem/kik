@@ -1,26 +1,28 @@
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var ActionTypes = require('../constants/appConstants').ActionTypes;
-var ApplicationWebAPI = require('../api/ApplicationWebAPI');
+var UserWebAPI = require('../api/UserWebAPI');
+var promise = require('when').promise;
 
 module.exports = {
-
-  create: function(object){
-    AppDispatcher.handleAction({
-      actionType: ActionTypes.CREATE_APPLICATION,
-      object: object
-    });
-    ApplicationWebAPI.create(object, function(object){
-      dispatcher.handleServerAction({
-        type: ActionTypes.CREATE_APPLICATION_SUCCESS,
+  login: function(object){
+    return promise(function (resolve, reject) {
+      AppDispatcher.handleAction({
+        type: ActionTypes.LOG_IN,
         object: object
       });
-    }.bind(this), function(error){
-      dispatcher.handleServerAction({
-        type: ActionTypes.CREATE_APPLICATION_FAIL,
-        error: error
+      UserWebAPI.login(object, function(object){
+          AppDispatcher.handleAction({
+              type: ActionTypes.LOG_IN_SUCCESS,
+              object: object
+          });
+          resolve(object);
+      }.bind(this), function(error){
+          AppDispatcher.handleAction({
+              type: ActionTypes.LOG_IN_FAIL,
+              error: error
+          });
+          reject(error);
       });
     });
   },
-
-
 };

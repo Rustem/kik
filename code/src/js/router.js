@@ -5,12 +5,22 @@ var DefaultRoute = Router.DefaultRoute;
 var Redirect = Router.Redirect;
 
 var Index = require('./components/Index.jsx');
-var ApplicationList = require('./components/applications/ApplicationList.jsx');
+var Hub = require('./components/Hub.jsx');
+var LoginPage = require('./components/LoginPage.jsx');
+var stages = require('./components/stages');
 
 var routes = (
     <Route name="index" path="/" handler={Index}>
-        <Route name="application_list" path="/application_list/" handler={ApplicationList} />
-        <Redirect from="/" to="application_list" />
+	    <Route name="login" path="/login" handler={LoginPage} />
+        <Route name="stages" path="/stages/" handler={stages.Index}>
+        	<Route name="stage0" path="stage0" handler={stages.Stage0} />
+        	<Route name="stage1" path="stage1" handler={stages.Stage1} />
+        	<Route name="stage20" path="stage20" handler={stages.Stage20} />
+        	<Route name="stage21" path="stage21" handler={stages.Stage21} />
+        	<Route name="stage22" path="stage22" handler={stages.Stage22} />
+        </Route>
+
+        <DefaultRoute handler={Hub}/>
     </Route>
 );
 

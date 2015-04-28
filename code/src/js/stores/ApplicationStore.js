@@ -1,5 +1,6 @@
+var _ = require('lodash');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
-var appConstants = require('../constants/appConstants');
+var ActionTypes = require('../constants/appConstants').ActionTypes;
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
@@ -8,29 +9,42 @@ var CHANGE_EVENT = 'change';
 var _applications = {};
 
 var addItem = function(item){
-  _store[item.id] = item;
+  _applications[item.id] = item;
 };
 
 var removeItem = function(item){
-  delete _store[item.id];
+  delete _applications[item.id];
 }
 
 var ApplicationStore = objectAssign({}, EventEmitter.prototype, {
+
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
   },
+
   removeChangeListener: function(cb){
     this.removeListener(CHANGE_EVENT, cb);
   },
+
   getAll: function(){
-    return _store;
+    return _applications;
   },
+
+  getZero: function() {
+    return _.where(_applications, { status: 0 });
+  }
 });
 
-AppDispatcher.register(function(payload){
+ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){
   var action = payload.action;
-  switch(action.actionType){
-    case appConstants.CREATE_APPLICATION_SUCCESS:
+  switch(action.type){
+    case ActionTypes.APP_LOAD_SUCCESS:
+      _.forEach(action.object.applications, function(application){
+        addItem(application);
+      });
+      ApplicationStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.CREATE_APPLICATION_SUCCESS:
       addItem(action.object);
       ApplicationStore.emit(CHANGE_EVENT);
       break;

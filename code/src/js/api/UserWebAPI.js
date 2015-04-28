@@ -8,18 +8,12 @@ module.exports = {
         }, 0);
     },
 
-    create: function(object, success, failure) {
-        var timeNow = Date.now();
-        var object = _.extend({}, {
-            id: 'user_' + timeNow,
-            date_created: timeNow,
-        }, object);
+    login: function(object, success, failure) {
+        var users = JSON.parse(localStorage.getItem('users'));
 
-        var rawUsers = JSON.parse(localStorage.getItem('users')) || [];
-        rawUsers.push(object);
-        localStorage.setItem('users', JSON.stringify(rawUsers));
-        setTimeout(function() {
-            success(object);
+        var current_user = _.findWhere(users, { 'email': object.email });
+        setTimeout(function(){
+            success(current_user);
         }, 0);
     },
 }

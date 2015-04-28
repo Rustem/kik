@@ -1,6 +1,32 @@
-ApplicationList = React.createClass({
+ApplicationListItem = React.createClass({
+	PropTypes: {
+		idx: React.PropTypes.number,
+		application: React.PropTypes.object,
+	},
+
 	render: function() {
-		return <span>Yes</span>
+		var application = this.props.application;
+		return <p>
+				<span>{application.id}</span>: 
+				<span>{application.status}</span>
+			   </p>
+		
+	}
+})
+
+ApplicationList = React.createClass({
+	PropTypes: {
+		applications: React.PropTypes.array,
+	},
+
+	renderItem: function(application, idx) {
+		return <ApplicationListItem application={application} idx={idx} />
+	},
+
+	render: function() {
+		return  <div>
+					{this.props.applications.map(this.renderItem)}
+				</div>
 	}
 });
 
