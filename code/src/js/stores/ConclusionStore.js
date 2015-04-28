@@ -50,7 +50,7 @@ ConclusionStore.dispatchToken = AppDispatcher.register(function(payload){
       ConclusionStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.CREATE_CONCLUSION_SUCCESS:
-      addItem(action.object);
+      addItem(action.object.conclusion);
       ConclusionStore.emit(CHANGE_EVENT);
       break;
     default:

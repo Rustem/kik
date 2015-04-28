@@ -1,5 +1,6 @@
 var forms = require('newforms');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
+var AppContextMixin = require('../mixins/AppContextMixin');
 
 var RiskFormDefinition = forms.Form.extend({
   text: forms.CharField({
@@ -8,6 +9,7 @@ var RiskFormDefinition = forms.Form.extend({
 });
 
 var RiskForm = React.createClass({
+	mixins:[AppContextMixin],
 	propTypes: {
 		application: React.PropTypes.object,
 	    onHandleSubmit: React.PropTypes.func,
@@ -22,6 +24,7 @@ var RiskForm = React.createClass({
 	    	var rv = form.cleanedData;
 	    	rv['type'] = ConclusionTypes.RISK;
 	    	rv['application_id'] = this.props.application.id;
+	    	rv['author_id'] = this.getUser.id;
 	      	this.props.onHandleSubmit(rv);
 	    }
 	},

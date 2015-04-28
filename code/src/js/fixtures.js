@@ -35,33 +35,33 @@ module.exports = {
       },
     ]));
 
-    localStorage.setItem('applications', JSON.stringify([
-      {
-        id: 'appl_0',
-        status: 0,
-      },
-      {
-        id: 'appl_1',
-        status: 1,
-      },
-      {
-        id: 'appl_3',
-        status: 1,
-      },
-      {
-        id: 'appl_4',
-        status: 2,
-      },
-      {
-        id: 'appl_5',
-        status: 2,
-      },
-      {
-        id: 'appl_6',
-        status: 3,
-      },
+    // localStorage.setItem('applications', JSON.stringify([
+    //   {
+    //     id: 'appl_0',
+    //     status: 0,
+    //   },
+    //   {
+    //     id: 'appl_1',
+    //     status: 1,
+    //   },
+    //   {
+    //     id: 'appl_3',
+    //     status: 1,
+    //   },
+    //   {
+    //     id: 'appl_4',
+    //     status: 2,
+    //   },
+    //   {
+    //     id: 'appl_5',
+    //     status: 2,
+    //   },
+    //   {
+    //     id: 'appl_6',
+    //     status: 3,
+    //   },
       
-    ]));
+    // ]));
   },
 
   
