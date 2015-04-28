@@ -12,6 +12,7 @@ var i = 0;
 
 var path = {
   HTML: 'src/index.html',
+  CSS: 'src/css/*',
   MINIFIED_OUT: 'build.min.js',
   OUT: 'build.js',
   DEST: 'dist',
@@ -23,8 +24,10 @@ var path = {
 gulp.task('copy', function(){
   gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
+  gulp.src(path.CSS)
+    .pipe(gulp.dest(path.DEST_SRC));
 });
- 
+
 gulp.task('replaceHTMLsrc', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
@@ -77,4 +80,4 @@ gulp.task('replaceHTML', function(){
  
 gulp.task('production', ['replaceHTML', 'build']);
  
-gulp.task('default', ['watch']);
+gulp.task('default', ['copy', 'watch']);
