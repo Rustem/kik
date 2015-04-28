@@ -2,13 +2,14 @@ var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
+var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var ConclusionActions = require('../../actions/ConclusionActions');
 
 
 ApplicationDetail = React.createClass({
 	mixins: [AppContextMixin, Router.State, Router.Navigation],
 
-	onRiskSubmit: function(object) {
+	onConclusionSubmit: function(object) {
 		var promise = ConclusionActions.create(object);
 		promise.done(function() {
             this.transitionTo('index');
@@ -29,9 +30,9 @@ ApplicationDetail = React.createClass({
 			case 1:
 				return null;
 			case 20:
-				return <RiskConclusion application={application} onHandleSubmit={this.onRiskSubmit} />
+				return <RiskConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />
 			case 21:
-				return null;
+				return <LegalConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 22:
 				return null;
 		}

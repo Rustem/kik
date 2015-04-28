@@ -1,9 +1,9 @@
 var ConclusionStore = require('../../stores/ConclusionStore');
-var RiskForm = require('../../forms/RiskForm.jsx');
+var LegalForm = require('../../forms/LegalForm.jsx');
 var ConclusionTypes = require('../../constants/appConstants').ConclusionTypes;
 
 
-RiskConclusion = React.createClass({
+LegalConclusion = React.createClass({
 	PropTypes: {
 		onHandleSubmit: React.PropTypes.func,
 		application: React.PropTypes.object,
@@ -11,7 +11,7 @@ RiskConclusion = React.createClass({
 
 	getConclusion: function() {
 		var application = this.props.application;
-		return ConclusionStore.getByApplicationAndType(application, ConclusionTypes.RISK);
+		return ConclusionStore.getByApplicationAndType(application, ConclusionTypes.LEGAL);
 	},
 
 	render: function() {
@@ -19,7 +19,7 @@ RiskConclusion = React.createClass({
 		return  <div>
 					{
 					conclusion == undefined ? 
-						<RiskForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
+						<LegalForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
 					:
 						<div>{conclusion.text}</div>
 					}
@@ -28,4 +28,4 @@ RiskConclusion = React.createClass({
 	}
 });
 
-module.exports = RiskConclusion;
+module.exports = LegalConclusion;

@@ -12,7 +12,13 @@ var appConstants = {
 		CREATE_CONCLUSION: null,
 		CREATE_CONCLUSION_SUCCESS: null,
 		CREATE_CONCLUSION_FAIL: null,
-	})
+	}),
+
+	ConclusionTypes: {
+		RISK: 0,
+		LEGAL: 1,
+		SECUR: 2,
+	}
 };
 
 module.exports = appConstants;

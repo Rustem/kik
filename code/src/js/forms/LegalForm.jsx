@@ -1,13 +1,13 @@
 var forms = require('newforms');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 
-var RiskFormDefinition = forms.Form.extend({
+var LegalFormDefinition = forms.Form.extend({
   text: forms.CharField({
     widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
   }),
 });
 
-var RiskForm = React.createClass({
+var LegalForm = React.createClass({
 	propTypes: {
 		application: React.PropTypes.object,
 	    onHandleSubmit: React.PropTypes.func,
@@ -16,11 +16,11 @@ var RiskForm = React.createClass({
 	onHandleSubmit: function(e) {
 		e.preventDefault();
 
-	    var form = this.refs.RiskForm.getForm();
+	    var form = this.refs.LegalForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
 	    	var rv = form.cleanedData;
-	    	rv['type'] = ConclusionTypes.RISK;
+	    	rv['type'] = ConclusionTypes.LEGAL;
 	    	rv['application_id'] = this.props.application.id;
 	      	this.props.onHandleSubmit(rv);
 	    }
@@ -28,10 +28,10 @@ var RiskForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={RiskFormDefinition} ref="RiskForm"/>
+			        <forms.RenderForm form={LegalFormDefinition} ref="LegalForm"/>
 			        <button>Отправить</button>
 			    </form>
     },
 });
 
-module.exports = RiskForm;
+module.exports = LegalForm;

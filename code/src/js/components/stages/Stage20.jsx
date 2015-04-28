@@ -2,8 +2,10 @@ var _ = require('lodash');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var ConclusionStore = require('../../stores/ConclusionStore');
 var ApplicationList = require('../applications/ApplicationList.jsx');
+var ConclusionTypes = require('../../constants/appConstants').ConclusionTypes;
 
 var Stage20 = React.createClass({
+	
 	getInitialState: function() {
 		return {
 			applications: ApplicationStore.getByStatus(2),
@@ -13,7 +15,7 @@ var Stage20 = React.createClass({
 	render: function() {
 		var waiting = [], ready = [];
 		_.forEach(this.state.applications, function(a){
-			if(ConclusionStore.getByApplication(a).length > 0)
+			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.RISK) !== undefined)
 				ready.push(a);
 			else
 				waiting.push(a);

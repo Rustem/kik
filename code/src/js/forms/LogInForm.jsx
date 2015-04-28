@@ -14,7 +14,7 @@ var LogInForm = React.createClass({
 	onHandleSubmit: function(e) {
 		e.preventDefault();
 
-	    var form = this.refs.loginForm.getForm();
+	    var form = this.refs.LoginForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
 	      this.props.onHandleSubmit(form.cleanedData);
@@ -23,7 +23,7 @@ var LogInForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={LogInFormDefinition} ref="loginForm"/>
+			        <forms.RenderForm form={LogInFormDefinition} ref="LoginForm"/>
 			        <button>Log In</button>
 			    </form>
     },

@@ -35,7 +35,7 @@ var ConclusionStore = objectAssign({}, EventEmitter.prototype, {
   },
 
   getByApplicationAndType: function(application, type) {
-    return _.where(this.getByApplication(application), { type: type });
+    return _.first(_.where(this.getByApplication(application), { type: type }));
   }
 
 });
