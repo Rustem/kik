@@ -1,17 +1,14 @@
+var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var RiskForm = require('../../forms/RiskForm.jsx');
 
 
 ApplicationDetail = React.createClass({
-	mixins: [AppContextMixin],
-	
-	contextTypes: {
-        router: React.PropTypes.func
-    },
+	mixins: [AppContextMixin, Router.State],
 
 	getApplication: function() {
-		var params = this.context.router.getCurrentParams();
+		var params = this.getParams();
 		return ApplicationStore.get(params.id)
 	},
 
