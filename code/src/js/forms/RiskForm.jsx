@@ -1,12 +1,14 @@
 var forms = require('newforms');
 
 var RiskFormDefinition = forms.Form.extend({
-  conclusion: forms.TextField(),
+  conclusion: forms.CharField({
+    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+  }),
 });
 
 var RiskForm = React.createClass({
-	
 	propTypes: {
+		application: React.PropTypes.object,
 	    onHandleSubmit: React.PropTypes.func,
 	},
 
@@ -16,7 +18,9 @@ var RiskForm = React.createClass({
 	    var form = this.refs.riskForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
-	      this.props.onHandleSubmit(form.cleanedData);
+	    	var rv = form.cleanedData;
+	    	rv['application_id'] = this.props.application.id;
+	      	this.props.onHandleSubmit(rv);
 	    }
 	},
 

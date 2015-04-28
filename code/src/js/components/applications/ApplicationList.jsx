@@ -1,3 +1,6 @@
+var Router = require('react-router');
+var Link = Router.Link;
+
 ApplicationListItem = React.createClass({
 	PropTypes: {
 		idx: React.PropTypes.number,
@@ -9,10 +12,14 @@ ApplicationListItem = React.createClass({
 		return <p>
 				<span>{application.id}</span>: 
 				<span>{application.status}</span>
+				<Link to="application_detail"
+					  params={{id: application.id}}>
+					  Посмотреть детали
+				</Link>
 			   </p>
 		
 	}
-})
+});
 
 ApplicationList = React.createClass({
 	PropTypes: {

@@ -26,6 +26,10 @@ var ApplicationStore = objectAssign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, cb);
   },
 
+  get: function(id) {
+    return _applications[id];
+  },
+
   getAll: function(){
     return _applications;
   },

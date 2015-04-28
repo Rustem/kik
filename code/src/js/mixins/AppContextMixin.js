@@ -1,10 +1,9 @@
-var AppContextMixin = {
-    contextTypes: {
-        user: React.PropTypes.object,
-    },
+var SessionStore = require('../stores/SessionStore');
 
+var AppContextMixin = {
+    
     getUser: function() {
-        return this.context.user;
+        return SessionStore.current_user();
     },
 
 };
