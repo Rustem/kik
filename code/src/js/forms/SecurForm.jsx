@@ -3,9 +3,14 @@ var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
 var SecurFormDefinition = forms.Form.extend({
-  text: forms.CharField({
-    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
-  }),
+    remark: forms.CharField({
+    	label: "Замечания",
+    	widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+    }),
+    output: forms.CharField({
+    	label: "Заключение и выводы",
+    	widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+    }),
 });
 
 var SecurForm = React.createClass({

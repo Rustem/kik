@@ -38,6 +38,13 @@ module.exports = {
         email: 'petrov@kik.kz',
         position: 22,
       },
+      {
+        id: 'user_3',
+        firstname: 'Елена',
+        lastname: 'Чурманова',
+        email: 'churmanova@kik.kz',
+        position: 3,
+      },
     ]));
 
     // localStorage.setItem('applications', JSON.stringify([

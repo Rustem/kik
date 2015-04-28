@@ -19,6 +19,7 @@ var routes = (
         	<Route name="stage20" path="stage20" handler={stages.Stage20} />
         	<Route name="stage21" path="stage21" handler={stages.Stage21} />
         	<Route name="stage22" path="stage22" handler={stages.Stage22} />
+            <Route name="stage3" path="stage3" handler={stages.Stage3} />
         </Route>
         <Route name="application_detail" path="/application/:id" handler={ApplicationDetail} />
         <DefaultRoute handler={Hub}/>

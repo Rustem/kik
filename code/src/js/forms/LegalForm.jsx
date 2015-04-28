@@ -3,7 +3,7 @@ var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
 var LegalFormDefinition = forms.Form.extend({
-  text: forms.CharField({
+  output: forms.CharField({
     widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
   }),
 });

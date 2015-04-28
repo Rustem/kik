@@ -23,6 +23,9 @@ var Hub = React.createClass({
 	        	case 22:
 	        		transition.redirect('stage22', {}, {});
 	        		break;
+	        	case 3:
+	        		transition.redirect('stage3', {}, {});
+	        		break;
 	        }
 	    },
 	},
