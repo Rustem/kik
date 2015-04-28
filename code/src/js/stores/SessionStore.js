@@ -40,6 +40,10 @@ var SessionStore = objectAssign({}, EventEmitter.prototype, {
 SessionStore.dispatchToken = AppDispatcher.register(function(payload) {
     var action = payload.action;
     switch(action.type) {
+        case ActionTypes.APP_LOAD_SUCCESS:
+            SessionStore.setCurrent(action.object.current_user);
+            SessionStore.emitChange();
+            break;
         case ActionTypes.LOG_IN_SUCCESS:
             SessionStore.setCurrent(action.object);
             SessionStore.emitChange();

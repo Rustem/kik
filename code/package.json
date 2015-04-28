@@ -22,9 +22,10 @@
   "dependencies": {
     "flux": "~2.0.3",
     "lodash": "~3.7.0",
-    "newforms": "^0.12.1",
-    "newforms-gridforms": "^2.0.0",
-    "react": "~0.13.2",
-    "react-router": "~0.13.2"
+    "react": "~0.12",
+    "react-router": "~0.11.0",
+    "newforms": "~0.11",
+    "newforms-gridforms": "~1.x",
+    "when": "~3.7.3"
   }
 }

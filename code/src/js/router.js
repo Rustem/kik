@@ -7,6 +7,7 @@ var Redirect = Router.Redirect;
 var Index = require('./components/Index.jsx');
 var Hub = require('./components/Hub.jsx');
 var LoginPage = require('./components/LoginPage.jsx');
+var ApplicationDetail = require('./components/applications/ApplicationDetail.jsx');
 var stages = require('./components/stages');
 
 var routes = (
@@ -19,7 +20,7 @@ var routes = (
         	<Route name="stage21" path="stage21" handler={stages.Stage21} />
         	<Route name="stage22" path="stage22" handler={stages.Stage22} />
         </Route>
-
+        <Route name="application_detail" path="/application/:id" handler={ApplicationDetail} />
         <DefaultRoute handler={Hub}/>
     </Route>
 );

@@ -1,23 +1,29 @@
 window.React = require('react');
 var Router = require('react-router');
+var routes = require('./router').routes;
+var Fixtures = require('./fixtures');
 var AppActions = require('./actions/AppActions');
 var UserWebAPI = require('./api/UserWebAPI');
 var ApplicationWebAPI = require('./api/ApplicationWebAPI');
-var routes = require('./router').routes;
-var Fixtures = require('./fixtures');
+var ConclusionWebAPI = require('./api/ConclusionWebAPI');
 
 Fixtures.init();
 
-UserWebAPI.getAll(function(users){
-    ApplicationWebAPI.getAll(function(applications){
-        var appState = {
-          	applications: applications,
-            users: users
-        };
-        AppActions.load(appState);
+UserWebAPI.getCurrentUser(function(current_user){
+	ApplicationWebAPI.getAll(function(applications){
+		ConclusionWebAPI.getAll(function(conclusions){
 
-        Router.run(routes, function(Handler, state){
-          	React.render(<Handler />, document.getElementById('app'));
-        })
-    });
+			var appState = {
+				current_user: current_user,
+			  	applications: applications,
+			  	conclusions: conclusions,
+			};
+			AppActions.load(appState);
+
+			Router.run(routes, function(Handler, state){
+			  	React.render(<Handler />, document.getElementById('app'));
+			});
+			
+		});
+	});
 });

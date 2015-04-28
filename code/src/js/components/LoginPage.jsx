@@ -4,6 +4,7 @@ var LogInForm = require('../forms/LogInForm.jsx');
 var UserActions = require('../actions/UserActions');
 
 var LoginPage = React.createClass({
+    mixins: [Router.Navigation],
     statics: {
         willTransitionTo: function (transition, params) {
           if (SessionStore.current_user()) {
@@ -20,7 +21,7 @@ var LoginPage = React.createClass({
         var promise = UserActions.login(object);
         console.log(this.context)
         promise.done(function() {
-            this.context.router.transitionTo('index');
+            this.transitionTo('index');
             
         }.bind(this));
     },
