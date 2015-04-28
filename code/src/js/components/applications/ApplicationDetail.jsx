@@ -2,10 +2,19 @@ var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var RiskForm = require('../../forms/RiskForm.jsx');
+var ConclusionActions = require('../../actions/ConclusionActions');
 
 
 ApplicationDetail = React.createClass({
-	mixins: [AppContextMixin, Router.State],
+	mixins: [AppContextMixin, Router.State, Router.Navigation],
+
+	onRiskSubmit: function(object) {
+		var promise = ConclusionActions.create(object);
+		promise.done(function() {
+            this.transitionTo('index');
+            
+        }.bind(this));
+	},
 
 	getApplication: function() {
 		var params = this.getParams();
@@ -20,12 +29,13 @@ ApplicationDetail = React.createClass({
 			case 1:
 				return null;
 			case 20:
-				return <RiskForm application={application} />
+				return <RiskForm application={application} onHandleSubmit={this.onRiskSubmit} />
 			case 21:
 				return null;
 			case 22:
 				return null;
 		}
+		return null
 	},
 
 	render: function() {
@@ -36,7 +46,7 @@ ApplicationDetail = React.createClass({
 						<span>{application.id}</span>: 
 						<span>{application.status}</span>
 					</p>
-					{Component ? <Component application={application} /> : null}
+					{Component}
 				</div>
 		
 	}

@@ -45,10 +45,10 @@ ConclusionStore.dispatchToken = AppDispatcher.register(function(payload){
       });
       ConclusionStore.emit(CHANGE_EVENT);
       break;
-    // case ActionTypes.CREATE_APPLICATION_SUCCESS:
-    //   addItem(action.object);
-    //   ConclusionStore.emit(CHANGE_EVENT);
-    //   break;
+    case ActionTypes.CREATE_CONCLUSION_SUCCESS:
+      addItem(action.object);
+      ConclusionStore.emit(CHANGE_EVENT);
+      break;
     default:
       return true;
   }

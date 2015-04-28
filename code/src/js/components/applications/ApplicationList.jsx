@@ -11,7 +11,7 @@ ApplicationListItem = React.createClass({
 		var application = this.props.application;
 		return <p>
 				<span>{application.id}</span>: 
-				<span>{application.status}</span>
+				<span>{application.status}</span> 
 				<Link to="application_detail"
 					  params={{id: application.id}}>
 					  Посмотреть детали

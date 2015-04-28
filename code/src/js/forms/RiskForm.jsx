@@ -27,7 +27,7 @@ var RiskForm = React.createClass({
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
 			        <forms.RenderForm form={RiskFormDefinition} ref="riskForm"/>
-			        <button>Log In</button>
+			        <button>Отправить</button>
 			    </form>
     },
 });
