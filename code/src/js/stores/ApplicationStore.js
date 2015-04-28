@@ -59,7 +59,6 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){
       ApplicationStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.CREATE_CONCLUSION_SUCCESS:
-      console.log(action.object)
       AppDispatcher.waitFor([ConclusionStore.dispatchToken]);
       addItem(action.object.application);
       ApplicationStore.emit(CHANGE_EVENT);

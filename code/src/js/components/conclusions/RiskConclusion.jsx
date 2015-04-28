@@ -7,7 +7,7 @@ var TEMPLATES = require('../../constants/appConstants').TEMPLATES;
 var utils = require('../../utils');
 
 
-RiskConclusion = React.createClass({
+var RiskConclusion = React.createClass({
 	PropTypes: {
 		onHandleSubmit: React.PropTypes.func,
 		application: React.PropTypes.object,
@@ -19,7 +19,7 @@ RiskConclusion = React.createClass({
 	},
 
 	genDoc: function(application) {
-		var conclusion = ConclusionStore.getByApplicationAndType(application, ConclusionTypes.RISK);
+		var conclusion = this.getConclusion();
 		var author = UserStore.get(application.author_id);
 		var params = {
 			id: application.id,

@@ -3,7 +3,7 @@ var LegalForm = require('../../forms/LegalForm.jsx');
 var ConclusionTypes = require('../../constants/appConstants').ConclusionTypes;
 
 
-LegalConclusion = React.createClass({
+var LegalConclusion = React.createClass({
 	PropTypes: {
 		onHandleSubmit: React.PropTypes.func,
 		application: React.PropTypes.object,

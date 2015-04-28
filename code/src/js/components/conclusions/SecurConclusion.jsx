@@ -3,7 +3,7 @@ var SecurForm = require('../../forms/SecurForm.jsx');
 var ConclusionTypes = require('../../constants/appConstants').ConclusionTypes;
 
 
-SecurConclusion = React.createClass({
+var SecurConclusion = React.createClass({
 	PropTypes: {
 		onHandleSubmit: React.PropTypes.func,
 		application: React.PropTypes.object,

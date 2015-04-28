@@ -1,10 +1,11 @@
 var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
+var ConclusionActions = require('../../actions/ConclusionActions');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
-var ConclusionActions = require('../../actions/ConclusionActions');
+var FullConclusion = require('../conclusions/FullConclusion.jsx');
 
 
 ApplicationDetail = React.createClass({
@@ -36,6 +37,8 @@ ApplicationDetail = React.createClass({
 				return <LegalConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 22:
 				return <SecurConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
+			case 3:
+				return <FullConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 		}
 		return null
 	},

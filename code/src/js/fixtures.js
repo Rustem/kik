@@ -73,11 +73,6 @@ module.exports = {
     //     status: 2,
     //     author_id: 'user_0'
     //   },
-    //   {
-    //     id: 'appl_6',
-    //     status: 3,
-    //     author_id: 'user_0'
-    //   },
       
     // ]));
   },
