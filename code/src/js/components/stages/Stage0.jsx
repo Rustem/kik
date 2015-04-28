@@ -4,7 +4,7 @@ var ApplicationList = require('../applications/ApplicationList.jsx');
 var Stage0 = React.createClass({
 	getInitialState: function() {
 		return {
-			applications: ApplicationStore.getZero(),
+			applications: ApplicationStore.getByStatus(0),
 		}
 	},
 

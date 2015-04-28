@@ -20,7 +20,7 @@ ApplicationList = React.createClass({
 	},
 
 	renderItem: function(application, idx) {
-		return <ApplicationListItem application={application} idx={idx} />
+		return <ApplicationListItem application={application} key={'app_item__'+idx} />
 	},
 
 	render: function() {

@@ -30,9 +30,14 @@ var ApplicationStore = objectAssign({}, EventEmitter.prototype, {
     return _applications;
   },
 
-  getZero: function() {
-    return _.where(_applications, { status: 0 });
-  }
+  // 0 - applications are just created
+  // 1 - applications wait for confirmation
+  // 2 - applications have been confirmed
+  // 3 - applications are ready
+  getByStatus: function(status) {
+    return _.where(_applications, { status: status });
+  },
+
 });
 
 ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){

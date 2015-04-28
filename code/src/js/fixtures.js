@@ -45,8 +45,20 @@ module.exports = {
         status: 1,
       },
       {
-        id: 'appl_2',
+        id: 'appl_3',
         status: 1,
+      },
+      {
+        id: 'appl_4',
+        status: 2,
+      },
+      {
+        id: 'appl_5',
+        status: 2,
+      },
+      {
+        id: 'appl_6',
+        status: 3,
       },
       
     ]));
