@@ -18,6 +18,21 @@ function isConclusionsCollected(application) {
 	       securConclusion !== undefined
 }
 
+function print_doc(template_name, params) {
+	var loadFile=function(url,callback){
+        JSZipUtils.getBinaryContent(url,callback);
+    }
+    loadFile("src/doc_templates/"+template_name, function(err,content){
+        if (err) { throw err};
+        doc=new Docxgen(content);
+        doc.setData( params );
+        doc.render();
+        out=doc.getZip().generate({type:"blob"})
+        saveAs(out,"doc_"+params.id+".docx")
+    })
+}
+
 module.exports = {
   isConclusionsCollected: isConclusionsCollected,
+  print_doc: print_doc,
 }

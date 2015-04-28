@@ -3,9 +3,49 @@ var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
 var RiskFormDefinition = forms.Form.extend({
-  text: forms.CharField({
-    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
-  }),
+	finCondition: forms.ChoiceField({
+		required: false,
+		label: "Финансовое состояние",
+		choices: ["Стабильное", "Плохое", "Хорошее"]
+	}),
+	pd: forms.IntegerField({
+		required: false,
+		label: "П/Д",
+	}),
+	od: forms.IntegerField({
+		required: false,
+		label: "О/Д",
+	}),
+	creditCapacity: forms.CharField({
+		required: false,
+		label: "Класс кредитоспособности",
+		widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+	}),
+	ratingCapacity: forms.ChoiceField({
+		required: false,
+		label: "Рейтинг платежеспособности",
+		choices: ["Низкий", "Стандартный", "Высокий"]
+	}),
+	riskGroup: forms.ChoiceField({
+		required: false,
+		label: "Группа риска",
+		choices: ["минимальный", "нормальный", "максимальный"]
+	}),
+	remark: forms.CharField({
+		required: false,
+		label: "Замечания, выявленные по проекту на момент проведения экспертизы",
+	    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+	}),
+	miniminMethods: forms.CharField({
+		required: false,
+		label: "Методы минимизации выявленных рисков",
+	    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+	}),
+	output: forms.CharField({
+		required: false,
+		label: "Резюме (выводы и рекомендации)",
+	    widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
+	}),
 });
 
 var RiskForm = React.createClass({

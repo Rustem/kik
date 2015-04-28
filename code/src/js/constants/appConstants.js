@@ -18,6 +18,13 @@ var appConstants = {
 		RISK: 0,
 		LEGAL: 1,
 		SECUR: 2,
+	},
+
+	TEMPLATES: {
+		RISK: 'risk.docx',
+		LEGAL: 'risk.docx',
+		SECUR: 'risk.docx',
+		FULL: 'full.docx',
 	}
 };
 

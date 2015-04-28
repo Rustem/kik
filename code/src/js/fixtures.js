@@ -5,31 +5,36 @@ module.exports = {
     localStorage.setItem('users', JSON.stringify([
       {
         id: 'user_0',
-        name: 'Искаков Куаныш',
+        firstname: 'Куаныш',
+        lastname: 'Искаков',
         email: 'iskakov@kik.kz',
         position: 0,
       },
       {
         id: 'user_1',
-        name: 'Сериков Мухтар',
+        firstname: 'Мухтар',
+        lastname: 'Сериков',
         email: 'serikov@kik.kz',
         position: 1,
       },
       {
         id: 'user_20',
-        name: 'Махамбетов Айдос',
+        firstname: 'Айдос',
+        lastname: 'Махамбетов',
         email: 'makhambetov@kik.kz',
         position: 20,
       },
       {
         id: 'user_21',
-        name: 'Булатов Алмас',
+        firstname: 'Алмас',
+        lastname: 'Булатов',
         email: 'bulatov@kik.kz',
         position: 21,
       },
       {
         id: 'user_22',
-        name: 'Петров Айдын',
+        firstname: 'Айдын',
+        lastname: 'Петров',
         email: 'petrov@kik.kz',
         position: 22,
       },
@@ -39,26 +44,32 @@ module.exports = {
     //   {
     //     id: 'appl_0',
     //     status: 0,
+    //     author_id: 'user_0'
     //   },
     //   {
     //     id: 'appl_1',
     //     status: 1,
+    //     author_id: 'user_0'
     //   },
     //   {
     //     id: 'appl_3',
     //     status: 1,
+    //     author_id: 'user_0'
     //   },
     //   {
     //     id: 'appl_4',
     //     status: 2,
+    //     author_id: 'user_0'
     //   },
     //   {
     //     id: 'appl_5',
     //     status: 2,
+    //     author_id: 'user_0'
     //   },
     //   {
     //     id: 'appl_6',
     //     status: 3,
+    //     author_id: 'user_0'
     //   },
       
     // ]));
