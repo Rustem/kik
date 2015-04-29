@@ -27,17 +27,18 @@ var DATA = {
   },
   houses: {
     ala: [['h1', 'Базис'], ['h2', 'Essentai Park'], ['h3', 'Чешские террасы']],
-    ast: [['h12', 'Империал'], ['h12', 'Москва']]
+    ast: [['h12', 'Империал'], ['h13', 'Москва']]
   },
   flats: [
-    {rooms: 1, house: 'h1', number: '32'},
-    {rooms: 1, house: 'h1', number: '56'},
-    {rooms: 3, house: 'h2', number: '21'},
-    {rooms: 3, house: 'h2', number: '07a'},
-    {rooms: 2, house: 'h12', number: '333'}
+    {'rooms': 1, 'house': 'h1', 'number': '32'},
+    {'rooms': 1, 'house': 'h1', 'number': '56'},
+    {'rooms': 3, 'house': 'h2', 'number': '21'},
+    {'rooms': 3, 'house': 'h2', 'number': '07a'},
+    {'rooms': 2, 'house': 'h12', 'number': '333'}
   ]
 };
 
+var DEPENDENT_FIELDS = ['region', 'city', 'house', 'flat']; // 'podiezd', 'level', 'area'
 
 
 var ApplicationForm = forms.Form.extend({
@@ -75,66 +76,94 @@ var ApplicationFormView = React.createClass({
 
   getInitialState: function() {
     return {
-      form_data: {region: REGION_CHOICES[0][0]}
+      form_data: {region: REGION_CHOICES[0][0]},
+      form_choices: {}
     }
+  },
+
+  componentDidMount: function() {
+    var newState = _.assign(this.state, this._getNewState(this.state.form_data));
+    this.setState(newState);
   },
 
   _getForm: function() {
     return this.refs.application_form.getForm();
   },
 
-  _normalizeData: function(data, choices) {
-    console.log('t1:', data, choices);
-    ['region', 'city', 'house', 'flat'].forEach(function(field) {
-      !data[field] && !_.isEmpty(choices[field]) && (data[field] = choices[field][0][0]);
+  _normalizeData: function(data, prev_data) {
+    console.log('nd1:', data, prev_data);
+    // ['region', 'city', 'house', 'flat'].forEach(function(field) {
+    //   !data[field] && !_.isEmpty(choices[field]) && (data[field] = choices[field][0][0]);
+    // });
+    var reset_flag = false;
+    DEPENDENT_FIELDS.forEach(function(field) {
+      if( reset_flag )
+        delete data[field];
+      else {
+        if( data[field] !== prev_data[field] )
+          reset_flag = true;
+      }
     });
-    console.log('t2:', data);
+    console.log('nd2:', data);    
     return data;
   },
 
   _filterChoices: function(data) {
     var choices = {},
-        data = _.clone(data),
+        data = _.clone(data, true),
+        _getFirstChoice = function(choices) {
+          return _.isEmpty(choices) ? null : _.isEmpty(choices[0]) ? choices[0] : choices[0][0];
+        },
         marker_fields = {
           region: function(val) {
-            val && (choices.city = DATA.cities[val], data.city = choices.city[0][0]);
+            val && (choices.city = DATA.cities[val], !data.city && (data.city = _getFirstChoice(choices.city)));
           },
           city: function(val) {
-            val && (choices.house = DATA.houses[val], data.house = choices.house[0][0]);
+            val && (choices.house = DATA.houses[val], !data.house && (data.house = _getFirstChoice(choices.house)));
           },
           rooms: function(val) {
             var f = function(rooms, house) {
-                var flats = _.filter(DATA.flats, {rooms: rooms, house: house});
+                var flats = _.filter(DATA.flats, {'rooms': parseInt(rooms,10), 'house': house});
                 return _.map(flats, 'number');
               };
-            val && data.house && (choices.flat = f(val, data.house), data.flat = choices.flat[0][0]);
+            val && data.house && (choices.flat = f(val, data.house), !data.flat && (data.flat = _getFirstChoice(choices.flat)));
           }
         };
 
-    console.log('I:', choices, data);
+   console.log('I:', choices, data, this.state.form_data);
 
     ['region', 'city', 'rooms'].forEach(function(field) {
       marker_fields[field](data[field]);
     });
 
-    console.log('O:', choices, data);
+   console.log('O:', choices, data);
 
     return [data, choices];
   },
 
+  _getNewState: function(new_data) {
+    var choices = null;
+    // new_data -> choices -> data & choices
+    new_data = this._normalizeData(new_data, this.state.form_data);
+    var ret = this._filterChoices(new_data);
+    new_data = ret[0];
+    choices = ret[1];
+
+    return {
+      form_data: new_data,
+      form_choices: choices
+    }
+  },
+
   onFormChange: function() {
-    var data = this._getForm().data;
-    // data = this._normalizeData(data);
-    this.setState({
-      form_data: data
-    });
+    var data = this._getForm().data
+    this.setState(this._getNewState(data));
   },
 
   render: function() {
     // data -> choices -> data
-    var ret = this._filterChoices(this.state.form_data);
     var f = new ApplicationForm(null, {
-      data: ret[0], fields_choices: ret[1],
+      data: _.clone(this.state.form_data, true), fields_choices: this.state.form_choices,
       controlled: true, onChange: this.onFormChange
     });
 
