@@ -1,7 +1,9 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
+			        
 var RiskFormDefinition = forms.Form.extend({
 	finCondition: forms.ChoiceField({
 		required: false,
@@ -71,8 +73,12 @@ var RiskForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={RiskFormDefinition} ref="RiskForm"/>
-			        <button>Отправить</button>
+			        <forms.RenderForm form={RiskFormDefinition} ref="RiskForm">
+			        	<BootstrapForm/>
+			        </forms.RenderForm>
+			        <div className="text-center">
+						<button type="submit" className="btn btn-success">Отправить</button>
+					</div>
 			    </form>
     },
 });

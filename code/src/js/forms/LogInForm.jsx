@@ -1,5 +1,5 @@
 var forms = require('newforms');
-var BootstrapForm = require('newforms-bootstrap')
+var BootstrapForm = require('newforms-bootstrap');
 
 var LogInFormDefinition = forms.Form.extend({
   email: forms.EmailField({
@@ -33,7 +33,7 @@ var LogInForm = React.createClass({
 			        	<BootstrapForm/>
 			        </forms.RenderForm>
 			        <div className="text-center">
-			        	<button type="button" className="btn btn-block btn-success">Войти</button>
+			        	<button type="submit" className="btn btn-block btn-success">Войти</button>
 			        </div>
 			    </form>
     },

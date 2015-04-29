@@ -1,9 +1,11 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
 var LegalFormDefinition = forms.Form.extend({
   output: forms.CharField({
+  	label: 'Резюме',
     widget: forms.Textarea({attrs: {rows: 6, cols: 60}})
   }),
 });
@@ -31,8 +33,12 @@ var LegalForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={LegalFormDefinition} ref="LegalForm"/>
-			        <button>Отправить</button>
+			        <forms.RenderForm form={LegalFormDefinition} ref="LegalForm">
+			        	<BootstrapForm/>
+			        </forms.RenderForm>
+			        <div className="text-center">
+						<button type="submit" className="btn btn-success">Отправить</button>
+					</div>
 			    </form>
     },
 });

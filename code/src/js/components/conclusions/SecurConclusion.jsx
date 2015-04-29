@@ -16,13 +16,17 @@ var SecurConclusion = React.createClass({
 
 	render: function() {
 		var conclusion = this.getConclusion();
-		return  <div>
-					{
-					conclusion == undefined ? 
-						<SecurForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
-					:
-						<div>{conclusion.text}</div>
-					}
+		return  <div className="row">
+						<h3>Управление службы безопасности и режима</h3>
+						{
+						conclusion == undefined ? 
+							<SecurForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
+						:
+							<div className="well well-sm" style={{backgroundColor:'white'}}>
+								<p><b>Заключение и выводы:</b></p>
+								{conclusion.output}
+							</div>
+						}
 				</div>
 		
 	}

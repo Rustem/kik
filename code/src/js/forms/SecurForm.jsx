@@ -1,4 +1,5 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;
 var AppContextMixin = require('../mixins/AppContextMixin');
 
@@ -36,8 +37,12 @@ var SecurForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={SecurFormDefinition} ref="SecurForm"/>
-			        <button>Отправить</button>
+			        <forms.RenderForm form={SecurFormDefinition} ref="SecurForm">
+			        	<BootstrapForm/>
+			        </forms.RenderForm>
+			        <div className="text-center">
+						<button type="submit" className="btn btn-success">Отправить</button>
+					</div>
 			    </form>
     },
 });

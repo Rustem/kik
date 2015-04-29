@@ -1,8 +1,9 @@
 var moment = require('moment');
+var StageHeader = require('../stages/StageHeader.jsx');
 var PeopleStore = require('../../stores/PeopleStore');
 var PeopleFinderForm = require('../../forms/PeopleFinderForm.jsx');
-var utils = require('../../utils');
 var AppContextMixin = require('../../mixins/AppContextMixin');
+var utils = require('../../utils');
 
 var PeopleListItem = React.createClass({
 	mixins: [AppContextMixin],
@@ -51,11 +52,15 @@ var PeopleListItem = React.createClass({
 
 	render: function() {
 		var person = this.props.person;
-		return  <p>
-					{person.lastname} {person.firstname} {person.middlename}
-					<button onClick={this.genZayavlenie.bind(null, person)}>Распечатать заявление</button>
-					<button onClick={this.genSoglasie.bind(null, person)}>Распечатать согласие</button>
-				</p>
+		return  <tr>
+			        <th scope="row">{this.props.idx+1}</th>
+			        <td>{person.lastname} {person.firstname} {person.middlename} </td>
+			        <td>{person.iin}</td>
+			        <td>
+			          	<button className="btn btn-default btn-xs" onClick={this.genZayavlenie.bind(null, person)}>Распечатать заявление</button>
+						<button className="btn btn-default btn-xs" onClick={this.genSoglasie.bind(null, person)}>Распечатать согласие</button>
+					</td>
+		        </tr>
 	},
 });
 
@@ -65,13 +70,27 @@ var PeopleList = React.createClass({
 	},
 
 	renderItem: function(person, idx) {
-		return <PeopleListItem person={person} key={'person__'+idx} />
+		return <PeopleListItem person={person} key={'person__'+idx} idx={idx} />
 	},
 
 	render: function() {
 		var people = this.props.people;
 		return  <div>
-					{people ? people.map(this.renderItem) : null}
+					{people ? 
+						<table className="table table-striped">
+							<thead>
+						        <tr>
+						          <th>#</th>
+						          <th>ФИО</th>
+						          <th>ИИН</th>
+						          <th></th>
+						        </tr>
+					      	</thead>
+					      	<tbody>
+								{people.map(this.renderItem)}
+					      	</tbody>
+						</table>
+					: null}
 				</div>
 	}
 });
@@ -94,9 +113,12 @@ var PeopleFinder = React.createClass({
 	},
 
 	render: function() {
-		return  <div>
-					<PeopleFinderForm onHandleSubmit={this.onSearch} />
-					<PeopleList people={this.findPeople()} />
+		return  <div className="page-container">
+	                <StageHeader />
+	                <div className="row" style={{marginTop:'90px'}}>
+	            	    <PeopleFinderForm onHandleSubmit={this.onSearch} />
+						<PeopleList people={this.findPeople()} />
+	                </div>
 				</div>
 	}
 });

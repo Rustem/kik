@@ -63,34 +63,44 @@ module.exports = {
       },
     ]));
 
-    // localStorage.setItem('applications', JSON.stringify([
-    //   {
-    //     id: 'appl_0',
-    //     status: 0,
-    //     author_id: 'user_0'
-    //   },
-    //   {
-    //     id: 'appl_1',
-    //     status: 1,
-    //     author_id: 'user_0'
-    //   },
-    //   {
-    //     id: 'appl_3',
-    //     status: 1,
-    //     author_id: 'user_0'
-    //   },
-    //   {
-    //     id: 'appl_4',
-    //     status: 2,
-    //     author_id: 'user_0'
-    //   },
-    //   {
-    //     id: 'appl_5',
-    //     status: 2,
-    //     author_id: 'user_0'
-    //   },
+    localStorage.setItem('applications', JSON.stringify([
+      {
+        id: 'appl_0',
+        status: 0,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_1',
+        status: 1,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_3',
+        status: 1,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_4',
+        status: 2,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_5',
+        status: 2,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_6',
+        status: 2,
+        author_id: 'user_0'
+      },
+      {
+        id: 'appl_7',
+        status: 2,
+        author_id: 'user_0'
+      },
       
-    // ]));
+    ]));
   },
 
   

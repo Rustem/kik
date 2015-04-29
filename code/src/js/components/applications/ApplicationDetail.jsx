@@ -6,6 +6,8 @@ var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
 var FullConclusion = require('../conclusions/FullConclusion.jsx');
+var StageHeader = require('../stages/StageHeader.jsx');
+var ApplicationInfo = require('./ApplicationInfo.jsx');
 
 
 var ApplicationDetail = React.createClass({
@@ -46,14 +48,13 @@ var ApplicationDetail = React.createClass({
 	render: function() {
 		var application = this.getApplication(),
 			Component = this.getComponent(application);
-		return  <div>
-					<p>
-						<span>{application.id}</span>: 
-						<span>{application.status}</span>
-					</p>
-					{Component}
-				</div>
-		
+		return  <div className="page-container">
+	                <StageHeader />
+	                <div className="row" style={{marginTop:'90px'}}>
+		                <ApplicationInfo application={application} />
+		                {Component}
+	                </div>
+	            </div>		
 	}
 });
 

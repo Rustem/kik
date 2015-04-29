@@ -51,16 +51,20 @@ var RiskConclusion = React.createClass({
 
 	render: function() {
 		var conclusion = this.getConclusion();
-		return  <div>
-					{
-					conclusion == undefined ? 
-						<RiskForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
-					:
-						<div>
-							{conclusion.text}
-							<button onClick={this.genDoc.bind(null, this.props.application)}>Скачать документ</button>
-						</div>
-					}
+		return <div className="row">
+						<h3>Управление риск-менеджмента</h3>
+						{
+						conclusion == undefined ? 
+							<RiskForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
+						:
+							[<div className="well well-sm" style={{backgroundColor:'white'}}>
+								<p><b>Резюме:</b></p>
+								{conclusion.output}
+							</div>,
+							<div className="text-center">
+								<button className="btn btn-info" onClick={this.genDoc.bind(null, this.props.application)}>Скачать документ</button>
+							</div>]
+						}
 				</div>
 		
 	}

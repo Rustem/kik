@@ -21,10 +21,15 @@ var Stage20 = React.createClass({
 				waiting.push(a);
 		});
 		return <div>
-				<h1>Ждут заключения</h1>
-					<ApplicationList applications={waiting} />
-				<h1>Готовы</h1>
-					<ApplicationList applications={ready} />
+				{waiting.length > 0 ? 
+					[<h4>Ждут заключения</h4>,
+					 <ApplicationList applications={waiting} />]
+				: <h4>Новых заявлений нет</h4>}
+				<br />
+				{ready.length > 0 ? 
+					[<h4>Готовы</h4>,
+					 <ApplicationList applications={ready} />]
+				: <h4>Обработанных заявлений нет</h4>}
 			   </div>
 	}
 });

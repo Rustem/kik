@@ -25,8 +25,8 @@ var appConstants = {
 
 	TEMPLATES: {
 		RISK: 'risk.docx',
-		LEGAL: 'risk.docx',
-		SECUR: 'risk.docx',
+		// LEGAL: 'legal.docx',
+		// SECUR: 'secur.docx',
 		FULL: 'full.docx',
 		ZAYAVLENIE: 'zayavlenie.docx',
 		SOGLASIE: 'soglasie.docx',

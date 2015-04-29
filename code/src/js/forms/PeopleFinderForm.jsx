@@ -1,4 +1,5 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap');
 
 var PeopleFinderFormDefinition = forms.Form.extend({
   iin: forms.CharField({
@@ -23,9 +24,21 @@ var PeopleFinderForm = React.createClass({
 	},
 
     render: function() {
-	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={PeopleFinderFormDefinition} ref="PeopleFinderForm"/>
-			        <button type="button" className="btn btn-default">Найти</button>
+    	var Col = BootstrapForm.Col, 
+    		Container = BootstrapForm.Container, 
+    		Row = BootstrapForm.Row, 
+    		Field = BootstrapForm.Field;
+	    return  <form onSubmit={this.onHandleSubmit} className="form-inline">
+			        <forms.RenderForm form={PeopleFinderFormDefinition} ref="PeopleFinderForm">
+			        	<Container>
+						    <Row>
+						        <Field name="iin" md="3"/>
+						        <Col md="2">
+			        				<button type="submit" className="btn btn-default">Найти</button>
+						        </Col>
+						    </Row>
+						</Container>
+			        </forms.RenderForm>
 			    </form>
     },
 });

@@ -9,14 +9,17 @@ var ApplicationListItem = React.createClass({
 
 	render: function() {
 		var application = this.props.application;
-		return <p>
-				<span>{application.id}</span>: 
-				<span>{application.status}</span> 
-				<Link to="application_detail"
-					  params={{id: application.id}}>
-					  Посмотреть детали
-				</Link>
-			   </p>
+		return  <tr>
+			        <th scope="row">{this.props.idx+1}</th>
+			        <td>{application.lastname} {application.firstname} {application.middlename} </td>
+			        <td>{application.program}</td>
+			        <td>
+			          	<Link to="application_detail"
+						  params={{id: application.id}}>
+						  Посмотреть детали
+						</Link>
+					</td>
+		        </tr>
 		
 	}
 });
@@ -27,13 +30,23 @@ var ApplicationList = React.createClass({
 	},
 
 	renderItem: function(application, idx) {
-		return <ApplicationListItem application={application} key={'app_item__'+idx} />
+		return <ApplicationListItem application={application} key={'app_item__'+idx} idx={idx}/>
 	},
 
 	render: function() {
-		return  <div>
-					{this.props.applications.map(this.renderItem)}
-				</div>
+		return  <table className="table table-striped">
+					<thead>
+				        <tr>
+				          <th>#</th>
+				          <th>ФИО</th>
+				          <th>Программа</th>
+				          <th></th>
+				        </tr>
+			      	</thead>
+			      	<tbody>
+						{this.props.applications.map(this.renderItem)}
+			      	</tbody>
+				</table>
 	}
 });
 

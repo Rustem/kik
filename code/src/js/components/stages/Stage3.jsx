@@ -9,7 +9,13 @@ var Stage3 = React.createClass({
 	},
 
 	render: function() {
-		return <ApplicationList applications={this.state.applications} />;
+		var applications = this.state.applications
+		return 	<div>
+					{applications.length > 0 ? 
+						[<h4>Заявления</h4>,
+						 <ApplicationList applications={applications} />]
+					: <h4>Новых заявлений нет</h4>}
+				</div>
 	}
 });
 

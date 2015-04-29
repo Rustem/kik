@@ -55,14 +55,27 @@ var FullConclusion = React.createClass({
 
 	render: function() {
 		var conclusions = this.getConclusions();
-		return  <div>
-						<h1>Управление риск-менеджмента</h1>
-						{conclusions.risk.output}
-						<h1>Юридическое управление</h1>
-						{conclusions.legal.output}
-						<h1>Управление службы безопасности и режима</h1>
-						{conclusions.secur.output}
-						<button onClick={this.genDoc.bind(null, this.props.application)}>Скачать документ</button>
+		return  <div className="row">
+						<h3>Управление риск-менеджмента</h3>
+						<div className="well well-sm" style={{backgroundColor:'white'}}>
+							<p><b>Резюме:</b></p>
+							{conclusions.risk.output}
+						</div>
+						
+						<h3>Юридическое управление</h3>
+						<div className="well well-sm" style={{backgroundColor:'white'}}>
+							<p><b>Резюме:</b></p>
+							{conclusions.legal.output}
+						</div>
+						
+						<h3>Управление службы безопасности и режима</h3>
+						<div className="well well-sm" style={{backgroundColor:'white'}}>
+							<p><b>Заключение и выводы:</b></p>
+							{conclusions.secur.output}
+						</div>
+						<div className="text-center">
+							<button className="btn btn-info" onClick={this.genDoc.bind(null, this.props.application)}>Скачать документ</button>
+						</div>
 				</div>
 		
 	}

@@ -16,13 +16,17 @@ var LegalConclusion = React.createClass({
 
 	render: function() {
 		var conclusion = this.getConclusion();
-		return  <div>
-					{
-					conclusion == undefined ? 
-						<LegalForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
-					:
-						<div>{conclusion.text}</div>
-					}
+		return  <div className="row">
+						<h3>Юридическое управление</h3>
+						{
+						conclusion == undefined ? 
+							<LegalForm application={this.props.application} onHandleSubmit={this.props.onHandleSubmit} />
+						:
+							<div className="well well-sm" style={{backgroundColor:'white'}}>
+								<p><b>Резюме:</b></p>
+								{conclusion.output}
+							</div>
+						}
 				</div>
 		
 	}
