@@ -89,7 +89,11 @@ var ApplicationFormView = React.createClass({
 
   getInitialState: function() {
     return {
-      form_data: {region: REGION_CHOICES[0][0], interest_rate: '18%'},
+      form_data: {
+        region: REGION_CHOICES[0][0], 
+        interest_rate: '18%', 
+        cost_utility: 10000.0
+      },
       form_choices: {}
     }
   },
@@ -166,10 +170,24 @@ var ApplicationFormView = React.createClass({
           return parseInt(data[field],10);
         },
         _retS = function(val) {
-          return (val==='NaN') ? '' : t;
+          return (val==='NaN' || _.isNaN(val)) ? '' : val;
+        },
+        _totalCost = function() {
+          var fields = [
+            'cost_rent_payment', 'cost_insurance_items', 'cost_insurance_life', 
+            'cost_insurance_payments', 'cost_utility', 'cost_maintenance',
+            'cost_other', 'cost_taxes'
+            ];
+          var sum = _.reduce(fields, function(acc, field) {
+                acc += _getF(field) || 0;
+                return acc;
+              }, 0.0);
+          return sum;
         },
         t;
-    data.cost_rent_payment = _retS((_getF('rent_area_payment') * _getF('area')).toFixed(2));
+    data.cost_rent_payment = _retS( (_getF('rent_area_payment') * _getF('area')).toFixed(2) );
+    data.cost_taxes = _retS( ((_getF('area')*198000*0.015)/12).toFixed(2) );
+    data.cost_total = _retS( _totalCost() );
 
     return data;
   },
