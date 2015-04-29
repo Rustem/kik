@@ -8,7 +8,7 @@ var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
 var FullConclusion = require('../conclusions/FullConclusion.jsx');
 
 
-ApplicationDetail = React.createClass({
+var ApplicationDetail = React.createClass({
 	mixins: [AppContextMixin, Router.State, Router.Navigation],
 
 	onConclusionSubmit: function(object) {

@@ -1,7 +1,7 @@
 var Router = require('react-router');
 var Link = Router.Link;
 
-ApplicationListItem = React.createClass({
+var ApplicationListItem = React.createClass({
 	PropTypes: {
 		idx: React.PropTypes.number,
 		application: React.PropTypes.object,
@@ -21,7 +21,7 @@ ApplicationListItem = React.createClass({
 	}
 });
 
-ApplicationList = React.createClass({
+var ApplicationList = React.createClass({
 	PropTypes: {
 		applications: React.PropTypes.array,
 	},

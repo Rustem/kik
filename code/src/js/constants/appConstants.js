@@ -28,6 +28,8 @@ var appConstants = {
 		LEGAL: 'risk.docx',
 		SECUR: 'risk.docx',
 		FULL: 'full.docx',
+		ZAYAVLENIE: 'zayavlenie.docx',
+		SOGLASIE: 'soglasie.docx',
 	}
 };
 

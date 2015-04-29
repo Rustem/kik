@@ -47,6 +47,22 @@ module.exports = {
       },
     ]));
 
+
+    localStorage.setItem('people', JSON.stringify([
+      {
+        id: 'p_0',
+        lastname: 'Иванов',
+        firstname: 'Сергей',
+        middlename: 'Жанибекович',
+        iin: '12345',
+        address: 'г. Алматы, ул. Карасай Батыра, 52',
+        birthdate: '11.12.1964',
+        tel: '+7 701 882 9321',
+        udv_n: '892834982',
+        udv_date: '20.12.2009',
+      },
+    ]));
+
     // localStorage.setItem('applications', JSON.stringify([
     //   {
     //     id: 'appl_0',

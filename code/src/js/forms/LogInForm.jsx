@@ -1,8 +1,13 @@
 var forms = require('newforms');
 
 var LogInFormDefinition = forms.Form.extend({
-  email: forms.EmailField(),
-  password: forms.CharField({widget: forms.PasswordInput}),
+  email: forms.EmailField({
+  	label: 'E-mail',
+  }),
+  password: forms.CharField({
+  	label: 'Пароль',
+  	widget: forms.PasswordInput
+  }),
 });
 
 var LogInForm = React.createClass({
@@ -24,7 +29,7 @@ var LogInForm = React.createClass({
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
 			        <forms.RenderForm form={LogInFormDefinition} ref="LoginForm"/>
-			        <button>Log In</button>
+			        <button>Войти</button>
 			    </form>
     },
 });
