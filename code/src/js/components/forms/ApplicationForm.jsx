@@ -11,13 +11,12 @@ var PROGRAM_CHOICES = [
   ['kz_2020', 'Доступное жилье - 2020'],
   ['other', 'Другая программа']
 ];
-
 var REGION_CHOICES = [
   ['reg_1', 'Алматинская обл.'],
   ['reg_2', 'Акмолинская обл.']
 ];
-
 var ROOMS_CHOICES = [[1, 1], [2, '2-x'], [3, '3-x']];
+var RENT_CHOICES = [['3160.72', '5 лет за 3160,72 тенге'], ['2469.60', '7 лет за 2469.60 тенге'], ['1800.10', '12 лет за 1800.10 тенге']];
 
 
 var DATA = {
@@ -30,15 +29,15 @@ var DATA = {
     ast: [['h12', 'Империал'], ['h13', 'Москва']]
   },
   flats: [
-    {'rooms': 1, 'house': 'h1', 'number': '32'},
-    {'rooms': 1, 'house': 'h1', 'number': '56'},
-    {'rooms': 3, 'house': 'h2', 'number': '21'},
-    {'rooms': 3, 'house': 'h2', 'number': '07a'},
-    {'rooms': 2, 'house': 'h12', 'number': '333'}
+    {'rooms': 1, 'house': 'h1', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h1', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 3, 'house': 'h2', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h2', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+    {'rooms': 2, 'house': 'h12', 'number': '333', 'podiezd': 1, 'level': 6, 'area': 95}
   ]
 };
 
-var DEPENDENT_FIELDS = ['region', 'city', 'house', 'flat']; // 'podiezd', 'level', 'area'
+var DEPENDENT_FIELDS = ['region', 'city', 'house', 'rooms', 'flat', 'podiezd', 'level', 'area'];
 
 
 var ApplicationForm = forms.Form.extend({
@@ -48,7 +47,21 @@ var ApplicationForm = forms.Form.extend({
   house: forms.ChoiceField({label: "ЖИЛОЙ КОМПЛЕКС"}),
   rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect}),
   flat: forms.ChoiceField({label: "НОМЕР КВАРТИРЫ"}),
-  name: forms.CharField({label: "ИМЯ"}),
+  podiezd: forms.CharField({label: "ПОДЪЕЗД"}),
+  level: forms.CharField({label: "ЭТАЖ"}),
+  area: forms.CharField({label: "КВАДРАТУРА"}),
+  rent_area_payment: forms.ChoiceField({label: "СТОИМОСТЬ АРЕНДЫ ЗА 1 М2ПРИ СРОКЕ АРЕНДЫ В", choices: RENT_CHOICES, widget: forms.RadioSelect}),
+  interest_rate: forms.CharField({label: "ПРОЦЕНТНАЯ СТАВКА"}),
+
+  cost_rent_payment: forms.CharField({label: "Ежемесячный платеж по аренде"}),
+  cost_insurance_items: forms.CharField({label: "Платеж по страхованию имущества"}),
+  cost_insurance_life: forms.CharField({label: "Платеж по страхованию жизни"}),
+  cost_insurance_payments: forms.CharField({label: "Платеж по страхованию риска неплатежей по аренде"}),
+  cost_utility: forms.CharField({label: "Коммунальные платежи"}),
+  cost_maintenance: forms.CharField({label: "Услуги по техническому обслуживанию имущества"}),
+  cost_taxes: forms.CharField({label: "Платеж по налогу на имущество"}),
+  cost_other: forms.CharField({label: "Другие платежи"}),
+  cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж"}),
 
 
   constructor: function(data, kwargs) {
@@ -76,7 +89,7 @@ var ApplicationFormView = React.createClass({
 
   getInitialState: function() {
     return {
-      form_data: {region: REGION_CHOICES[0][0]},
+      form_data: {region: REGION_CHOICES[0][0], interest_rate: '18%'},
       form_choices: {}
     }
   },
@@ -92,9 +105,6 @@ var ApplicationFormView = React.createClass({
 
   _normalizeData: function(data, prev_data) {
     console.log('nd1:', data, prev_data);
-    // ['region', 'city', 'house', 'flat'].forEach(function(field) {
-    //   !data[field] && !_.isEmpty(choices[field]) && (data[field] = choices[field][0][0]);
-    // });
     var reset_flag = false;
     DEPENDENT_FIELDS.forEach(function(field) {
       if( reset_flag )
@@ -112,7 +122,7 @@ var ApplicationFormView = React.createClass({
     var choices = {},
         data = _.clone(data, true),
         _getFirstChoice = function(choices) {
-          return _.isEmpty(choices) ? null : _.isEmpty(choices[0]) ? choices[0] : choices[0][0];
+          return _.isEmpty(choices) ? null : (_.isArray(choices[0]) && !_.isEmpty(choices[0])) ? choices[0][0] : choices[0];
         },
         marker_fields = {
           region: function(val) {
@@ -127,12 +137,19 @@ var ApplicationFormView = React.createClass({
                 return _.map(flats, 'number');
               };
             val && data.house && (choices.flat = f(val, data.house), !data.flat && (data.flat = _getFirstChoice(choices.flat)));
+          },
+          flat: function(val) {
+            if( !val ) return;
+            var flatData = _.filter(DATA.flats, {'rooms': parseInt(data.rooms,10), 'house': data.house, 'number': val})[0];
+            data.podiezd = flatData.podiezd;
+            data.level = flatData.level;
+            data.area = flatData.area;
           }
         };
 
    console.log('I:', choices, data, this.state.form_data);
 
-    ['region', 'city', 'rooms'].forEach(function(field) {
+    ['region', 'city', 'rooms', 'flat'].forEach(function(field) {
       marker_fields[field](data[field]);
     });
 
@@ -141,13 +158,30 @@ var ApplicationFormView = React.createClass({
     return [data, choices];
   },
 
+  _computeData: function(data) {
+    var _getF = function(field) {
+          return parseFloat(data[field],10);
+        },
+        _getI = function(field) {
+          return parseInt(data[field],10);
+        },
+        _retS = function(val) {
+          return (val==='NaN') ? '' : t;
+        },
+        t;
+    data.cost_rent_payment = _retS((_getF('rent_area_payment') * _getF('area')).toFixed(2));
+
+    return data;
+  },
+
   _getNewState: function(new_data) {
     var choices = null;
-    // new_data -> choices -> data & choices
-    new_data = this._normalizeData(new_data, this.state.form_data);
+    // new_data -> choices -> data & choices -> compute data
+    new_data = this._normalizeData(new_data, this.state.form_data);    
     var ret = this._filterChoices(new_data);
     new_data = ret[0];
     choices = ret[1];
+    new_data = this._computeData(new_data);
 
     return {
       form_data: new_data,
@@ -162,10 +196,11 @@ var ApplicationFormView = React.createClass({
 
   render: function() {
     // data -> choices -> data
-    var f = new ApplicationForm(null, {
-      data: _.clone(this.state.form_data, true), fields_choices: this.state.form_choices,
-      controlled: true, onChange: this.onFormChange
-    });
+    var form_data = _.clone(this.state.form_data, true),
+        f = new ApplicationForm(null, {
+          data: form_data, fields_choices: this.state.form_choices,
+          controlled: true, onChange: this.onFormChange
+        });
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -184,6 +219,36 @@ var ApplicationFormView = React.createClass({
               <Row>
                 <Field name="rooms"/>
                 <Field name="flat"/>
+              </Row>
+              <Row>
+                <Field name="podiezd"/>
+                <Field name="level"/>
+                <Field name="area"/>
+              </Row>
+              <Row>
+                <Field name="rent_area_payment"/>
+              </Row>
+              <Row>
+                <Field name="interest_rate"/>
+              </Row>
+            </Section>
+            <Section name="Параметры арендной недвижимости">
+              <Row>
+                <Field name="cost_rent_payment"/>
+              </Row>
+              <Row>
+                <Field name="cost_insurance_items"/>
+                <Field name="cost_insurance_life"/>
+                <Field name="cost_insurance_payments"/>
+              </Row>
+              <Row>
+                <Field name="cost_utility"/>
+                <Field name="cost_maintenance"/>
+                <Field name="cost_taxes"/>
+                <Field name="cost_other"/>
+              </Row>
+              <Row>
+                <Field name="cost_total"/>
               </Row>
             </Section>
           </GridForm>
