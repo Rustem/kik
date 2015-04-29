@@ -18,7 +18,6 @@ var PeopleFinderForm = React.createClass({
 	    var form = this.refs.PeopleFinderForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
-	    	console.log(form.cleanedData)
 	      this.props.onHandleSubmit(form.cleanedData);
 	    }
 	},
@@ -26,7 +25,7 @@ var PeopleFinderForm = React.createClass({
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
 			        <forms.RenderForm form={PeopleFinderFormDefinition} ref="PeopleFinderForm"/>
-			        <button>Найти</button>
+			        <button type="button" className="btn btn-default">Найти</button>
 			    </form>
     },
 });

@@ -1,4 +1,5 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap')
 
 var LogInFormDefinition = forms.Form.extend({
   email: forms.EmailField({
@@ -28,8 +29,12 @@ var LogInForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={LogInFormDefinition} ref="LoginForm"/>
-			        <button>Войти</button>
+			        <forms.RenderForm form={LogInFormDefinition} ref="LoginForm">
+			        	<BootstrapForm/>
+			        </forms.RenderForm>
+			        <div className="text-center">
+			        	<button type="button" className="btn btn-block btn-success">Войти</button>
+			        </div>
 			    </form>
     },
 });

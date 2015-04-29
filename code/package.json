@@ -26,6 +26,7 @@
     "react-router": "~0.11.0",
     "newforms": "~0.11",
     "newforms-gridforms": "~1.x",
+    "newforms-bootstrap": "~1.x",
     "when": "~3.7.3",
     "moment": "~2.10.2"
   }

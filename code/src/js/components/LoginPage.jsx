@@ -27,7 +27,11 @@ var LoginPage = React.createClass({
 
     render: function() {
         return (
-            <div className='body-container'>
+            <div className='login-container'>
+                <div className="text-center">
+                    <img src="http://kmc.kz/uploads/settings/537c680011584.png" alt="Казахстанская ипотечная компания" />
+                </div>
+                <br />
                 <LogInForm onHandleSubmit={this.onLogIn} />
             </div>
         )
