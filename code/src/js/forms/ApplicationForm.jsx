@@ -17,7 +17,8 @@ var REGION_CHOICES = [
 ];
 var ROOMS_CHOICES = [[1, 1], [2, '2-x'], [3, '3-x']];
 var RENT_CHOICES = [['3160.72', '5 лет за 3160,72 тенге'], ['2469.60', '7 лет за 2469.60 тенге'], ['1800.10', '12 лет за 1800.10 тенге']];
-
+var NATIONALITY_CHOICES = [['rus', 'Русский'], ['kaz',' Казах']];
+var FAMILYSTATUS_CHOICES = [['married', 'Женат'], ['single', 'Холост'], ['divorced', 'Разведен']];
 
 var DATA = {
   cities: {
@@ -63,7 +64,26 @@ var ApplicationForm = forms.Form.extend({
   cost_other: forms.CharField({label: "Другие платежи"}),
   cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж"}),
 
-
+  lastname: forms.CharField({label: "ФАМИЛИЯ"}),
+  firstname: forms.CharField({label: "ИМЯ"}),
+  middlename: forms.CharField({label: "ОТЧЕСТВО"}),
+  dob: forms.CharField({label: "ДАТА РОЖДЕНИЯ"}),
+  nationality: forms.ChoiceField({label: "НАЦИОНАЛЬНОСТЬ", choices: NATIONALITY_CHOICES}),
+  familystatus: forms.ChoiceField({label: "СЕМЕЙНЫЙ СТАТУС", choices: FAMILYSTATUS_CHOICES, widget: forms.RadioSelect}),
+  address: forms.CharField({label: "АДРЕС ПРОЖИВАНИЯ"}),
+  phonenumber: forms.CharField({label: "НОМЕР ТЕЛЕФОНА"}),
+  income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ"}),
+  income_extrawork: forms.CharField({label: "ДОХОДЫ ПО ДОП. МЕСТУ РАБОТЫ"}),
+  income_dividend: forms.CharField({label: "ДОХОДЫ В ВИДЕ ДИВЕДЕНДОВ"}),
+  income_emolument: forms.CharField({label: "ДОХОД В ВИДЕ ВОЗНАГРАЖД. И РЕГУЛЯРНЫХ СТРАХОВЫХ ВЫПЛАТ"}),
+  income_pension: forms.CharField({label: "ПЕНСИОННЫЕ ВЫПЛАТЫ И СТИПЕНДИИ"}),
+  income_rental: forms.CharField({label: "ДОХОД В ВИДЕ АРЕНДНОЙ ПЛАТЫ"}),
+  income_aliment: forms.CharField({label: "АЛЕМЕНТЫ"}),
+  income_extra: forms.CharField({label: "ДРУГИЕ ДОХОДЫ"}),
+  income_total: forms.CharField({label: "ИТОГО"}),
+  od: forms.CharField({label: "О/Д"}),
+  pd: forms.CharField({label: "П/Д"}),
+  
   constructor: function(data, kwargs) {
     // Call the constructor of whichever form you're extending so that the
     // forms.Form constructor eventually gets called - this.fields doesn't
@@ -232,7 +252,103 @@ var ApplicationFormView = React.createClass({
       <form onSubmit={this.handleSubmit}>
 
         <forms.RenderForm form={f} ref='application_form' >
-
+          <GridForm>
+            <Section name="Пожалуйста, выберите программу">
+              <Row>
+                <Field name="program"/>
+              </Row>
+              <Row>
+                <Field name="region"/>
+                <Field name="city"/>
+                <Field name="house"/>
+              </Row>
+              <Row>
+                <Field name="rooms"/>
+                <Field name="flat"/>
+              </Row>
+              <Row>
+                <Field name="podiezd"/>
+                <Field name="level"/>
+                <Field name="area"/>
+              </Row>
+              <Row>
+                <Field name="rent_area_payment"/>
+              </Row>
+              <Row>
+                <Field name="interest_rate"/>
+              </Row>
+            </Section>
+            <Section name="Параметры арендной недвижимости">
+              <Row>
+                <Field name="cost_rent_payment"/>
+              </Row>
+              <Row>
+                <Field name="cost_insurance_items"/>
+                <Field name="cost_insurance_life"/>
+                <Field name="cost_insurance_payments"/>
+              </Row>
+              <Row>
+                <Field name="cost_utility"/>
+                <Field name="cost_maintenance"/>
+                <Field name="cost_taxes"/>
+                <Field name="cost_other"/>
+              </Row>
+              <Row>
+                <Field name="cost_total"/>
+              </Row>
+            </Section>
+            <Section name="Анкета (демографические данные)">
+              <Row>
+                <Field name="lastname"/>
+                <Field name="firstname"/>
+                <Field name="middlename"/>
+              </Row>
+              <Row>
+                <Field name="dob"/>
+                <Field name="nationality"/>
+              </Row>
+              <Row>
+                <Field name="familystatus"/>
+                  <Field name="address"/>
+                  <Field name="phonenumber"/>
+              </Row>
+            </Section>
+            <Section name="Информация о доходах/расходах">
+              <Row>
+                <Field name="income_mainwork"/>
+              </Row>
+              <Row>
+                <Field name="income_extrawork"/>
+              </Row>
+              <Row>
+                <Field name="income_dividend"/>
+              </Row>
+              <Row>
+                <Field name="income_emolument"/>
+              </Row>
+              <Row>
+                <Field name="income_pension"/>
+              </Row>
+              <Row>
+                <Field name="income_rental"/>
+              </Row>
+              <Row>
+                <Field name="income_aliment"/>
+              </Row>
+              <Row>
+                <Field name="income_extra"/>
+              </Row>
+              <Row>
+                <Field name="income_total"/> 
+              </Row>
+            </Section>
+            <Section name="Коэффициенты (авто)">
+              <Row>
+                <Field name="od"/>
+                <Field name="pd"/>
+              </Row>
+            </Section>
+          </GridForm>
         </forms.RenderForm>
 
         <button type='submit'>Red Button!</button>
