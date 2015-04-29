@@ -1,0 +1,70 @@
+{
+  "name": "newforms",
+  "description": "An isomorphic form-handling library for React",
+  "version": "0.11.0",
+  "author": {
+    "name": "Jonny Buchanan",
+    "email": "jonathan.buchanan@gmail.com"
+  },
+  "keywords": [
+    "isomorphic",
+    "form-handling",
+    "forms",
+    "input",
+    "validation",
+    "conversion",
+    "coercion",
+    "react",
+    "react-component"
+  ],
+  "main": "./newforms.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/insin/newforms.git"
+  },
+  "dependencies": {
+    "Concur": "^0.3.0",
+    "envify": "^3.2.0",
+    "get-form-data": "^1.0.1",
+    "isomorph": "^0.3.0",
+    "validators": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=0.12.0"
+  },
+  "browserify": {
+    "transform": [
+      "envify"
+    ]
+  },
+  "browserify-shim": {
+    "react": "global:React",
+    "react/addons": "global:React"
+  },
+  "bugs": {
+    "url": "https://github.com/insin/newforms/issues"
+  },
+  "homepage": "https://github.com/insin/newforms",
+  "_id": "newforms@0.11.0",
+  "scripts": {},
+  "_shasum": "6f0451b10d4b311f01195a265995179849f1a202",
+  "_from": "newforms@>=0.11.0 <0.12.0",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "insin",
+    "email": "jonathan.buchanan@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "insin",
+      "email": "jonathan.buchanan@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "6f0451b10d4b311f01195a265995179849f1a202",
+    "tarball": "http://registry.npmjs.org/newforms/-/newforms-0.11.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/newforms/-/newforms-0.11.0.tgz",
+  "readme": "ERROR: No README data found!"
+}

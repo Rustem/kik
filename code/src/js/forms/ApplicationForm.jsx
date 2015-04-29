@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var forms = require('newforms');
+var forms = require('../lib/newforms/newforms');
 var GridForms = require('newforms-gridforms');
 var GridForm = GridForms.GridForm;
 var Section = GridForms.Section;
@@ -44,13 +44,13 @@ var ApplicationForm = forms.Form.extend({
   program: forms.ChoiceField({label: "ПРОГРАММА", choices: PROGRAM_CHOICES}),
   region: forms.ChoiceField({label: "РЕГИОН", choices: REGION_CHOICES}),
   city: forms.ChoiceField({label: "ГОРОД"}),
-  house: forms.ChoiceField({label: "ЖИЛОЙ КОМПЛЕКС"}),
+  house: forms.ChoiceField({label: "ЖИЛОЙ КОМПЛЕКС", required: true}),
   rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect}),
-  flat: forms.ChoiceField({label: "НОМЕР КВАРТИРЫ"}),
+  flat: forms.ChoiceField({label: "НОМЕР КВАРТИРЫ", required: true}),
   podiezd: forms.CharField({label: "ПОДЪЕЗД"}),
   level: forms.CharField({label: "ЭТАЖ"}),
   area: forms.CharField({label: "КВАДРАТУРА"}),
-  rent_area_payment: forms.ChoiceField({label: "СТОИМОСТЬ АРЕНДЫ ЗА 1 М2ПРИ СРОКЕ АРЕНДЫ В", choices: RENT_CHOICES, widget: forms.RadioSelect}),
+  rent_area_payment: forms.ChoiceField({label: "СТОИМОСТЬ АРЕНДЫ ЗА 1 М2ПРИ СРОКЕ АРЕНДЫ В", choices: RENT_CHOICES, widget: forms.RadioSelect, required: true}),
   interest_rate: forms.CharField({label: "ПРОЦЕНТНАЯ СТАВКА"}),
 
   cost_rent_payment: forms.CharField({label: "Ежемесячный платеж по аренде"}),
@@ -84,7 +84,14 @@ var ApplicationFormView = React.createClass({
 
   handleSubmit: function(evt) {
     evt.preventDefault();
-    alert('Hi!')
+    var form = this._getForm(),
+        isValid = form.validate();
+    console.log(isValid)
+    if (isValid) {
+      var data = form.cleanedData,
+          application = _.assign({}, _.omit(data, []));
+      this.props.onSubmit(application);
+    }
   },
 
   getInitialState: function() {
@@ -217,59 +224,15 @@ var ApplicationFormView = React.createClass({
     var form_data = _.clone(this.state.form_data, true),
         f = new ApplicationForm(null, {
           data: form_data, fields_choices: this.state.form_choices,
-          controlled: true, onChange: this.onFormChange
+          controlled: true, onChange: this.onFormChange,
+          emptyPermitted: true
         });
 
     return (
       <form onSubmit={this.handleSubmit}>
 
         <forms.RenderForm form={f} ref='application_form' >
-          <GridForm>
-            <Section name="Пожалуйста, выберите программу">
-              <Row>
-                <Field name="program"/>
-              </Row>
-              <Row>
-                <Field name="region"/>
-                <Field name="city"/>
-                <Field name="house"/>
-              </Row>
-              <Row>
-                <Field name="rooms"/>
-                <Field name="flat"/>
-              </Row>
-              <Row>
-                <Field name="podiezd"/>
-                <Field name="level"/>
-                <Field name="area"/>
-              </Row>
-              <Row>
-                <Field name="rent_area_payment"/>
-              </Row>
-              <Row>
-                <Field name="interest_rate"/>
-              </Row>
-            </Section>
-            <Section name="Параметры арендной недвижимости">
-              <Row>
-                <Field name="cost_rent_payment"/>
-              </Row>
-              <Row>
-                <Field name="cost_insurance_items"/>
-                <Field name="cost_insurance_life"/>
-                <Field name="cost_insurance_payments"/>
-              </Row>
-              <Row>
-                <Field name="cost_utility"/>
-                <Field name="cost_maintenance"/>
-                <Field name="cost_taxes"/>
-                <Field name="cost_other"/>
-              </Row>
-              <Row>
-                <Field name="cost_total"/>
-              </Row>
-            </Section>
-          </GridForm>
+
         </forms.RenderForm>
 
         <button type='submit'>Red Button!</button>
