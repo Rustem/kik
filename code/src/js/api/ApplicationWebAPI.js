@@ -17,7 +17,26 @@ module.exports = {
 
         var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
         rawApplications.push(object);
-        localStorage.setItem('applications', JSON.stringify(rawActivities));
+        localStorage.setItem('applications', JSON.stringify(rawApplications));
+        setTimeout(function() {
+            success(object);
+        }, 0);
+    },
+
+    approve: function(object, success, failure) {
+
+        var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
+        object.status = 2;
+        
+        for(var i = 0; i<rawApplications.length; i++) {
+            var cur = rawApplications[i];
+            if(cur.id === object.id) {
+                rawApplications[i] = object;
+                break;
+            }
+        }
+
+        localStorage.setItem('applications', JSON.stringify(rawApplications));
         setTimeout(function() {
             success(object);
         }, 0);

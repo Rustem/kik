@@ -58,6 +58,10 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){
       addItem(action.object);
       ApplicationStore.emit(CHANGE_EVENT);
       break;
+    case ActionTypes.APPROVE_APPLICATION_SUCCESS:
+      addItem(action.object);
+      ApplicationStore.emit(CHANGE_EVENT);
+      break;
     case ActionTypes.CREATE_CONCLUSION_SUCCESS:
       AppDispatcher.waitFor([ConclusionStore.dispatchToken]);
       addItem(action.object.application);

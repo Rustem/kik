@@ -2,10 +2,12 @@ var Router = require('react-router');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var ConclusionActions = require('../../actions/ConclusionActions');
+var ApplicationActions = require('../../actions/ApplicationActions');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
 var FullConclusion = require('../conclusions/FullConclusion.jsx');
+var ApprovalConclusion = require('../conclusions/ApprovalConclusion.jsx');
 var StageHeader = require('../stages/StageHeader.jsx');
 var ApplicationInfo = require('./ApplicationInfo.jsx');
 
@@ -21,6 +23,19 @@ var ApplicationDetail = React.createClass({
         }.bind(this));
 	},
 
+	onApplicationApprove: function() {
+		var application = this.getApplication();
+		var promise = ApplicationActions.approve(application);
+		promise.done(function() {
+            this.transitionTo('index');
+            
+        }.bind(this));
+	},
+
+	onApplicationReject: function() {
+
+	},
+
 	getApplication: function() {
 		var params = this.getParams();
 		return ApplicationStore.get(params.id)
@@ -32,7 +47,7 @@ var ApplicationDetail = React.createClass({
 			case 0:
 				return null;
 			case 1:
-				return null;
+				return <ApprovalConclusion application={application} onApplicationApprove={this.onApplicationApprove}  onApplicationReject={this.onApplicationReject} />;
 			case 20:
 				return <RiskConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 21:
