@@ -25,9 +25,9 @@ var PeopleListItem = React.createClass({
 			tel: person.tel,
 
 		}
-		console.log(params)
+		// console.log(params)
 
-		// utils.print_doc(TEMPLATES.ZAYAVLENIE, params);
+		utils.print_doc(TEMPLATES.ZAYAVLENIE, params);
 	},
 
 	genSoglasie: function(person) {
@@ -45,9 +45,9 @@ var PeopleListItem = React.createClass({
 			udv_date: person.udv_date,
 
 		}
-		console.log(params)
+		// console.log(params)
 
-		// utils.print_doc(TEMPLATES.SOGLASIE, params);
+		utils.print_doc(TEMPLATES.SOGLASIE, params);
 	},
 
 	render: function() {
