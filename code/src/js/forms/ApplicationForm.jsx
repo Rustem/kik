@@ -4,7 +4,8 @@ var GridForms = require('newforms-gridforms');
 var GridForm = GridForms.GridForm;
 var Section = GridForms.Section;
 var Row = GridForms.Row;
-var Field = GridForms.Field;
+var Field = require('../lib/newforms-gridforms/Field'); // own Field with errorMessage
+var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
 
 
 var PROGRAM_CHOICES = [
@@ -42,48 +43,48 @@ var DEPENDENT_FIELDS = ['region', 'city', 'house', 'rooms', 'flat', 'podiezd', '
 
 
 var ApplicationForm = forms.Form.extend({
-  program: forms.ChoiceField({label: "ПРОГРАММА", choices: PROGRAM_CHOICES}),
-  region: forms.ChoiceField({label: "РЕГИОН", choices: REGION_CHOICES}),
-  city: forms.ChoiceField({label: "ГОРОД"}),
+  program: forms.ChoiceField({label: "ПРОГРАММА", choices: PROGRAM_CHOICES, required: false}),
+  region: forms.ChoiceField({label: "РЕГИОН", choices: REGION_CHOICES, required: false}),
+  city: forms.ChoiceField({label: "ГОРОД", required: false}),
   house: forms.ChoiceField({label: "ЖИЛОЙ КОМПЛЕКС", required: true}),
-  rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect}),
+  rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect, required: false}),
   flat: forms.ChoiceField({label: "НОМЕР КВАРТИРЫ", required: true}),
-  podiezd: forms.CharField({label: "ПОДЪЕЗД"}),
-  level: forms.CharField({label: "ЭТАЖ"}),
-  area: forms.CharField({label: "КВАДРАТУРА"}),
+  podiezd: forms.CharField({label: "ПОДЪЕЗД", required: false}),
+  level: forms.CharField({label: "ЭТАЖ", required: false}),
+  area: forms.CharField({label: "КВАДРАТУРА", required: false, required: true}),
   rent_area_payment: forms.ChoiceField({label: "СТОИМОСТЬ АРЕНДЫ ЗА 1 М2ПРИ СРОКЕ АРЕНДЫ В", choices: RENT_CHOICES, widget: forms.RadioSelect, required: true}),
-  interest_rate: forms.CharField({label: "ПРОЦЕНТНАЯ СТАВКА"}),
+  interest_rate: forms.CharField({label: "ПРОЦЕНТНАЯ СТАВКА", required: false}),
 
-  cost_rent_payment: forms.CharField({label: "Ежемесячный платеж по аренде"}),
-  cost_insurance_items: forms.CharField({label: "Платеж по страхованию имущества"}),
-  cost_insurance_life: forms.CharField({label: "Платеж по страхованию жизни"}),
-  cost_insurance_payments: forms.CharField({label: "Платеж по страхованию риска неплатежей по аренде"}),
-  cost_utility: forms.CharField({label: "Коммунальные платежи"}),
-  cost_maintenance: forms.CharField({label: "Услуги по техническому обслуживанию имущества"}),
-  cost_taxes: forms.CharField({label: "Платеж по налогу на имущество"}),
-  cost_other: forms.CharField({label: "Другие платежи"}),
-  cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж"}),
+  cost_rent_payment: forms.CharField({label: "Ежемесячный платеж по аренде", required: true}),
+  cost_insurance_items: forms.CharField({label: "Платеж по страхованию имущества", required: false}),
+  cost_insurance_life: forms.CharField({label: "Платеж по страхованию жизни", required: false}),
+  cost_insurance_payments: forms.CharField({label: "Платеж по страхованию риска неплатежей по аренде", required: false}),
+  cost_utility: forms.CharField({label: "Коммунальные платежи", required: false}),
+  cost_maintenance: forms.CharField({label: "Услуги по техническому обслуживанию имущества", required: false}),
+  cost_taxes: forms.CharField({label: "Платеж по налогу на имущество", required: false}),
+  cost_other: forms.CharField({label: "Другие платежи", required: false}),
+  cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж", required: true}),
 
-  lastname: forms.CharField({label: "ФАМИЛИЯ"}),
-  firstname: forms.CharField({label: "ИМЯ"}),
-  middlename: forms.CharField({label: "ОТЧЕСТВО"}),
-  dob: forms.CharField({label: "ДАТА РОЖДЕНИЯ"}),
-  nationality: forms.ChoiceField({label: "НАЦИОНАЛЬНОСТЬ", choices: NATIONALITY_CHOICES}),
-  familystatus: forms.ChoiceField({label: "СЕМЕЙНЫЙ СТАТУС", choices: FAMILYSTATUS_CHOICES, widget: forms.RadioSelect}),
-  address: forms.CharField({label: "АДРЕС ПРОЖИВАНИЯ"}),
-  phonenumber: forms.CharField({label: "НОМЕР ТЕЛЕФОНА"}),
-  income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ"}),
-  income_extrawork: forms.CharField({label: "ДОХОДЫ ПО ДОП. МЕСТУ РАБОТЫ"}),
-  income_dividend: forms.CharField({label: "ДОХОДЫ В ВИДЕ ДИВЕДЕНДОВ"}),
-  income_emolument: forms.CharField({label: "ДОХОД В ВИДЕ ВОЗНАГРАЖД. И РЕГУЛЯРНЫХ СТРАХОВЫХ ВЫПЛАТ"}),
-  income_pension: forms.CharField({label: "ПЕНСИОННЫЕ ВЫПЛАТЫ И СТИПЕНДИИ"}),
-  income_rental: forms.CharField({label: "ДОХОД В ВИДЕ АРЕНДНОЙ ПЛАТЫ"}),
-  income_aliment: forms.CharField({label: "АЛЕМЕНТЫ"}),
-  income_extra: forms.CharField({label: "ДРУГИЕ ДОХОДЫ"}),
-  income_total: forms.CharField({label: "ИТОГО"}),
-  od: forms.CharField({label: "О/Д"}),
-  pd: forms.CharField({label: "П/Д"}),
-  
+  lastname: forms.CharField({label: "ФАМИЛИЯ", required: true}),
+  firstname: forms.CharField({label: "ИМЯ", required: true}),
+  middlename: forms.CharField({label: "ОТЧЕСТВО", required: true}),
+  birthday: forms.CharField({label: "ДАТА РОЖДЕНИЯ", required: false}),
+  nationality: forms.ChoiceField({label: "НАЦИОНАЛЬНОСТЬ", choices: NATIONALITY_CHOICES, required: false}),
+  familystatus: forms.ChoiceField({label: "СЕМЕЙНЫЙ СТАТУС", choices: FAMILYSTATUS_CHOICES, widget: forms.RadioSelect, required: false}),
+  address: forms.CharField({label: "АДРЕС ПРОЖИВАНИЯ", required: false}),
+  phonenumber: forms.CharField({label: "НОМЕР ТЕЛЕФОНА", required: false}),
+  income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ", required: false}),
+  income_extrawork: forms.CharField({label: "ДОХОДЫ ПО ДОП. МЕСТУ РАБОТЫ", required: false}),
+  income_dividend: forms.CharField({label: "ДОХОДЫ В ВИДЕ ДИВЕДЕНДОВ", required: false}),
+  income_emolument: forms.CharField({label: "ДОХОД В ВИДЕ ВОЗНАГРАЖД. И РЕГУЛЯРНЫХ СТРАХОВЫХ ВЫПЛАТ", required: false}),
+  income_pension: forms.CharField({label: "ПЕНСИОННЫЕ ВЫПЛАТЫ И СТИПЕНДИИ", required: false}),
+  income_rental: forms.CharField({label: "ДОХОД В ВИДЕ АРЕНДНОЙ ПЛАТЫ", required: false}),
+  income_aliment: forms.CharField({label: "АЛЕМЕНТЫ ПОЛУЧАЕМЫЕ", required: false}),
+  income_extra: forms.CharField({label: "ДРУГИЕ ДОХОДЫ", required: false}),
+  income_total: forms.CharField({label: "ИТОГО", required: true}),
+  od: forms.CharField({label: "О/Д", required: true}),
+  pd: forms.CharField({label: "П/Д", required: true}),
+
   constructor: function(data, kwargs) {
     // Call the constructor of whichever form you're extending so that the
     // forms.Form constructor eventually gets called - this.fields doesn't
@@ -104,14 +105,22 @@ var ApplicationFormView = React.createClass({
 
   handleSubmit: function(evt) {
     evt.preventDefault();
+    this.handleAction('save');
+  },
+
+  handleAction: function(action) {
     var form = this._getForm(),
         isValid = form.validate();
-    console.log(isValid)
     if (isValid) {
-      var data = form.cleanedData,
-          application = _.assign({}, _.omit(data, []));
-      this.props.onSubmit(application);
+      var application = this._getApplication(form.cleanedData);
+      this.props.onAction(action, application);
     }
+    else
+      alert(form.errors().errors);
+  },
+
+  _getApplication: function(formData) {
+    return _.assign({}, _.omit(formData, []))
   },
 
   getInitialState: function() {
@@ -199,22 +208,26 @@ var ApplicationFormView = React.createClass({
         _retS = function(val) {
           return (val==='NaN' || _.isNaN(val)) ? '' : val;
         },
-        _totalCost = function() {
-          var fields = [
-            'cost_rent_payment', 'cost_insurance_items', 'cost_insurance_life', 
-            'cost_insurance_payments', 'cost_utility', 'cost_maintenance',
-            'cost_other', 'cost_taxes'
-            ];
+        _getSum = function(fields) {
           var sum = _.reduce(fields, function(acc, field) {
                 acc += _getF(field) || 0;
                 return acc;
               }, 0.0);
           return sum;
-        },
-        t;
+        };
     data.cost_rent_payment = _retS( (_getF('rent_area_payment') * _getF('area')).toFixed(2) );
     data.cost_taxes = _retS( ((_getF('area')*198000*0.015)/12).toFixed(2) );
-    data.cost_total = _retS( _totalCost() );
+    data.cost_total = _retS( _getSum([
+            'cost_rent_payment', 'cost_insurance_items', 'cost_insurance_life', 
+            'cost_insurance_payments', 'cost_utility', 'cost_maintenance',
+            'cost_other', 'cost_taxes'
+            ]) );
+    data.pd = _retS((_getF('cost_rent_payment')/_getF('income_total')*100).toFixed(2)) + '%';
+    data.od = _retS((_getF('cost_total')/_getF('income_total')*100).toFixed(2)) + '%';
+    data.income_total = _retS((_getSum([
+      'income_extra', 'income_aliment', 'income_rental', 'income_pension',
+      'income_emolument', 'income_dividend', 'income_extrawork', 'income_mainwork'
+      ])));
 
     return data;
   },
@@ -249,110 +262,113 @@ var ApplicationFormView = React.createClass({
         });
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
+        <form onSubmit={this.handleSubmit}>
 
-        <forms.RenderForm form={f} ref='application_form' >
-          <GridForm>
-            <Section name="Пожалуйста, выберите программу">
-              <Row>
-                <Field name="program"/>
-              </Row>
-              <Row>
-                <Field name="region"/>
-                <Field name="city"/>
-                <Field name="house"/>
-              </Row>
-              <Row>
-                <Field name="rooms"/>
-                <Field name="flat"/>
-              </Row>
-              <Row>
-                <Field name="podiezd"/>
-                <Field name="level"/>
-                <Field name="area"/>
-              </Row>
-              <Row>
-                <Field name="rent_area_payment"/>
-              </Row>
-              <Row>
-                <Field name="interest_rate"/>
-              </Row>
-            </Section>
-            <Section name="Параметры арендной недвижимости">
-              <Row>
-                <Field name="cost_rent_payment"/>
-              </Row>
-              <Row>
-                <Field name="cost_insurance_items"/>
-                <Field name="cost_insurance_life"/>
-                <Field name="cost_insurance_payments"/>
-              </Row>
-              <Row>
-                <Field name="cost_utility"/>
-                <Field name="cost_maintenance"/>
-                <Field name="cost_taxes"/>
-                <Field name="cost_other"/>
-              </Row>
-              <Row>
-                <Field name="cost_total"/>
-              </Row>
-            </Section>
-            <Section name="Анкета (демографические данные)">
-              <Row>
-                <Field name="lastname"/>
-                <Field name="firstname"/>
-                <Field name="middlename"/>
-              </Row>
-              <Row>
-                <Field name="dob"/>
-                <Field name="nationality"/>
-              </Row>
-              <Row>
-                <Field name="familystatus"/>
-                  <Field name="address"/>
-                  <Field name="phonenumber"/>
-              </Row>
-            </Section>
-            <Section name="Информация о доходах/расходах">
-              <Row>
-                <Field name="income_mainwork"/>
-              </Row>
-              <Row>
-                <Field name="income_extrawork"/>
-              </Row>
-              <Row>
-                <Field name="income_dividend"/>
-              </Row>
-              <Row>
-                <Field name="income_emolument"/>
-              </Row>
-              <Row>
-                <Field name="income_pension"/>
-              </Row>
-              <Row>
-                <Field name="income_rental"/>
-              </Row>
-              <Row>
-                <Field name="income_aliment"/>
-              </Row>
-              <Row>
-                <Field name="income_extra"/>
-              </Row>
-              <Row>
-                <Field name="income_total"/> 
-              </Row>
-            </Section>
-            <Section name="Коэффициенты (авто)">
-              <Row>
-                <Field name="od"/>
-                <Field name="pd"/>
-              </Row>
-            </Section>
-          </GridForm>
-        </forms.RenderForm>
+          <forms.RenderForm form={f} ref='application_form'>
+            <GridForm>
+              <Section name="Пожалуйста, выберите программу">
+                <Row>
+                  <Field name="program"/>
+                </Row>
+                <Row>
+                  <Field name="region"/>
+                  <Field name="city"/>
+                  <Field name="house"/>
+                </Row>
+                <Row>
+                  <Field name="rooms"/>
+                  <Field name="flat"/>
+                </Row>
+                <Row>
+                  <FieldLabel name="podiezd"/>
+                  <FieldLabel name="level"/>
+                  <FieldLabel name="area"/>
+                </Row>
+                <Row>
+                  <Field name="rent_area_payment"/>
+                </Row>
+                <Row>
+                  <FieldLabel name="interest_rate"/>
+                </Row>
+              </Section>
+              <Section name="Параметры арендной недвижимости">
+                <Row>
+                  <Field name="cost_rent_payment"/>
+                </Row>
+                <Row>
+                  <Field name="cost_insurance_items"/>
+                  <Field name="cost_insurance_life"/>
+                  <Field name="cost_insurance_payments"/>
+                </Row>
+                <Row>
+                  <Field name="cost_utility"/>
+                  <Field name="cost_maintenance"/>
+                  <Field name="cost_taxes"/>
+                  <Field name="cost_other"/>
+                </Row>
+                <Row>
+                  <Field name="cost_total"/>
+                </Row>
+              </Section>
+              <Section name="Анкета (демографические данные)">
+                <Row>
+                  <Field name="lastname"/>
+                  <Field name="firstname"/>
+                  <Field name="middlename"/>
+                </Row>
+                <Row>
+                  <Field name="birthday"/>
+                  <Field name="nationality"/>
+                </Row>
+                <Row>
+                  <Field name="familystatus"/>
+                    <Field name="address"/>
+                    <Field name="phonenumber"/>
+                </Row>
+              </Section>
+              <Section name="Информация о доходах/расходах">
+                <Row>
+                  <Field name="income_mainwork"/>
+                </Row>
+                <Row>
+                  <Field name="income_extrawork"/>
+                </Row>
+                <Row>
+                  <Field name="income_dividend"/>
+                </Row>
+                <Row>
+                  <Field name="income_emolument"/>
+                </Row>
+                <Row>
+                  <Field name="income_pension"/>
+                </Row>
+                <Row>
+                  <Field name="income_rental"/>
+                </Row>
+                <Row>
+                  <Field name="income_aliment"/>
+                </Row>
+                <Row>
+                  <Field name="income_extra"/>
+                </Row>
+                <Row>
+                  <FieldLabel name="income_total"/> 
+                </Row>
+              </Section>
+              <Section name="Коэффициенты (авто)">
+                <Row>
+                  <FieldLabel name="od"/>
+                  <FieldLabel name="pd"/>
+                </Row>
+              </Section>
+            </GridForm>
+          </forms.RenderForm>
 
-        <button type='submit'>Red Button!</button>
-      </form>
+          <button type='submit'>Сохранить</button>
+        </form>
+        <button type='accept' onClick={this.handleAction.bind(this, 'accept')}>Согласовать</button>
+      </div>
     );
   },
 
