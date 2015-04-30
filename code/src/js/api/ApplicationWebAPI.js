@@ -17,7 +17,7 @@ module.exports = {
 
         var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
         rawApplications.push(object);
-        localStorage.setItem('applications', JSON.stringify(rawActivities));
+        localStorage.setItem('applications', JSON.stringify(rawApplications));
         setTimeout(function() {
             success(object);
         }, 0);
