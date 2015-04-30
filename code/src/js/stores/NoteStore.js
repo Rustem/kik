@@ -51,7 +51,7 @@ NoteStore.dispatchToken = AppDispatcher.register(function(payload){
       NoteStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.CREATE_NOTE_SUCCESS:
-      addItem(action.object);
+      addItem(action.object.note);
       NoteStore.emit(CHANGE_EVENT);
       break;
     default:

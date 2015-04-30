@@ -16,8 +16,8 @@ var Stage1 = React.createClass({
 		var applications = this.state.applications
 		return 	<div>
 					{applications.length > 0 ? 
-						[<h4>Заявления</h4>,
-						 <ApplicationList applications={applications} />]
+						[<h4 key="header">Заявления</h4>,
+						 <ApplicationList applications={applications} key="application_list"/>]
 					: <h4>Новых заявлений нет</h4>}
 				</div>
 	}

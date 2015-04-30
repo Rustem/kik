@@ -3,6 +3,7 @@ var ApplicationStore = require('../../stores/ApplicationStore');
 var AppContextMixin = require('../../mixins/AppContextMixin');
 var ConclusionActions = require('../../actions/ConclusionActions');
 var ApplicationActions = require('../../actions/ApplicationActions');
+var NoteActions = require('../../actions/NoteActions');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
@@ -32,8 +33,12 @@ var ApplicationDetail = React.createClass({
         }.bind(this));
 	},
 
-	onApplicationReject: function() {
-
+	onApplicationReject: function(object) {
+		var promise = NoteActions.create(object);
+		promise.done(function() {
+            this.transitionTo('index');
+            
+        }.bind(this));
 	},
 
 	getApplication: function() {
