@@ -3,6 +3,8 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var ActionTypes = require('../constants/appConstants').ActionTypes;
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
+var ConclusionStore = require('./ConclusionStore');
+var NoteStore = require('./NoteStore');
 
 var CHANGE_EVENT = 'change';
 
@@ -55,6 +57,20 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){
       break;
     case ActionTypes.CREATE_APPLICATION_SUCCESS:
       addItem(action.object);
+      ApplicationStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.APPROVE_APPLICATION_SUCCESS:
+      addItem(action.object);
+      ApplicationStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.CREATE_CONCLUSION_SUCCESS:
+      AppDispatcher.waitFor([ConclusionStore.dispatchToken]);
+      addItem(action.object.application);
+      ApplicationStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.CREATE_NOTE_SUCCESS:
+      AppDispatcher.waitFor([ConclusionStore.dispatchToken]);
+      addItem(action.object.application);
       ApplicationStore.emit(CHANGE_EVENT);
       break;
     default:

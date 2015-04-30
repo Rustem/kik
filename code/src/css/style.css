@@ -1,0 +1,14 @@
+body {
+	background-color: #F5F5F5;
+}
+.login-container{
+	width: 480px;
+	margin: auto;
+	padding-top: 8rem;
+}
+.page-container{
+	width: 800px;
+	margin: auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}

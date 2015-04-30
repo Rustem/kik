@@ -1,4 +1,6 @@
 var _ = require('lodash');
+var Router = require('react-router');
+var Link = Router.Link;
 var ApplicationStore = require('../../stores/ApplicationStore');
 var ApplicationWebAPI = require('../../api/ApplicationWebAPI');
 var ApplicationList = require('../applications/ApplicationList.jsx');
@@ -38,13 +40,26 @@ var Stage0 = React.createClass({
   },
 
 	render: function() {
+    var applications = this.state.applications;
 		return (
       <div>
-        <ApplicationList applications={this.state.applications} />
+        <div>
+          <p className='text-right'>
+            <Link to="person_finder"
+                className="btn btn-default">
+                Найти человека
+            </Link>
+          </p>
+          <br />
+          {applications.length > 0 ? 
+            [<h4>Заявления</h4>,
+             <ApplicationList applications={applications} />]
+          : <h4>Заявлений нет</h4>}
+        </div>
+
         <ApplicationForm onAction={this.handleFormAction} />
       </div>
     );
-
 	}
 });
 

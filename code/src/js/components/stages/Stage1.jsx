@@ -1,7 +1,25 @@
+var _ = require('lodash');
+var ApplicationStore = require('../../stores/ApplicationStore');
+var ConclusionStore = require('../../stores/ConclusionStore');
+var ApplicationList = require('../applications/ApplicationList.jsx');
+var ConclusionTypes = require('../../constants/appConstants').ConclusionTypes;
+
 var Stage1 = React.createClass({
 
+	getInitialState: function() {
+		return {
+			applications: ApplicationStore.getByStatus(1),
+		}
+	},
+
 	render: function() {
-		return <span>Stage1</span>;
+		var applications = this.state.applications
+		return 	<div>
+					{applications.length > 0 ? 
+						[<h4 key="header">Заявления</h4>,
+						 <ApplicationList applications={applications} key="application_list"/>]
+					: <h4>Новых заявлений нет</h4>}
+				</div>
 	}
 });
 

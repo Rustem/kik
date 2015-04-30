@@ -1,8 +1,14 @@
 var forms = require('newforms');
+var BootstrapForm = require('newforms-bootstrap');
 
 var LogInFormDefinition = forms.Form.extend({
-  email: forms.EmailField(),
-  password: forms.CharField({widget: forms.PasswordInput}),
+  email: forms.EmailField({
+  	label: 'E-mail',
+  }),
+  password: forms.CharField({
+  	label: 'Пароль',
+  	widget: forms.PasswordInput
+  }),
 });
 
 var LogInForm = React.createClass({
@@ -14,7 +20,7 @@ var LogInForm = React.createClass({
 	onHandleSubmit: function(e) {
 		e.preventDefault();
 
-	    var form = this.refs.loginForm.getForm();
+	    var form = this.refs.LoginForm.getForm();
 	    var isValid = form.validate();
 	    if (isValid) {
 	      this.props.onHandleSubmit(form.cleanedData);
@@ -23,8 +29,12 @@ var LogInForm = React.createClass({
 
     render: function() {
 	    return  <form onSubmit={this.onHandleSubmit}>
-			        <forms.RenderForm form={LogInFormDefinition} ref="loginForm"/>
-			        <button>Log In</button>
+			        <forms.RenderForm form={LogInFormDefinition} ref="LoginForm">
+			        	<BootstrapForm/>
+			        </forms.RenderForm>
+			        <div className="text-center">
+			        	<button type="submit" className="btn btn-block btn-success">Войти</button>
+			        </div>
 			    </form>
     },
 });

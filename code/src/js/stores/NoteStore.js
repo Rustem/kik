@@ -3,20 +3,21 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var ActionTypes = require('../constants/appConstants').ActionTypes;
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
+var ConclusionStore = require('./ConclusionStore');
 
 var CHANGE_EVENT = 'change';
 
-var _users = {};
+var _notes = {};
 
 var addItem = function(item){
-  _users[item.id] = item;
+  _notes[item.id] = item;
 };
 
 var removeItem = function(item){
-  delete _users[item.id];
+  delete _notes[item.id];
 }
 
-var UserStore = objectAssign({}, EventEmitter.prototype, {
+var NoteStore = objectAssign({}, EventEmitter.prototype, {
 
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
@@ -27,27 +28,35 @@ var UserStore = objectAssign({}, EventEmitter.prototype, {
   },
 
   get: function(id) {
-    return _users[id];
+    return _notes[id];
   },
 
   getAll: function(){
-    return _users;
+    return _notes;
+  },
+
+  getByApplication: function(application) {
+    return _.where(_notes, { application_id: application.id });
   },
 
 });
 
-UserStore.dispatchToken = AppDispatcher.register(function(payload){
+NoteStore.dispatchToken = AppDispatcher.register(function(payload){
   var action = payload.action;
   switch(action.type){
     case ActionTypes.APP_LOAD_SUCCESS:
-      _.forEach(action.object.users, function(user){
-        addItem(user);
+      _.forEach(action.object.notes, function(note){
+        addItem(note);
       });
-      UserStore.emit(CHANGE_EVENT);
+      NoteStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.CREATE_NOTE_SUCCESS:
+      addItem(action.object.note);
+      NoteStore.emit(CHANGE_EVENT);
       break;
     default:
       return true;
   }
 });
 
-module.exports = UserStore;
+module.exports = NoteStore;

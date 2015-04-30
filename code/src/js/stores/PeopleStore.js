@@ -6,17 +6,17 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
 
-var _users = {};
+var _people = {};
 
 var addItem = function(item){
-  _users[item.id] = item;
+  _people[item.id] = item;
 };
 
 var removeItem = function(item){
-  delete _users[item.id];
+  delete _people[item.id];
 }
 
-var UserStore = objectAssign({}, EventEmitter.prototype, {
+var PeopleStore = objectAssign({}, EventEmitter.prototype, {
 
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
@@ -26,28 +26,32 @@ var UserStore = objectAssign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, cb);
   },
 
-  get: function(id) {
-    return _users[id];
+  get: function(id){
+    return _people[id];
   },
 
   getAll: function(){
-    return _users;
+    return _people;
+  },
+
+  getByIIN: function(iin) {
+    return _.where(_people, { iin: iin });
   },
 
 });
 
-UserStore.dispatchToken = AppDispatcher.register(function(payload){
+PeopleStore.dispatchToken = AppDispatcher.register(function(payload){
   var action = payload.action;
   switch(action.type){
     case ActionTypes.APP_LOAD_SUCCESS:
-      _.forEach(action.object.users, function(user){
-        addItem(user);
+      _.forEach(action.object.people, function(person){
+        addItem(person);
       });
-      UserStore.emit(CHANGE_EVENT);
+      PeopleStore.emit(CHANGE_EVENT);
       break;
     default:
       return true;
   }
 });
 
-module.exports = UserStore;
+module.exports = PeopleStore;

@@ -25,4 +25,26 @@ module.exports = {
       });
     });
   },
+
+  logout: function(object){
+    return promise(function (resolve, reject) {
+      AppDispatcher.handleAction({
+        type: ActionTypes.LOG_OUT,
+        object: object
+      });
+      UserWebAPI.logout(object, function(object){
+          AppDispatcher.handleAction({
+              type: ActionTypes.LOG_OUT_SUCCESS,
+              object: object
+          });
+          resolve(object);
+      }.bind(this), function(error){
+          AppDispatcher.handleAction({
+              type: ActionTypes.LOG_OUT_FAIL,
+              error: error
+          });
+          reject(error);
+      });
+    });
+  },
 };

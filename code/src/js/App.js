@@ -6,24 +6,36 @@ var AppActions = require('./actions/AppActions');
 var UserWebAPI = require('./api/UserWebAPI');
 var ApplicationWebAPI = require('./api/ApplicationWebAPI');
 var ConclusionWebAPI = require('./api/ConclusionWebAPI');
+var UserWebAPI = require('./api/UserWebAPI');
+var PersonWebAPI = require('./api/PersonWebAPI');
+var NoteWebAPI = require('./api/NoteWebAPI');
 
 Fixtures.init();
 
 UserWebAPI.getCurrentUser(function(current_user){
-	ApplicationWebAPI.getAll(function(applications){
-		ConclusionWebAPI.getAll(function(conclusions){
+	UserWebAPI.getAll(function(users){
+		ApplicationWebAPI.getAll(function(applications){
+			ConclusionWebAPI.getAll(function(conclusions){
+				PersonWebAPI.getAll(function(people) {
+					NoteWebAPI.getAll(function(notes) {
 
-			var appState = {
-				current_user: current_user,
-			  	applications: applications,
-			  	conclusions: conclusions,
-			};
-			AppActions.load(appState);
+						var appState = {
+							current_user: current_user,
+							users: users,
+							people: people,
+						  	applications: applications,
+						  	conclusions: conclusions,
+						  	notes: notes,
+						};
+						AppActions.load(appState);
 
-			Router.run(routes, function(Handler, state){
-			  	React.render(<Handler />, document.getElementById('app'));
+						Router.run(routes, function(Handler, state){
+						  	React.render(<Handler />, document.getElementById('app'));
+						});
+					});
+				});
+				
 			});
-			
 		});
 	});
 });

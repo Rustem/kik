@@ -34,6 +34,10 @@ var ConclusionStore = objectAssign({}, EventEmitter.prototype, {
     return _.where(_conclusions, { application_id: application.id });
   },
 
+  getByApplicationAndType: function(application, type) {
+    return _.first(_.where(this.getByApplication(application), { type: type }));
+  }
+
 });
 
 ConclusionStore.dispatchToken = AppDispatcher.register(function(payload){
@@ -45,10 +49,10 @@ ConclusionStore.dispatchToken = AppDispatcher.register(function(payload){
       });
       ConclusionStore.emit(CHANGE_EVENT);
       break;
-    // case ActionTypes.CREATE_APPLICATION_SUCCESS:
-    //   addItem(action.object);
-    //   ConclusionStore.emit(CHANGE_EVENT);
-    //   break;
+    case ActionTypes.CREATE_CONCLUSION_SUCCESS:
+      addItem(action.object.conclusion);
+      ConclusionStore.emit(CHANGE_EVENT);
+      break;
     default:
       return true;
   }

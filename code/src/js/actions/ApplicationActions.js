@@ -11,14 +11,36 @@ module.exports = {
         object: object
       });
       ApplicationWebAPI.create(object, function(object){
-          dispatcher.handleServerAction({
+          AppDispatcher.handleAction({
               type: ActionTypes.CREATE_APPLICATION_SUCCESS,
               object: object
           });
           resolve(object);
       }.bind(this), function(error){
-          dispatcher.handleServerAction({
+          AppDispatcher.handleAction({
               type: ActionTypes.CREATE_APPLICATION_FAIL,
+              error: error
+          });
+          reject(error);
+      });
+    });
+  },
+
+  approve: function(object){
+    return promise(function (resolve, reject) {
+      AppDispatcher.handleAction({
+        type: ActionTypes.APPROVE_APPLICATION,
+        object: object
+      });
+      ApplicationWebAPI.approve(object, function(object){
+          AppDispatcher.handleAction({
+              type: ActionTypes.APPROVE_APPLICATION_SUCCESS,
+              object: object
+          });
+          resolve(object);
+      }.bind(this), function(error){
+          AppDispatcher.handleAction({
+              type: ActionTypes.APPROVE_APPLICATION_FAIL,
               error: error
           });
           reject(error);
