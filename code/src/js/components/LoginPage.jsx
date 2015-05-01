@@ -19,7 +19,6 @@ var LoginPage = React.createClass({
 
     onLogIn: function(object) {
         var promise = UserActions.login(object);
-        console.log(this.context)
         promise.done(function() {
             this.transitionTo('index');
             

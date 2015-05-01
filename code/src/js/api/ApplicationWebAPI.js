@@ -28,6 +28,14 @@ module.exports = {
     },
 
     accept: function(object, success, failure) {
+        if(!object.id) {
+            var timeNow = Date.now();
+            var object = _.extend({}, {
+                id: 'appl_' + timeNow,
+                date_created: timeNow,
+                status: 1,
+            }, object);
+        }
         object.status = 1;
 
         var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];

@@ -37,7 +37,8 @@ var PeopleListItem = React.createClass({
 		var author = this.getUser();
 		var params = {
 			id: person.id,
-			date: moment().format("hh:mm"),
+			date: moment().format("DD.MM.YYYY"),
+			time: moment().format("HH:mm"),
 			author: author.lastname+" "+author.firstname,
 			lastname: person.lastname,
 			firstname: person.firstname,
