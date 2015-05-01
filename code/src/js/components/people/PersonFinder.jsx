@@ -1,4 +1,6 @@
 var moment = require('moment');
+var Router = require('react-router');
+var Link = Router.Link;
 var StageHeader = require('../stages/StageHeader.jsx');
 var PeopleStore = require('../../stores/PeopleStore');
 var PeopleFinderForm = require('../../forms/PeopleFinderForm.jsx');
@@ -60,6 +62,11 @@ var PeopleListItem = React.createClass({
 			        <td>
 			          	<button className="btn btn-default btn-xs" onClick={this.genZayavlenie.bind(null, person)}>Распечатать заявление</button>
 						<button className="btn btn-default btn-xs" onClick={this.genSoglasie.bind(null, person)}>Распечатать согласие</button>
+						<Link to="application_new"
+							  query={{iin: person.iin}}
+							  className="btn btn-primary btn-xs">
+							Создать заявку
+						</Link>
 					</td>
 		        </tr>
 	},
@@ -110,7 +117,9 @@ var PeopleFinder = React.createClass({
 
 	findPeople: function() {
 		var iin = this.state.iin;
-		return PeopleStore.getByIIN(iin);
+		if(iin.length > 0)
+			return [PeopleStore.getByIIN(iin)];
+		return []
 	},
 
 	render: function() {

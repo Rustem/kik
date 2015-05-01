@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var Router = require('react-router');
+var PeopleStore = require('../../stores/PeopleStore');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var ApplicationActions = require('../../actions/ApplicationActions');
 var ApplicationForm = require('../../forms/ApplicationForm.jsx');
@@ -25,10 +26,23 @@ var ApplicationNew = React.createClass({
   },
 
   getApplication: function() {
+    var application = {};
     var id = this.getParams().id;
+    var iin = this.getQuery().iin;
     if(id)
-      return ApplicationStore.get(id);
-    return undefined;
+      application = ApplicationStore.get(id);
+    if(iin) {
+      var person = PeopleStore.getByIIN(iin);
+      application = _.assign(application, {
+        lastname: person.lastname,
+        firstname: person.firstname,
+        middlename: person.middlename,
+        address: person.address,
+        birthday: person.birthdate,
+        phonenumber: person.tel,
+      })
+    }
+    return application;
   },
 
 	render: function() {

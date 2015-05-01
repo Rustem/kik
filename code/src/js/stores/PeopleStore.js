@@ -35,7 +35,7 @@ var PeopleStore = objectAssign({}, EventEmitter.prototype, {
   },
 
   getByIIN: function(iin) {
-    return _.where(_people, { iin: iin });
+    return _.findWhere(_people, { iin: iin });
   },
 
 });
