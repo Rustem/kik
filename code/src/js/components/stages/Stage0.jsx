@@ -14,37 +14,16 @@ var Stage0 = React.createClass({
 		}
 	},
 
-  handleFormAction: function(action, application) {
-    var actions = {
-          save: function() {
-            var newApplication = _.assign({
-              status: 0
-            }, application);
-            ApplicationWebAPI.create(newApplication);
-          },
-          accept: function() {
-            var newApplication = _.assign({
-              status: 1
-            }, application);
-            ApplicationWebAPI.create(newApplication);
-          }
-        };
-
-    _.isFunction(actions[action]) && actions[action]();
-
-    console.log(action, application);
-    // var newApplication = _.assign({
-    //   status: 0
-    // }, application);
-    // ApplicationWebAPI.create(newApplication);
-  },
-
 	render: function() {
     var applications = this.state.applications;
 		return (
       <div>
         <div>
           <p className='text-right'>
+            <Link to="application_new"
+                className="btn btn-default">
+                Новое заявление
+            </Link>&nbsp;
             <Link to="person_finder"
                 className="btn btn-default">
                 Найти человека
@@ -57,7 +36,6 @@ var Stage0 = React.createClass({
           : <h4>Заявлений нет</h4>}
         </div>
 
-        <ApplicationForm onAction={this.handleFormAction} />
       </div>
     );
 	}

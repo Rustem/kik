@@ -8,12 +8,15 @@ module.exports = {
         }, 0);
     },
 
-    create: function(object, success, failure) {
-        var timeNow = Date.now();
-        var object = _.extend({}, {
-            id: 'appl_' + timeNow,
-            date_created: timeNow,
-        }, object);
+    save: function(object, success, failure) {
+        if(!object.id) {
+            var timeNow = Date.now();
+            var object = _.extend({}, {
+                id: 'appl_' + timeNow,
+                date_created: timeNow,
+                status: 0,
+            }, object);
+        }
 
         var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
         rawApplications.push(object);

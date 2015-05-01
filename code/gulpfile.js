@@ -14,6 +14,7 @@ var path = {
   HTML: 'src/index.html',
   CSS: 'src/css/*',
   JS_VENDORS: 'src/js/vendors/*',
+  DOC_TEMPLATES: 'src/js/doc_templates/*',
   MINIFIED_OUT: 'build.min.js',
   OUT: 'build.js',
   DEST: 'dist',
@@ -29,6 +30,8 @@ gulp.task('copy', function(){
     .pipe(gulp.dest(path.DEST_SRC+'/css'));
   gulp.src(path.JS_VENDORS)
     .pipe(gulp.dest(path.DEST_SRC+'/vendors'));
+  gulp.src(path.DOC_TEMPLATES)
+    .pipe(gulp.dest(path.DEST_SRC+'/doc_templates'));
 });
 
 gulp.task('replaceHTMLsrc', function(){

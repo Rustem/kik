@@ -9,6 +9,7 @@ var Hub = require('./components/Hub.jsx');
 var LoginPage = require('./components/LoginPage.jsx');
 var stages = require('./components/stages');
 var ApplicationDetail = require('./components/applications/ApplicationDetail.jsx');
+var ApplicationNew = require('./components/applications/ApplicationNew.jsx');
 var PersonFinder = require('./components/people/PersonFinder.jsx');
 
 var routes = (
@@ -22,6 +23,8 @@ var routes = (
         	<Route name="stage22" path="stage22" handler={stages.Stage22} />
             <Route name="stage3" path="stage3" handler={stages.Stage3} />
         </Route>
+        <Route name="application_new" path="/application/new" handler={ApplicationNew} />
+        <Route name="application_edit" path="/application/:id/edit" handler={ApplicationNew} />
         <Route name="application_detail" path="/application/:id" handler={ApplicationDetail} />
         <Route name="person_finder" path="/people/search" handler={PersonFinder} />
         <DefaultRoute handler={Hub}/>

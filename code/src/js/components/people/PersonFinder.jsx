@@ -3,6 +3,7 @@ var StageHeader = require('../stages/StageHeader.jsx');
 var PeopleStore = require('../../stores/PeopleStore');
 var PeopleFinderForm = require('../../forms/PeopleFinderForm.jsx');
 var AppContextMixin = require('../../mixins/AppContextMixin');
+var TEMPLATES = require('../../constants/appConstants').TEMPLATES;
 var utils = require('../../utils');
 
 var PeopleListItem = React.createClass({

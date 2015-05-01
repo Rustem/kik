@@ -4,11 +4,12 @@ var AppContextMixin = require('../../mixins/AppContextMixin');
 var ConclusionActions = require('../../actions/ConclusionActions');
 var ApplicationActions = require('../../actions/ApplicationActions');
 var NoteActions = require('../../actions/NoteActions');
+var CreationConclusion = require('../conclusions/CreationConclusion.jsx');
+var ApprovalConclusion = require('../conclusions/ApprovalConclusion.jsx');
 var RiskConclusion = require('../conclusions/RiskConclusion.jsx');
 var LegalConclusion = require('../conclusions/LegalConclusion.jsx');
 var SecurConclusion = require('../conclusions/SecurConclusion.jsx');
 var FullConclusion = require('../conclusions/FullConclusion.jsx');
-var ApprovalConclusion = require('../conclusions/ApprovalConclusion.jsx');
 var StageHeader = require('../stages/StageHeader.jsx');
 var ApplicationInfo = require('./ApplicationInfo.jsx');
 
@@ -50,7 +51,7 @@ var ApplicationDetail = React.createClass({
 		var user = this.getUser();
 		switch(user.position) {
 			case 0:
-				return null;
+				return <CreationConclusion application={application} />;
 			case 1:
 				return <ApprovalConclusion application={application} onApplicationApprove={this.onApplicationApprove}  onApplicationReject={this.onApplicationReject} />;
 			case 20:

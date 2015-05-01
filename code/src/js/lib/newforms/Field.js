@@ -26,7 +26,7 @@ var Field = Concur.extend({
   // Add an 'invalid' entry to defaultErrorMessages if you want a specific
   // field error message not raised by the field validators.
 , defaultErrorMessages: {
-    required: 'This field is required.'
+    required: 'Обязательное поле.'
   }
 , emptyValues: EMPTY_VALUES.slice()
 , emptyValueArray: true // Should isEmptyValue check for empty Arrays?

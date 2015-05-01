@@ -9,10 +9,12 @@ var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
 
 
 var PROGRAM_CHOICES = [
+  [undefined, ''],
   ['kz_2020', 'Доступное жилье - 2020'],
   ['other', 'Другая программа']
 ];
 var REGION_CHOICES = [
+  [undefined, ''],
   ['reg_1', 'Алматинская обл.'],
   ['reg_2', 'Акмолинская обл.']
 ];
@@ -28,14 +30,46 @@ var DATA = {
   },
   houses: {
     ala: [['h1', 'Базис'], ['h2', 'Essentai Park'], ['h3', 'Чешские террасы']],
-    ast: [['h12', 'Империал'], ['h13', 'Москва']]
+    ast: [['h11', 'Империал'], ['h12', 'Москва']],
+    tlg: [['h21', 'Аккент'], ['h22', 'Асыл Арман']]
   },
   flats: [
     {'rooms': 1, 'house': 'h1', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
     {'rooms': 1, 'house': 'h1', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
-    {'rooms': 3, 'house': 'h2', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 2, 'house': 'h1', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h1', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+
+    {'rooms': 1, 'house': 'h2', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h2', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h2', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
     {'rooms': 3, 'house': 'h2', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
-    {'rooms': 2, 'house': 'h12', 'number': '333', 'podiezd': 1, 'level': 6, 'area': 95}
+    
+    {'rooms': 1, 'house': 'h3', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h3', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h3', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h3', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+
+
+    {'rooms': 1, 'house': 'h11', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h11', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h11', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h11', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+
+
+    {'rooms': 1, 'house': 'h12', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h12', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h12', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h12', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+
+    {'rooms': 1, 'house': 'h21', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h21', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h21', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h21', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
+
+    {'rooms': 1, 'house': 'h22', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
+    {'rooms': 1, 'house': 'h22', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
+    {'rooms': 2, 'house': 'h22', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
+    {'rooms': 3, 'house': 'h22', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
   ]
 };
 
@@ -43,11 +77,11 @@ var DEPENDENT_FIELDS = ['region', 'city', 'house', 'rooms', 'flat', 'podiezd', '
 
 
 var ApplicationForm = forms.Form.extend({
-  program: forms.ChoiceField({label: "ПРОГРАММА", choices: PROGRAM_CHOICES, required: false}),
-  region: forms.ChoiceField({label: "РЕГИОН", choices: REGION_CHOICES, required: false}),
+  program: forms.ChoiceField({label: "ПРОГРАММА", choices: PROGRAM_CHOICES, required: true}),
+  region: forms.ChoiceField({label: "РЕГИОН", choices: REGION_CHOICES, required: true}),
   city: forms.ChoiceField({label: "ГОРОД", required: false}),
   house: forms.ChoiceField({label: "ЖИЛОЙ КОМПЛЕКС", required: true}),
-  rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect, required: false}),
+  rooms: forms.ChoiceField({label: "КОЛИЧЕСТВО КОМНАТ", choices: ROOMS_CHOICES, widget: forms.RadioSelect, required: true}),
   flat: forms.ChoiceField({label: "НОМЕР КВАРТИРЫ", required: true}),
   podiezd: forms.CharField({label: "ПОДЪЕЗД", required: false}),
   level: forms.CharField({label: "ЭТАЖ", required: false}),
@@ -112,11 +146,20 @@ var ApplicationFormView = React.createClass({
     var form = this._getForm(),
         isValid = form.validate();
     if (isValid) {
-      var application = this._getApplication(form.cleanedData);
-      this.props.onAction(action, application);
+      var application = _.assign(this.props.application, 
+        this._getApplication(form.cleanedData)
+      );
+      switch(action) {
+        case 'save':
+          this.props.onSave(application);
+          break;
+        case 'accept':
+          this.props.onAccept(application);
+          break;
+      }
     }
     else
-      alert(form.errors().errors);
+      alert("Заполните обязательные поля");
   },
 
   _getApplication: function(formData) {
@@ -125,11 +168,11 @@ var ApplicationFormView = React.createClass({
 
   getInitialState: function() {
     return {
-      form_data: {
+      form_data: _.assign({
         region: REGION_CHOICES[0][0], 
         interest_rate: '18%', 
         cost_utility: 10000.0
-      },
+      }, this.props.application),
       form_choices: {}
     }
   },
@@ -144,7 +187,6 @@ var ApplicationFormView = React.createClass({
   },
 
   _normalizeData: function(data, prev_data) {
-    console.log('nd1:', data, prev_data);
     var reset_flag = false;
     DEPENDENT_FIELDS.forEach(function(field) {
       if( reset_flag )
@@ -154,7 +196,6 @@ var ApplicationFormView = React.createClass({
           reset_flag = true;
       }
     });
-    console.log('nd2:', data);    
     return data;
   },
 
@@ -187,13 +228,9 @@ var ApplicationFormView = React.createClass({
           }
         };
 
-   console.log('I:', choices, data, this.state.form_data);
-
     ['region', 'city', 'rooms', 'flat'].forEach(function(field) {
       marker_fields[field](data[field]);
     });
-
-   console.log('O:', choices, data);
 
     return [data, choices];
   },
@@ -364,10 +401,14 @@ var ApplicationFormView = React.createClass({
               </Section>
             </GridForm>
           </forms.RenderForm>
-
-          <button type='submit'>Сохранить</button>
         </form>
-        <button type='accept' onClick={this.handleAction.bind(this, 'accept')}>Согласовать</button>
+        <br />
+        <div className="row">
+          <div className="text-center">
+            <button className="btn btn-info" onClick={this.handleSubmit}>Сохранить</button>&nbsp;
+            <button className="btn btn-success" onClick={this.handleAction.bind(null, 'accept')}>Отправить на согласование</button>
+          </div>
+        </div>
       </div>
     );
   },

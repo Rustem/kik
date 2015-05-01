@@ -55,7 +55,7 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){
       });
       ApplicationStore.emit(CHANGE_EVENT);
       break;
-    case ActionTypes.CREATE_APPLICATION_SUCCESS:
+    case ActionTypes.SAVE_APPLICATION_SUCCESS:
       addItem(action.object);
       ApplicationStore.emit(CHANGE_EVENT);
       break;

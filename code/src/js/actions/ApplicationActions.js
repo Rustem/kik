@@ -4,21 +4,21 @@ var ApplicationWebAPI = require('../api/ApplicationWebAPI');
 var promise = require('when').promise;
 
 module.exports = {
-  create: function(object){
+  save: function(object){
     return promise(function (resolve, reject) {
       AppDispatcher.handleAction({
-        type: ActionTypes.CREATE_APPLICATION,
+        type: ActionTypes.SAVE_APPLICATION,
         object: object
       });
-      ApplicationWebAPI.create(object, function(object){
+      ApplicationWebAPI.save(object, function(object){
           AppDispatcher.handleAction({
-              type: ActionTypes.CREATE_APPLICATION_SUCCESS,
+              type: ActionTypes.SAVE_APPLICATION_SUCCESS,
               object: object
           });
           resolve(object);
       }.bind(this), function(error){
           AppDispatcher.handleAction({
-              type: ActionTypes.CREATE_APPLICATION_FAIL,
+              type: ActionTypes.SAVE_APPLICATION_FAIL,
               error: error
           });
           reject(error);
