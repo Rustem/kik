@@ -26,7 +26,7 @@ var NoteForm = React.createClass({
 	    if (isValid) {
 	    	var rv = form.cleanedData;
 	    	rv['application_id'] = this.props.application.id;
-	      	rv['author_id'] = this.getUser.id;
+	      	rv['author_id'] = this.getUser().id;
 	      	this.props.onHandleSubmit(rv);
 	    }
 	},
