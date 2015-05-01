@@ -26,6 +26,28 @@ module.exports = {
     });
   },
 
+  accept: function(object){
+    return promise(function (resolve, reject) {
+      AppDispatcher.handleAction({
+        type: ActionTypes.ACCEPT_APPLICATION,
+        object: object
+      });
+      ApplicationWebAPI.accept(object, function(object){
+          AppDispatcher.handleAction({
+              type: ActionTypes.ACCEPT_APPLICATION_SUCCESS,
+              object: object
+          });
+          resolve(object);
+      }.bind(this), function(error){
+          AppDispatcher.handleAction({
+              type: ActionTypes.ACCEPT_APPLICATION_FAIL,
+              error: error
+          });
+          reject(error);
+      });
+    });
+  },
+
   approve: function(object){
     return promise(function (resolve, reject) {
       AppDispatcher.handleAction({
