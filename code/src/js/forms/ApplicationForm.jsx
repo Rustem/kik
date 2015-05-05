@@ -6,6 +6,7 @@ var Section = GridForms.Section;
 var Row = GridForms.Row;
 var Field = require('../lib/newforms-gridforms/Field'); // own Field with errorMessage
 var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
+var PersonField = require('./fields/PersonField.jsx');
 
 
 var PROGRAM_CHOICES = [
@@ -99,14 +100,8 @@ var ApplicationForm = forms.Form.extend({
   cost_other: forms.CharField({label: "Другие платежи", required: false}),
   cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж", required: true}),
 
-  lastname: forms.CharField({label: "ФАМИЛИЯ", required: true}),
-  firstname: forms.CharField({label: "ИМЯ", required: true}),
-  middlename: forms.CharField({label: "ОТЧЕСТВО", required: true}),
-  birthday: forms.CharField({label: "ДАТА РОЖДЕНИЯ", required: false}),
-  nationality: forms.ChoiceField({label: "НАЦИОНАЛЬНОСТЬ", choices: NATIONALITY_CHOICES, required: false}),
-  familystatus: forms.ChoiceField({label: "СЕМЕЙНЫЙ СТАТУС", choices: FAMILYSTATUS_CHOICES, widget: forms.RadioSelect, required: false}),
-  address: forms.CharField({label: "АДРЕС ПРОЖИВАНИЯ", required: false}),
-  phonenumber: forms.CharField({label: "НОМЕР ТЕЛЕФОНА", required: false}),
+  person: PersonField({label: "Person"}),
+
   income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ", required: false}),
   income_extrawork: forms.CharField({label: "ДОХОДЫ ПО ДОП. МЕСТУ РАБОТЫ", required: false}),
   income_dividend: forms.CharField({label: "ДОХОДЫ В ВИДЕ ДИВЕДЕНДОВ", required: false}),
@@ -285,7 +280,10 @@ var ApplicationFormView = React.createClass({
   },
 
   onFormChange: function() {
-    var data = this._getForm().data
+    var data = this._getForm().data;
+
+    console.log('onFormChange:', data)
+
     this.setState(this._getNewState(data));
   },
 
@@ -350,18 +348,7 @@ var ApplicationFormView = React.createClass({
               </Section>
               <Section name="Анкета (демографические данные)">
                 <Row>
-                  <Field name="lastname"/>
-                  <Field name="firstname"/>
-                  <Field name="middlename"/>
-                </Row>
-                <Row>
-                  <Field name="birthday"/>
-                  <Field name="nationality"/>
-                </Row>
-                <Row>
-                  <Field name="familystatus"/>
-                    <Field name="address"/>
-                    <Field name="phonenumber"/>
+                  <Field name="person"/>
                 </Row>
               </Section>
               <Section name="Информация о доходах/расходах">
