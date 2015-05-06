@@ -6,7 +6,6 @@ var ApplicationWebAPI = require('../../api/ApplicationWebAPI');
 var ApplicationList = require('../applications/ApplicationList.jsx');
 var ApplicationForm = require('../../forms/ApplicationForm.jsx');
 
-
 var Stage0 = React.createClass({
 	getInitialState: function() {
 		return {
@@ -35,7 +34,6 @@ var Stage0 = React.createClass({
              <ApplicationList applications={applications} />]
           : <h4>Заявлений нет</h4>}
         </div>
-
       </div>
     );
 	}
