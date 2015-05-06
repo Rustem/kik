@@ -7,6 +7,7 @@ var Row = GridForms.Row;
 var Field = require('../lib/newforms-gridforms/Field'); // own Field with errorMessage
 var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
 var PersonField = require('./fields/PersonField.jsx');
+var MultiPersonField = require('./fields/MultiPersonField.jsx');
 
 
 var PROGRAM_CHOICES = [
@@ -101,6 +102,9 @@ var ApplicationForm = forms.Form.extend({
   cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж", required: true}),
 
   person: PersonField({label: "Person"}),
+  person_guarantor: PersonField({label: "Guarantor"}),
+  persons: MultiPersonField({label: "Persons", person_number: 3, person_label: "Individ Person"}),
+
 
   income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ", required: false}),
   income_extrawork: forms.CharField({label: "ДОХОДЫ ПО ДОП. МЕСТУ РАБОТЫ", required: false}),
@@ -282,7 +286,7 @@ var ApplicationFormView = React.createClass({
   onFormChange: function() {
     var data = this._getForm().data;
 
-    console.log('onFormChange:', data)
+    console.log('onFormChange:', data, this._getForm().cleanedData);
 
     this.setState(this._getNewState(data));
   },
@@ -349,6 +353,9 @@ var ApplicationFormView = React.createClass({
               <Section name="Анкета (демографические данные)">
                 <Row>
                   <Field name="person"/>
+                </Row>
+                <Row>
+                  <Field name="person_guarantor"/>
                 </Row>
               </Section>
               <Section name="Информация о доходах/расходах">

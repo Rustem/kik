@@ -66,8 +66,6 @@ MultiValueField.prototype.clean = function(value) {
   var cleanData = []
   var errors = []
 
-  console.log("1a:", value, is.Array(value));
-
   if (!value || is.Array(value)) {
     var allValuesEmpty = true
     if (is.Array(value)) {
@@ -78,6 +76,7 @@ MultiValueField.prototype.clean = function(value) {
         }
       }
     }
+
     if (!value || allValuesEmpty) {
       if (this.required) {
         throw ValidationError(this.errorMessages.required, {code: 'required'})
@@ -92,8 +91,6 @@ MultiValueField.prototype.clean = function(value) {
   }
 
   for (i = 0, l = this.fields.length; i < l; i++) {
-        console.log("1b:");
-
     var field = this.fields[i]
     var fieldValue = value[i]
     if (fieldValue === undefined) {
@@ -117,16 +114,10 @@ MultiValueField.prototype.clean = function(value) {
       }
     }
 
-        console.log("1c:");
-
-
     try {
       cleanData.push(field.clean(fieldValue))
-      console.log("1d:");
     }
     catch (e) {
-      console.log("1e:", e);
-
       if (!(e instanceof ValidationError)) { throw e }
       // Collect all validation errors in a single list, which we'll throw at
       // the end of clean(), rather than throwing a single exception for the
@@ -137,18 +128,11 @@ MultiValueField.prototype.clean = function(value) {
     }
   }
 
-  console.log("2_:", errors);
-
   if (errors.length !== 0) {
     throw ValidationError(errors)
   }
 
-  console.log("2:")
-
   var out = this.compress(cleanData)
-
-  console.log("3:", out);
-
   this.validate(out)
   this.runValidators(out)
   return out

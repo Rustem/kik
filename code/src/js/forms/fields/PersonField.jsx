@@ -15,7 +15,7 @@ var fields = [
   forms.CharField({label: "АДРЕС ПРОЖИВАНИЯ", required: false}),
   forms.CharField({label: "НОМЕР ТЕЛЕФОНА", required: false})
 ];
-var fiels_name = ['lastname', 'firstname', 'middlename', 'birthday', 'nationality', 'familystatus', 'address', 'phonenumber'];
+var fields_name = ['lastname', 'firstname', 'middlename', 'birthday', 'nationality', 'familystatus', 'address', 'phonenumber'];
 
 
 var PersonField = forms.MultiValueField.extend({
@@ -26,8 +26,7 @@ var PersonField = forms.MultiValueField.extend({
   },
 
   constructor: function PersonField(kwargs) {
-    console.log('here')
-    // if (!(this instanceof PersonField)) { return new PersonField(kwargs) }
+    if (!(this instanceof PersonField)) { return new PersonField(kwargs) }
     kwargs = _.assign({fields: fields}, kwargs);
     var errors = _.assign({}, this.defaultErrorMessages);
     if (typeof kwargs.errorMessages != 'undefined') {
@@ -38,8 +37,9 @@ var PersonField = forms.MultiValueField.extend({
 
   compress: function(values) {
     console.log('compress:', values);
-    var d = _.reduce(fiels_name, function(acc, value, index) {
+    var d = _.reduce(fields_name, function(acc, value, index) {
       acc[value] = values[index];
+      return acc;
     }, {});
     return d;
   }
