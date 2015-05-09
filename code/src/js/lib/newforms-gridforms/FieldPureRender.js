@@ -10,7 +10,12 @@ var FieldPureRender = React.createClass({
 
   render: function() {
     var bf = this.props.form.boundField(this.props.name)
-    return bf.render();
+    return (
+      <div>
+        {bf.render()}
+        <span className="text-danger">{bf.errorMessage()}</span>
+      </div>
+    )
   }
 });
 

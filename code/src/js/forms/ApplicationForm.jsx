@@ -105,6 +105,7 @@ var ApplicationForm = forms.Form.extend({
   person: PersonField({attrs:{label: "Данные клиента"}}),
   person_guarantor: PersonField({attrs:{label: "Поручитель"}}),
   persons: MultiPersonField({
+    required: false,
     attrs:{label: "Persons"},
     person_number: 0,
     person_label: "Individ Person"
@@ -185,7 +186,7 @@ var ApplicationFormView = React.createClass({
         cost_utility: 10000.0
       }, this.props.application),
       form_choices: {},
-      persons_number: 3,
+      persons_number: 1
     }
   },
 
@@ -297,7 +298,11 @@ var ApplicationFormView = React.createClass({
   },
 
   handleAddPersons: function(evt) {
-    alert('dsd')
+    evt.preventDefault();
+    this.setState({persons_number: this.state.persons_number + 1});
+  },
+
+  handleRemovePersons: function(evt) {
     evt.preventDefault();
     this.setState({persons_number: this.state.persons_number + 1});
   },

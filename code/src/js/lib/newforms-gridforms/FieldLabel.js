@@ -13,7 +13,7 @@ var FieldLabel = React.createClass({
     return <div data-field-span={this.props.span}>
       {bf.labelTag()}
       {bf.value()}
-      <span>{bf.errorMessage()}</span>
+      <span className="text-danger">{bf.errorMessage()}</span>
     </div>
   }
 });
