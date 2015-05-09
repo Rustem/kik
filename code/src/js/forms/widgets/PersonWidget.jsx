@@ -8,7 +8,8 @@ var FAMILYSTATUS_CHOICES = [['married', 'Женат'], ['single', 'Холост'
 
 var PersonWidget = forms.MultiWidget.extend({
   constructor: function(kwargs) {
-    kwargs = _.assign({attrs: {}}, kwargs);
+    if (!(this instanceof PersonWidget)) { return new PersonWidget(kwargs) }
+    kwargs = _.assign({attrs: {label: 'Person'}}, kwargs);
     widgets = [
       forms.TextInput({}),
       forms.TextInput({}),
@@ -36,20 +37,23 @@ var PersonWidget = forms.MultiWidget.extend({
   formatOutput: function(renderedWidgets) {
     //return React.createElement('div', null, renderedWidgets)
     return (
-      <div>
-        <div data-row-span="3">
-          <div data-field-span="1"><label>ФАМИЛИЯ</label>{renderedWidgets[0]}</div>
-          <div data-field-span="1"><label>ИМЯ</label>{renderedWidgets[1]}</div>
-          <div data-field-span="1"><label>ОТЧЕСТВО</label>{renderedWidgets[2]}</div>
-        </div>
-        <div data-row-span="2">
-          <div data-field-span="1"><label>ДАТА РОЖДЕНИЯ</label>{renderedWidgets[3]}</div>
-          <div data-field-span="1"><label>НАЦИОНАЛЬНОСТЬ</label>{renderedWidgets[4]}</div>
-        </div>
-        <div data-row-span="3">
-          <div data-field-span="1"><label>СЕМЕЙНЫЙ СТАТУС</label>{renderedWidgets[5]}</div>
-          <div data-field-span="1"><label>АДРЕС ПРОЖИВАНИЯ</label>{renderedWidgets[6]}</div>
-          <div data-field-span="1"><label>НОМЕР ТЕЛЕФОНА</label>{renderedWidgets[7]}</div>
+      <div data-row-span="1">
+        <div data-field-span="1">
+          <label>{this.attrs.label}:</label>
+          <div data-row-span="3">
+            <div data-field-span="1"><label>ФАМИЛИЯ</label>{renderedWidgets[0]}</div>
+            <div data-field-span="1"><label>ИМЯ</label>{renderedWidgets[1]}</div>
+            <div data-field-span="1"><label>ОТЧЕСТВО</label>{renderedWidgets[2]}</div>
+          </div>
+          <div data-row-span="2">
+            <div data-field-span="1"><label>ДАТА РОЖДЕНИЯ</label>{renderedWidgets[3]}</div>
+            <div data-field-span="1"><label>НАЦИОНАЛЬНОСТЬ</label>{renderedWidgets[4]}</div>
+          </div>
+          <div data-row-span="3">
+            <div data-field-span="1"><label>СЕМЕЙНЫЙ СТАТУС</label>{renderedWidgets[5]}</div>
+            <div data-field-span="1"><label>АДРЕС ПРОЖИВАНИЯ</label>{renderedWidgets[6]}</div>
+            <div data-field-span="1"><label>НОМЕР ТЕЛЕФОНА</label>{renderedWidgets[7]}</div>
+          </div>
         </div>
       </div>
     );

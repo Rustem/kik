@@ -19,7 +19,6 @@ var fields_name = ['lastname', 'firstname', 'middlename', 'birthday', 'nationali
 
 
 var PersonField = forms.MultiValueField.extend({
-  widget: PersonWidget,
   defaultErrorMessages: {
     invalidDate: 'Enter a valid date.',
     invalidTime: 'Enter a valid time.'
@@ -32,11 +31,13 @@ var PersonField = forms.MultiValueField.extend({
     if (typeof kwargs.errorMessages != 'undefined') {
       _.assign(errors, kwargs.errorMessages)
     }
+
+    this.widget = PersonWidget(_.omit(kwargs, 'fields'));
+
     forms.MultiValueField.call(this, kwargs);
   },
 
   compress: function(values) {
-    console.log('compress:', values);
     var d = _.reduce(fields_name, function(acc, value, index) {
       acc[value] = values[index];
       return acc;

@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var ConclusionTypes = require('./constants/appConstants').ConclusionTypes;
-var pkbData = require('./external_sources/pkb.js');
-var gcvpData = require('./external_sources/gcvp.js');
+var pkbData = null;//require('./external_sources/pkb.js');
+var gcvpData = null;//require('./external_sources/gcvp.js');
 
 
 function isConclusionsCollected(application) {
@@ -42,7 +42,7 @@ function checkPersonDetails(data) {
         if(pkbData[i].iin === data.iin)
             break
     }
-    
+
     var k=0;
     for(k; k<gcvpData.length; k++){
         if(gcvpData[k].iin === data.iin){
@@ -62,8 +62,8 @@ function checkPersonDetails(data) {
         console.log(pkbData[i].credits[j].delay_days);
     }
 
-        
-    
+
+
 
     /*
     console.log(gcvpData[k].iin);
@@ -80,7 +80,7 @@ function checkPersonDetails(data) {
         console.log(gcvpData[k].income.additional.receipts[j].date);
         console.log(gcvpData[k].income.additional.receipts[j].value);
     }
-        
+
 }
 
 

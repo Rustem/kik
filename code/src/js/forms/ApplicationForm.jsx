@@ -6,6 +6,7 @@ var Section = GridForms.Section;
 var Row = GridForms.Row;
 var Field = require('../lib/newforms-gridforms/Field'); // own Field with errorMessage
 var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
+var FieldPureRender = require('../lib/newforms-gridforms/FieldPureRender');
 var PersonField = require('./fields/PersonField.jsx');
 var MultiPersonField = require('./fields/MultiPersonField.jsx');
 
@@ -45,7 +46,7 @@ var DATA = {
     {'rooms': 1, 'house': 'h2', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
     {'rooms': 2, 'house': 'h2', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
     {'rooms': 3, 'house': 'h2', 'number': '07a', 'podiezd': 3, 'level': 6, 'area': 125},
-    
+
     {'rooms': 1, 'house': 'h3', 'number': '32', 'podiezd': 1, 'level': 6, 'area': 87},
     {'rooms': 1, 'house': 'h3', 'number': '56', 'podiezd': 2, 'level': 3, 'area': 60},
     {'rooms': 2, 'house': 'h3', 'number': '21', 'podiezd': 4, 'level': 6, 'area': 110},
@@ -101,9 +102,13 @@ var ApplicationForm = forms.Form.extend({
   cost_other: forms.CharField({label: "Другие платежи", required: false}),
   cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж", required: true}),
 
-  person: PersonField({label: "Person"}),
-  person_guarantor: PersonField({label: "Guarantor"}),
-  persons: MultiPersonField({label: "Persons", person_number: 3, person_label: "Individ Person"}),
+  person: PersonField({attrs:{label: "Данные клиента"}}),
+  person_guarantor: PersonField({attrs:{label: "Поручитель"}}),
+  persons: MultiPersonField({
+    attrs:{label: "Persons"},
+    person_number: 0,
+    person_label: "Individ Person"
+  }), // see contstructor()
 
 
   income_mainwork: forms.CharField({label: "ДОХОД ПО ОСНОВНОМУ МЕСТУ РАБОТЫ", required: false}),
@@ -123,6 +128,13 @@ var ApplicationForm = forms.Form.extend({
     // forms.Form constructor eventually gets called - this.fields doesn't
     // exist until this happens.
     forms.Form.call(this, kwargs)
+
+    this.fields.persons = MultiPersonField({
+      attrs:{label: "Persons"},
+      person_number: kwargs.persons_number,
+      person_label: "Individ Person"
+    });
+
 
     // Now that this.fields is a thing, make whatever changes you need to -
     // in this case, we're going to creata a list of pairs of project ids
@@ -145,7 +157,7 @@ var ApplicationFormView = React.createClass({
     var form = this._getForm(),
         isValid = form.validate();
     if (isValid) {
-      var application = _.assign(this.props.application, 
+      var application = _.assign(this.props.application,
         this._getApplication(form.cleanedData)
       );
       switch(action) {
@@ -168,11 +180,12 @@ var ApplicationFormView = React.createClass({
   getInitialState: function() {
     return {
       form_data: _.assign({
-        region: REGION_CHOICES[0][0], 
-        interest_rate: '18%', 
+        region: REGION_CHOICES[0][0],
+        interest_rate: '18%',
         cost_utility: 10000.0
       }, this.props.application),
-      form_choices: {}
+      form_choices: {},
+      persons_number: 3,
     }
   },
 
@@ -254,7 +267,7 @@ var ApplicationFormView = React.createClass({
     data.cost_rent_payment = _retS( (_getF('rent_area_payment') * _getF('area')).toFixed(2) );
     data.cost_taxes = _retS( ((_getF('area')*198000*0.015)/12).toFixed(2) );
     data.cost_total = _retS( _getSum([
-            'cost_rent_payment', 'cost_insurance_items', 'cost_insurance_life', 
+            'cost_rent_payment', 'cost_insurance_items', 'cost_insurance_life',
             'cost_insurance_payments', 'cost_utility', 'cost_maintenance',
             'cost_other', 'cost_taxes'
             ]) );
@@ -271,7 +284,7 @@ var ApplicationFormView = React.createClass({
   _getNewState: function(new_data) {
     var choices = null;
     // new_data -> choices -> data & choices -> compute data
-    new_data = this._normalizeData(new_data, this.state.form_data);    
+    new_data = this._normalizeData(new_data, this.state.form_data);
     var ret = this._filterChoices(new_data);
     new_data = ret[0];
     choices = ret[1];
@@ -281,6 +294,12 @@ var ApplicationFormView = React.createClass({
       form_data: new_data,
       form_choices: choices
     }
+  },
+
+  handleAddPersons: function(evt) {
+    alert('dsd')
+    evt.preventDefault();
+    this.setState({persons_number: this.state.persons_number + 1});
   },
 
   onFormChange: function() {
@@ -296,6 +315,7 @@ var ApplicationFormView = React.createClass({
     var form_data = _.clone(this.state.form_data, true),
         f = new ApplicationForm(null, {
           data: form_data, fields_choices: this.state.form_choices,
+          persons_number: this.state.persons_number,
           controlled: true, onChange: this.onFormChange,
           emptyPermitted: true
         });
@@ -352,10 +372,14 @@ var ApplicationFormView = React.createClass({
               </Section>
               <Section name="Анкета (демографические данные)">
                 <Row>
-                  <Field name="person"/>
+                  <FieldPureRender name="person"/>
                 </Row>
                 <Row>
-                  <Field name="person_guarantor"/>
+                  <FieldPureRender name="person_guarantor"/>
+                </Row>
+                <Row>
+                  <FieldPureRender name="persons"/>
+                  <a className="btn btn-default" onClick={this.handleAddPersons}>Add</a>
                 </Row>
               </Section>
               <Section name="Информация о доходах/расходах">
@@ -384,7 +408,7 @@ var ApplicationFormView = React.createClass({
                   <Field name="income_extra"/>
                 </Row>
                 <Row>
-                  <FieldLabel name="income_total"/> 
+                  <FieldLabel name="income_total"/>
                 </Row>
               </Section>
               <Section name="Коэффициенты (авто)">

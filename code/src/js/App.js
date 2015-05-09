@@ -10,8 +10,8 @@ var UserWebAPI = require('./api/UserWebAPI');
 var PersonWebAPI = require('./api/PersonWebAPI');
 var NoteWebAPI = require('./api/NoteWebAPI');
 
-var utils = require('./utils');
-utils.checkPersonDetails({'iin': '01822'});
+// var utils = require('./utils');
+// utils.checkPersonDetails({'iin': '01822'});
 
 Fixtures.init();
 
@@ -37,7 +37,7 @@ UserWebAPI.getCurrentUser(function(current_user){
 						});
 					});
 				});
-				
+
 			});
 		});
 	});

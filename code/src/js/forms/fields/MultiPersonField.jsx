@@ -7,17 +7,15 @@ var PersonField = require('./PersonField.jsx');
 var MultiPersonField = forms.MultiValueField.extend({
   constructor: function MultiPersonField(kwargs) {
     if (!(this instanceof MultiPersonField)) { return new MultiPersonField(kwargs) }
-    kwargs = _.assign({person_number: 1, person_label: "Person"}, kwargs);
-
-    _.assign({
-      fields:  MultiPersonField({label: "_t_"})
-      // _.reduce(_.range(kwargs.person_number), function(acc, index) {
-      //   acc.push(MultiPersonField({label: kwargs.person_label + ' ' + index}));
-      //   return acc;
-      // }, [])
+    kwargs = _.assign({person_number: 1, person_label: "Person #", attrs: {}}, kwargs);
+    kwargs = _.assign({
+      fields: _.reduce(_.range(kwargs.person_number), function(acc, index) {
+        acc.push(PersonField({label: kwargs.person_label + ' ' + index}));
+        return acc;
+      }, [])
     }, kwargs);
 
-    this.widget = MultiPersonWidgetFactory(kwargs.person_number);
+    this.widget = MultiPersonWidgetFactory(kwargs.person_number, kwargs.person_label);
 
     var errors = _.assign({}, this.defaultErrorMessages);
     // if (typeof kwargs.errorMessages != 'undefined') {

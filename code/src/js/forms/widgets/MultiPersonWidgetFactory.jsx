@@ -3,28 +3,23 @@ var forms = require('../../lib/newforms/newforms');
 var PersonWidget = require('./PersonWidget.jsx');
 
 
-var MultiPersonWidgetFactory = function(number) {
-
+var MultiPersonWidgetFactory = function(number, label) {
 
   var MultiPersonWidget = forms.MultiWidget.extend({
     constructor: function(kwargs) {
       kwargs = _.assign({attrs: {}}, kwargs);
-      widgets = PersonWidget({});
-      // _.reduce(_.range(number), function(acc, index) {
-      //   acc.push(PersonWidget({}));
-      //   return acc;
-      // }, []);
+      widgets = _.reduce(_.range(number), function(acc, index) {
+        acc.push(PersonWidget({attrs: {label: label + ' ' + index}}));
+        return acc;
+      }, []);
       forms.MultiWidget.call(this, widgets, kwargs);
     },
-
     formatOutput: function(renderedWidgets) {
-      return React.createElement('<div data-row-span="1">', null, renderedWidgets);
+      return React.createElement('div', null, renderedWidgets);
     }
-
   });
 
-
-  return MultiPersonWidget;  
+  return MultiPersonWidget;
 };
 
 
