@@ -21,7 +21,7 @@ var StageHeader = React.createClass({
         } else 
             switch(current_user.position) {
                 case 0:
-                    return 'Создание заявление'
+                    return 'Создание заявления'
                 case 1:
                     return 'Согласование'
                 case 20:

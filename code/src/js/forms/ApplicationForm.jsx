@@ -133,7 +133,7 @@ var ApplicationForm = forms.Form.extend({
     this.fields.persons = MultiPersonField({
       attrs:{label: "Persons"},
       person_number: kwargs.persons_number,
-      person_label: "Individ Person"
+      person_label: "Иждевенец"
     });
 
 
@@ -375,17 +375,23 @@ var ApplicationFormView = React.createClass({
                   <Field name="cost_total"/>
                 </Row>
               </Section>
-              <Section name="Анкета (демографические данные)">
+              <Section name="Информация о клиенте">
                 <Row>
                   <FieldPureRender name="person"/>
                 </Row>
+              </Section>
+               <Section name="Информация о гаранте">
                 <Row>
                   <FieldPureRender name="person_guarantor"/>
                 </Row>
+              </Section>
+              <Section name="Информация об иждивенцах">
                 <Row>
                   <FieldPureRender name="persons"/>
-                  <a className="btn btn-default" onClick={this.handleAddPersons}>Add</a>
                 </Row>
+                <p className="text-center" style={{marginTop:'20px'}}>
+                  <a className="btn btn-success" onClick={this.handleAddPersons}>Добавить иждивенца</a>
+                </p>
               </Section>
               <Section name="Информация о доходах/расходах">
                 <Row>
