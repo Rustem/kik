@@ -18,6 +18,15 @@ var fields = [
 var fields_name = ['lastname', 'firstname', 'middlename', 'birthday', 'nationality', 'familystatus', 'address', 'phonenumber'];
 
 
+var decompressData = function(compressedData, name) {
+  var values = _.at(compressedData[name], fields_name);
+  return _.reduce(values, function(acc, v, index) {
+    acc[name+'_'+index] = v;
+    return acc;
+  }, {});
+};
+
+
 var PersonField = forms.MultiValueField.extend({
   defaultErrorMessages: {
     invalidDate: 'Enter a valid date.',
@@ -48,6 +57,5 @@ var PersonField = forms.MultiValueField.extend({
 });
 
 module.exports = PersonField;
-
-
+module.exports.decompressData = decompressData;
 
