@@ -10,11 +10,11 @@ var RiskFormDefinition = forms.Form.extend({
 		label: "Финансовое состояние",
 		choices: ["Стабильное", "Плохое", "Хорошее"]
 	}),
-	pd: forms.IntegerField({
+	pd: forms.CharField({
 		required: false,
 		label: "П/Д",
 	}),
-	od: forms.IntegerField({
+	od: forms.CharField({
 		required: false,
 		label: "О/Д",
 	}),

@@ -34,12 +34,14 @@ var ApplicationNew = React.createClass({
     if(iin) {
       var person = PeopleStore.getByIIN(iin);
       application = _.assign(application, {
-        lastname: person.lastname,
-        firstname: person.firstname,
-        middlename: person.middlename,
-        address: person.address,
-        birthday: person.birthdate,
-        phonenumber: person.tel,
+        person: {
+          lastname: person.lastname,
+          firstname: person.firstname,
+          middlename: person.middlename,
+          address: person.address,
+          birthday: person.birthdate,
+          phonenumber: person.tel,
+        }
       })
     }
     return application;

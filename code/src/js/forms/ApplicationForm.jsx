@@ -102,8 +102,8 @@ var ApplicationForm = forms.Form.extend({
   cost_other: forms.CharField({label: "Другие платежи", required: false}),
   cost_total: forms.CharField({label: "ИТОГО ежемесячный платеж", required: true}),
 
-  person: PersonField({attrs:{label: "Данные клиента"}}),
-  person_guarantor: PersonField({attrs:{label: "Поручитель"}}),
+  person: PersonField({required: false, attrs:{label: "Данные клиента"}}),
+  person_guarantor: PersonField({required: false, attrs:{label: "Поручитель"}}),
   persons: MultiPersonField({
     required: false,
     attrs:{label: "Persons"},
@@ -272,8 +272,8 @@ var ApplicationFormView = React.createClass({
             'cost_insurance_payments', 'cost_utility', 'cost_maintenance',
             'cost_other', 'cost_taxes'
             ]) );
-    data.pd = _retS((_getF('cost_rent_payment')/_getF('income_total')*100).toFixed(2)) + '%';
-    data.od = _retS((_getF('cost_total')/_getF('income_total')*100).toFixed(2)) + '%';
+    data.pd = _retS((_getF('cost_rent_payment')/_getF('income_total')*100).toFixed(2));
+    data.od = _retS((_getF('cost_total')/_getF('income_total')*100).toFixed(2));
     data.income_total = _retS((_getSum([
       'income_extra', 'income_aliment', 'income_rental', 'income_pension',
       'income_emolument', 'income_dividend', 'income_extrawork', 'income_mainwork'
