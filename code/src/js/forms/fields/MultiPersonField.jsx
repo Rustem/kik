@@ -2,6 +2,20 @@ var _ = require('lodash');
 var forms = require('../../lib/newforms/newforms');
 var MultiPersonWidgetFactory = require('../widgets/MultiPersonWidgetFactory.jsx');
 var PersonField = require('./PersonField.jsx');
+var decompressDataOfPersonField = require('./PersonField.jsx').decompressData;
+
+
+var decompressData = function(compressedDataArray, name) {
+  return _.reduce(compressedDataArray[name], function(acc, val, index) {
+    var t = name+'_'+index,
+        d = {};
+    d[t] = val;
+
+    acc = _.assign(acc, decompressDataOfPersonField(d, t));
+
+    return acc;
+  }, {})
+};
 
 
 var MultiPersonField = forms.MultiValueField.extend({
@@ -32,6 +46,6 @@ var MultiPersonField = forms.MultiValueField.extend({
 });
 
 module.exports = MultiPersonField;
-
+module.exports.decompressData = decompressData;
 
 

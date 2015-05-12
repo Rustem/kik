@@ -8,7 +8,9 @@ var Field = require('../lib/newforms-gridforms/Field'); // own Field with errorM
 var FieldLabel = require('../lib/newforms-gridforms/FieldLabel');
 var FieldPureRender = require('../lib/newforms-gridforms/FieldPureRender');
 var PersonField = require('./fields/PersonField.jsx');
+var decompressDataOfPersonField = require('./fields/PersonField.jsx').decompressData;
 var MultiPersonField = require('./fields/MultiPersonField.jsx');
+var decompressDataOfMultiPersonField = require('./fields/MultiPersonField.jsx').decompressData;
 
 
 var PROGRAM_CHOICES = [
@@ -179,12 +181,25 @@ var ApplicationFormView = React.createClass({
   },
 
   getInitialState: function() {
+    var application = this.props.application || {};
+
+    if( _.isObject(application['person']) ) {
+      application = _.assign(application, decompressDataOfPersonField(application, 'person'));
+    }
+    if( _.isObject(application['person_guarantor']) ) {
+      application = _.assign(application, decompressDataOfPersonField(application, 'person_guarantor'));
+    }
+    if( _.isArray(application['persons']) ) {
+      application = _.assign(application, decompressDataOfMultiPersonField(application, 'persons'));
+    }
+
+
     return {
       form_data: _.assign({
         region: REGION_CHOICES[0][0],
         interest_rate: '18%',
         cost_utility: 10000.0
-      }, this.props.application),
+      }, application),
       form_choices: {},
       persons_number: 1
     }
