@@ -1,6 +1,6 @@
 var pkb = [ 
 {
-  "iin": "12343",
+  "iin": "100200300403",
   "firstname":"Мадияр",
   "lastname":"Ботбаев",
   "middlename":"Муканович",
@@ -24,7 +24,7 @@ var pkb = [
   ]
 },
 {
-  "iin": "12344",
+  "iin": "100200300404",
   "firstname":"Айжан",
   "lastname":"Жумабаев",
   "middlename":"Беришевич",
@@ -49,7 +49,7 @@ var pkb = [
   ]
 },
 { 
-  "iin": "12345",
+  "iin": "100200300400",
   "firstname":"Сергей",
   "lastname":"Иванов",
   "middlename":"Жанибекович",

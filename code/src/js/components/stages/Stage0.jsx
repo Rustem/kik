@@ -9,12 +9,13 @@ var ApplicationForm = require('../../forms/ApplicationForm.jsx');
 var Stage0 = React.createClass({
 	getInitialState: function() {
 		return {
-			applications: ApplicationStore.getByStatus(0),
+			applications: ApplicationStore.getAll(),
 		}
 	},
 
 	render: function() {
-    var applications = this.state.applications;
+    var my_applications = _.filter(this.state.applications, { status: 0 });
+    var other_applications = _.reject(this.state.applications, { status: 0 });
 		return (
       <div>
         <div>
@@ -29,10 +30,15 @@ var Stage0 = React.createClass({
             </Link>
           </p>
           <br />
-          {applications.length > 0 ? 
-            [<h4>Заявления</h4>,
-             <ApplicationList applications={applications} />]
-          : <h4>Заявлений нет</h4>}
+          <h4>Мои заявления</h4>
+          {my_applications.length > 0 ? 
+             <ApplicationList applications={my_applications} />
+          : <h6>Заявлений нет</h6>}
+          <br /><br />
+          <h4>Остальные заявления</h4>
+          {other_applications.length > 0 ? 
+             <ApplicationList applications={other_applications} />
+          : <h6>Заявлений нет</h6>}
         </div>
       </div>
     );

@@ -1,5 +1,8 @@
 var Router = require('react-router');
 var Link = Router.Link;
+var constants = require('../../constants/appConstants'); 
+var PROGRAMS = constants.PROGRAMS;
+var APPLICATION_STATUS = constants.APPLICATION_STATUS;
 
 var ApplicationListItem = React.createClass({
 	PropTypes: {
@@ -11,8 +14,9 @@ var ApplicationListItem = React.createClass({
 		var application = this.props.application;
 		return  <tr>
 			        <th scope="row">{this.props.idx+1}</th>
-			        <td>{application.lastname} {application.firstname} {application.middlename} </td>
-			        <td>{application.program}</td>
+			        <td>{application.person.lastname} {application.person.firstname} {application.person.middlename} </td>
+			        <td>{PROGRAMS[application.program]}</td>
+					<td>{APPLICATION_STATUS[application.status]}</td>
 			        <td>
 			          	<Link to="application_detail"
 						  params={{id: application.id}}>
@@ -40,6 +44,7 @@ var ApplicationList = React.createClass({
 				          <th>#</th>
 				          <th>ФИО</th>
 				          <th>Программа</th>
+				          <th>Статус</th>
 				          <th></th>
 				        </tr>
 			      	</thead>

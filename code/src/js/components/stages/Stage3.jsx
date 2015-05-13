@@ -1,20 +1,27 @@
+var _ = require('lodash');
 var ApplicationStore = require('../../stores/ApplicationStore');
 var ApplicationList = require('../applications/ApplicationList.jsx');
 
 var Stage3 = React.createClass({
 	getInitialState: function() {
 		return {
-			applications: ApplicationStore.getByStatus(3),
+			applications: ApplicationStore.getAll(),
 		}
 	},
 
 	render: function() {
-		var applications = this.state.applications
+		var my_applications = _.filter(this.state.applications, { status: 3 });
+    	var other_applications = _.reject(this.state.applications, { status: 3 });
 		return 	<div>
-					{applications.length > 0 ? 
-						[<h4>Заявления</h4>,
-						 <ApplicationList applications={applications} />]
-					: <h4>Новых заявлений нет</h4>}
+					<h4>Мои заявления</h4>
+					{my_applications.length > 0 ? 
+						<ApplicationList applications={my_applications} />
+					: <h6>Заявлений нет</h6>}
+					<br /><br />
+					<h4>Остальные заявления</h4>
+					{other_applications.length > 0 ? 
+						<ApplicationList applications={other_applications} />
+					: <h6>Заявлений нет</h6>}
 				</div>
 	}
 });

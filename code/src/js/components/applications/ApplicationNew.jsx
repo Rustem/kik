@@ -34,6 +34,7 @@ var ApplicationNew = React.createClass({
     if(iin) {
       var person = PeopleStore.getByIIN(iin);
       application = _.assign(application, {
+        income_mainwork: person.mock_gcvp_payment*10,
         person: {
           lastname: person.lastname,
           firstname: person.firstname,

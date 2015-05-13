@@ -41,7 +41,48 @@ var appConstants = {
 		FULL_MANUAL: 'full_manual.docx',
 		ZAYAVLENIE: 'zayavlenie.docx',
 		SOGLASIE: 'soglasie.docx',
-	}
+	},
+
+	APPLICATION_STATUS: {
+		0: 'Создание заявки',
+		1: 'На рассмотрении у кредитного менеджера',
+		2: 'Согласовано кредитным менеджером',
+		3: 'Вынесение решения',
+	},
+
+	PROGRAMS: {
+		'kz_2020': 'Доступное жилье - 2020',
+  		'other': 'Другая программа',
+	},
+
+	REGIONS: {
+		'reg_1': 'Алматинская обл.',
+  		'reg_2': 'Акмолинская обл.',
+	},
+
+	ROOMS: {
+		1: 1,
+		2: '2-x',
+		3: '3-x',
+	},
+
+	RENT: {
+		'3160.72': '5 лет за 3160,72 тенге',
+		'2469.60': '7 лет за 2469,60 тенге',
+		'1800.10': '12 лет за 1800,10 тенге',
+	},
+
+	NATIONALITY: {
+		'rus': 'Русский',
+		'kaz': 'Казах',
+	},
+
+	FAMILYSTATUS: {
+		'married': 'Женат',
+		'single': 'Холост',
+		'divorced': 'Разведен',
+	},
+
 };
 
 module.exports = appConstants;

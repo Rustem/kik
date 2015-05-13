@@ -1,4 +1,12 @@
 var _ = require('lodash');
+var constants = require('../../constants/appConstants');
+var PROGRAMS = constants.PROGRAMS;
+var REGIONS = constants.REGIONS;
+var ROOMS = constants.ROOMS;
+var RENT = constants.RENT;
+var NATIONALITY = constants.NATIONALITY;
+var FAMILYSTATUS = constants.FAMILYSTATUS;
+
 var ApplicationInfo = React.createClass({
 
 	render: function() {
@@ -12,11 +20,11 @@ var ApplicationInfo = React.createClass({
 			        </tr>
 			        <tr>
 			          <th>Программа</th>
-			          <td>{application.program}</td>
+			          <td>{PROGRAMS[application.program]}</td>
 			        </tr>
 			       	<tr>
 			          <th>Регион</th>
-			          <td>{application.region}</td>
+			          <td>{REGIONS[application.region]}</td>
 			        </tr>
 			        <tr>
 			          <th>Город</th>
@@ -28,7 +36,7 @@ var ApplicationInfo = React.createClass({
 			        </tr>
 			        <tr>
 			          <th>Количество комнат</th>
-			          <td>{application.rooms}</td>
+			          <td>{ROOMS[application.rooms]}</td>
 			        </tr>
 			        <tr>
 			          <th>Номер квартиры</th>
@@ -102,11 +110,11 @@ var ApplicationInfo = React.createClass({
 			        </tr>
 			        <tr>
 			          <th>Национальность</th>
-			          <td>{application.person.nationality}</td>
+			          <td>{NATIONALITY[application.person.nationality]}</td>
 			        </tr>
 			        <tr>
 			          <th>Семейный статус</th>
-			          <td>{application.person.familystatus}</td>
+			          <td>{FAMILYSTATUS[application.person.familystatus]}</td>
 			        </tr>
 			        <tr>
 			          <th>Адрес проживания</th>
@@ -129,11 +137,11 @@ var ApplicationInfo = React.createClass({
 			        </tr>
 			        <tr>
 			          <th>Национальность</th>
-			          <td>{application.person_guarantor.nationality}</td>
+			          <td>{NATIONALITY[application.person_guarantor.nationality]}</td>
 			        </tr>
 			        <tr>
 			          <th>Семейный статус</th>
-			          <td>{application.person_guarantor.familystatus}</td>
+			          <td>{FAMILYSTATUS[application.person_guarantor.familystatus]}</td>
 			        </tr>
 			        <tr>
 			          <th>Адрес проживания</th>

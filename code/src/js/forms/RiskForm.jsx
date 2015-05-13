@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var forms = require('newforms');
 var BootstrapForm = require('newforms-bootstrap');
 var ConclusionTypes = require('../constants/appConstants').ConclusionTypes;

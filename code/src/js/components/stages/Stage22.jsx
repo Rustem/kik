@@ -8,29 +8,37 @@ var Stage22 = React.createClass({
 
 	getInitialState: function() {
 		return {
-			applications: ApplicationStore.getByStatus(2),
+			applications: ApplicationStore.getAll(),
 		}
 	},
 
 	render: function() {
+		var my_applications = _.filter(this.state.applications, { status: 2 });
+    	var other_applications = _.reject(this.state.applications, { status: 2 });
+
 		var waiting = [], ready = [];
-		_.forEach(this.state.applications, function(a){
+		_.forEach(my_applications, function(a){
 			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.SECUR) !== undefined)
 				ready.push(a);
 			else
 				waiting.push(a);
 		});
-		return <div>
-				{waiting.length > 0 ? 
-					[<h4>Ждут заключения</h4>,
-					 <ApplicationList applications={waiting} />]
-				: <h4>Новых заявлений нет</h4>}
-				<br />
-				{ready.length > 0 ? 
-					[<h4>Готовы</h4>,
-					 <ApplicationList applications={ready} />]
-				: <h4>Обработанных заявлений нет</h4>}
-			   </div>
+		return  <div>
+					<h4>Ждут заключения</h4>
+					{waiting.length > 0 ? 
+						 <ApplicationList applications={waiting} />
+					: <h6>Новых заявлений нет</h6>}
+					<br /><br />
+					<h4>Готовы</h4>
+					{ready.length > 0 ? 
+						 <ApplicationList applications={ready} />
+					: <h6>Обработанных заявлений нет</h6>}
+					<br /><br />
+					<h4>Остальные заявления</h4>
+					{other_applications.length > 0 ? 
+						<ApplicationList applications={other_applications} />
+					: <h6>Заявлений нет</h6>}
+			    </div>
 	}
 });
 

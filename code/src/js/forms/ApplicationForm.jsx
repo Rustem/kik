@@ -12,21 +12,21 @@ var decompressDataOfPersonField = require('./fields/PersonField.jsx').decompress
 var MultiPersonField = require('./fields/MultiPersonField.jsx');
 var decompressDataOfMultiPersonField = require('./fields/MultiPersonField.jsx').decompressData;
 
+var constants = require('../constants/appConstants');
+var PROGRAMS = constants.PROGRAMS;
+var REGIONS = constants.REGIONS;
+var ROOMS = constants.ROOMS;
+var RENT = constants.RENT;
+var NATIONALITY = constants.NATIONALITY;
+var FAMILYSTATUS = constants.FAMILYSTATUS;
 
-var PROGRAM_CHOICES = [
-  [undefined, ''],
-  ['kz_2020', 'Доступное жилье - 2020'],
-  ['other', 'Другая программа']
-];
-var REGION_CHOICES = [
-  [undefined, ''],
-  ['reg_1', 'Алматинская обл.'],
-  ['reg_2', 'Акмолинская обл.']
-];
-var ROOMS_CHOICES = [[1, 1], [2, '2-x'], [3, '3-x']];
-var RENT_CHOICES = [['3160.72', '5 лет за 3160,72 тенге'], ['2469.60', '7 лет за 2469.60 тенге'], ['1800.10', '12 лет за 1800.10 тенге']];
-var NATIONALITY_CHOICES = [['rus', 'Русский'], ['kaz',' Казах']];
-var FAMILYSTATUS_CHOICES = [['married', 'Женат'], ['single', 'Холост'], ['divorced', 'Разведен']];
+var PROGRAM_CHOICES = [[undefined, '']].concat(_.map(_.keys(PROGRAMS), function(k) { return [k, PROGRAMS[k]]} ));
+
+var REGION_CHOICES = [[undefined, '']].concat(_.map(_.keys(REGIONS), function(k) { return [k, REGIONS[k]]} ));
+var ROOMS_CHOICES = _.map(_.keys(ROOMS), function(k) { return [k, ROOMS[k]]} );
+var RENT_CHOICES = _.map(_.keys(RENT), function(k) { return [k, RENT[k]]} );
+var NATIONALITY_CHOICES = [[undefined, '']].concat(_.map(_.keys(NATIONALITY), function(k) { return [k, NATIONALITY[k]]} ));
+var FAMILYSTATUS_CHOICES = [[undefined, '']].concat(_.map(_.keys(FAMILYSTATUS), function(k) { return [k, FAMILYSTATUS[k]]} ));;
 
 var DATA = {
   cities: {

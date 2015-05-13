@@ -54,12 +54,13 @@ module.exports = {
         lastname: 'Иванов',
         firstname: 'Сергей',
         middlename: 'Жанибекович',
-        iin: '12345',
+        iin: '100200300400',
         address: 'г. Алматы, ул. Карасай Батыра, 52',
         birthdate: '11.12.1964',
         tel: '+7 701 882 9321',
         udv_n: '892834982',
         udv_date: '20.12.2009',
+        mock_gcvp_payment: 55000, 
       },
     ]));
 

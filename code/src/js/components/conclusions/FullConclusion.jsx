@@ -109,8 +109,8 @@ var FullConclusion = React.createClass({
 
 	decide: function() {
 		var makeDecision = utils.makeDecision,
-			gcvpData = utils.getFromGCVP('12345'),
-			pkbData = utils.getFromPKB('12345');
+			gcvpData = utils.getFromGCVP('100200300400'),
+			pkbData = utils.getFromPKB('100200300400');
 
 		var decisionData = makeDecision(this.props.application, gcvpData, pkbData);
 
@@ -125,8 +125,8 @@ var FullConclusion = React.createClass({
 
 	decideBad: function() {
 		var makeDecision = utils.makeDecision,
-			gcvpData = utils.getFromGCVP('12344'),
-			pkbData = utils.getFromPKB('12344');
+			gcvpData = utils.getFromGCVP('100200300404'),
+			pkbData = utils.getFromPKB('100200300404');
 
 		var decisionData = makeDecision(this.props.application, gcvpData, pkbData);
 
@@ -138,8 +138,8 @@ var FullConclusion = React.createClass({
 
 	decideNeutral: function() {
 		var makeDecision = utils.makeDecision,
-			gcvpData = utils.getFromGCVP('12343'),
-			pkbData = utils.getFromPKB('12343');
+			gcvpData = utils.getFromGCVP('100200300403'),
+			pkbData = utils.getFromPKB('100200300403');
 
 		var decisionData = makeDecision(this.props.application, gcvpData, pkbData);
 
@@ -448,8 +448,8 @@ var FullConclusion = React.createClass({
 						</div>
 						<div className="text-center">
 							<button className="btn btn-info" onClick={this.decide}>Принять решение</button>
-							&nbsp;&nbsp;<button className="btn btn-link" onClick={this.decideBad}>Симулировать отказ</button>&nbsp;&nbsp;
-							<button className="btn btn-link" onClick={this.decideNeutral}>Симулировать отправку в Арендный комитет</button>
+							&nbsp;&nbsp;<button className="btn btn-link" onClick={this.decideBad}>Пример отказа</button>&nbsp;&nbsp;
+							<button className="btn btn-link" onClick={this.decideNeutral}>Пример дополнительного рассмотрения</button>
 						</div>
 						{decisionDetails}
 				</div>
