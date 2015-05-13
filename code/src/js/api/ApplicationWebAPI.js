@@ -15,6 +15,7 @@ module.exports = {
                 id: 'appl_' + timeNow,
                 date_created: timeNow,
                 status: 0,
+                round: 0,
             }, object);
         }
 
@@ -51,6 +52,26 @@ module.exports = {
 
         var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
         object.status = 2;
+        
+        for(var i = 0; i<rawApplications.length; i++) {
+            var cur = rawApplications[i];
+            if(cur.id === object.id) {
+                rawApplications[i] = object;
+                break;
+            }
+        }
+
+        localStorage.setItem('applications', JSON.stringify(rawApplications));
+        setTimeout(function() {
+            success(object);
+        }, 0);
+    },
+
+    reconsider: function(object, success, failure) {
+
+        var rawApplications = JSON.parse(localStorage.getItem('applications')) || [];
+        object.status = 0;
+        object.round = 1;
         
         for(var i = 0; i<rawApplications.length; i++) {
             var cur = rawApplications[i];

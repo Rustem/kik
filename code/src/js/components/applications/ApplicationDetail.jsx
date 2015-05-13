@@ -42,6 +42,14 @@ var ApplicationDetail = React.createClass({
         }.bind(this));
 	},
 
+	onApplicationReconsider: function(object) {
+		var promise = ApplicationActions.reconsider(object);
+		promise.done(function() {
+            this.transitionTo('index');
+            
+        }.bind(this));
+	},
+
 	getApplication: function() {
 		var params = this.getParams();
 		return ApplicationStore.get(params.id)
@@ -61,7 +69,7 @@ var ApplicationDetail = React.createClass({
 			case 22:
 				return <SecurConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
 			case 3:
-				return <FullConclusion application={application} onHandleSubmit={this.onConclusionSubmit} />;
+				return <FullConclusion application={application} onApplicationReconsider={this.onApplicationReconsider} />;
 		}
 		return null
 	},

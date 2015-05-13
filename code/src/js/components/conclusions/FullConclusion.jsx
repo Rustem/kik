@@ -418,7 +418,8 @@ var FullConclusion = React.createClass({
 		return  <div>
 					{Component}
 					<div className="text-center">
-						<button className="btn btn-success" onClick={this.genDoc.bind(null, doc_template, this.props.application, data)}>Скачать документ с решением</button>
+						<button className="btn btn-success" onClick={this.genDoc.bind(null, doc_template, this.props.application, data)}>Скачать документ с решением</button>&nbsp;&nbsp;
+						<button className="btn btn-warning" onClick={this.props.onApplicationReconsider.bind(null, this.props.application)}>Отправить на повторное рассмотрение</button>
 					</div>
 					<p><button className="btn btn-link" onClick={this.toggleShowDecisionDetails}>{this.state.showDecisionDetails ? 'Скрыть делали' : 'Показать детали'}</button></p>
 					{this.state.showDecisionDetails ? ComponentDetails : null}

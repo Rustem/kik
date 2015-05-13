@@ -69,4 +69,26 @@ module.exports = {
       });
     });
   },
+
+  reconsider: function(object) {
+    return promise(function (resolve, reject) {
+      AppDispatcher.handleAction({
+        type: ActionTypes.RECONSIDER_APPLICATION,
+        object: object
+      });
+      ApplicationWebAPI.reconsider(object, function(object){
+          AppDispatcher.handleAction({
+              type: ActionTypes.RECONSIDER_APPLICATION_SUCCESS,
+              object: object
+          });
+          resolve(object);
+      }.bind(this), function(error){
+          AppDispatcher.handleAction({
+              type: ActionTypes.RECONSIDER_APPLICATION_FAIL,
+              error: error
+          });
+          reject(error);
+      });
+    });
+  }
 };
