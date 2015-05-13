@@ -13,31 +13,61 @@ var Stage20 = React.createClass({
 	},
 
 	render: function() {
-		var my_applications = _.filter(this.state.applications, { status: 2 });
-    	var other_applications = _.reject(this.state.applications, { status: 2 });
+		var my_applications_0 = _.filter(this.state.applications, { status: 2, round: 0 });
+	    var other_applications_0 = _.reject(_.filter(this.state.applications, {round: 0}), { status: 2 });
+	    var my_applications_1 = _.filter(this.state.applications, { status: 2, round: 1 });
+	    var other_applications_1 = _.reject(_.filter(this.state.applications, {round: 1}), { status: 2 });
 
-		var waiting = [], ready = [];
-		_.forEach(my_applications, function(a){
+		var waiting_0 = [], ready_0 = [];
+		_.forEach(my_applications_0, function(a){
 			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.RISK) !== undefined)
-				ready.push(a);
+				ready_0.push(a);
 			else
-				waiting.push(a);
+				waiting_0.push(a);
+		});
+		var waiting_1 = [], ready_1 = [];
+		_.forEach(my_applications_1, function(a){
+			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.RISK) !== undefined)
+				ready_1.push(a);
+			else
+				waiting_1.push(a);
 		});
 		return  <div>
+					<h3 className="text-center">Первичное рассмотрение</h3>
 					<h4>Ждут заключения</h4>
-					{waiting.length > 0 ? 
-						 <ApplicationList applications={waiting} />
+					{waiting_0.length > 0 ? 
+						 <ApplicationList applications={waiting_0} />
 					: <h6>Новых заявлений нет</h6>}
 					<br /><br />
 					<h4>Готовы</h4>
-					{ready.length > 0 ? 
-						 <ApplicationList applications={ready} />
+					{ready_0.length > 0 ? 
+						 <ApplicationList applications={ready_0} />
 					: <h6>Обработанных заявлений нет</h6>}
 					<br /><br />
 					<h4>Остальные заявления</h4>
-					{other_applications.length > 0 ? 
-						<ApplicationList applications={other_applications} />
+					{other_applications_0.length > 0 ? 
+						<ApplicationList applications={other_applications_0} />
 					: <h6>Заявлений нет</h6>}
+
+					<br /><br /><br />
+					{my_applications_1.length > 0 || other_applications_1.length > 0 ? 
+					<div>
+					<h3 className="text-center">Повторное рассмотрение</h3>
+					<h4>Ждут заключения</h4>
+					{waiting_1.length > 0 ? 
+						 <ApplicationList applications={waiting_1} />
+					: <h6>Новых заявлений нет</h6>}
+					<br /><br />
+					<h4>Готовы</h4>
+					{ready_1.length > 0 ? 
+						 <ApplicationList applications={ready_1} />
+					: <h6>Обработанных заявлений нет</h6>}
+					<br /><br />
+					<h4>Остальные заявления</h4>
+					{other_applications_1.length > 0 ? 
+					   <ApplicationList applications={other_applications_1} />
+					: <h6>Заявлений нет</h6>}
+					</div> : null}
 			    </div>
 	}
 });

@@ -449,8 +449,19 @@ var ApplicationFormView = React.createClass({
         <br />
         <div className="row">
           <div className="text-center">
-            <button className="btn btn-info" onClick={this.handleSubmit}>Сохранить</button>&nbsp;
+            <button className="btn btn-info" onClick={this.handleSubmit}>Сохранить</button>
+          </div>
+        </div>
+        <div className="row" style={{marginTop: "20px"}}>
+          <div className="text-center">
+          <div className="col-xs-3 col-md-offset-3">
+            <select className="form-control">
+              <option>Сериков М.М.</option>
+            </select>&nbsp;
+          </div>
+          <div className="col-xs-3">
             <button className="btn btn-success" onClick={this.handleAction.bind(null, 'accept')}>Отправить на согласование</button>
+          </div>
           </div>
         </div>
       </div>
