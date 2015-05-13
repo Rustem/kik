@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var ApplicationInfo = React.createClass({
 
 	render: function() {
@@ -7,7 +8,7 @@ var ApplicationInfo = React.createClass({
 				<tbody>
 			        <tr>
 			          <th>ФИО</th>
-			          <td>{application.lastname} {application.firstname} {application.middlename}</td>
+			          <td>{application.person.lastname} {application.person.firstname} {application.person.middlename}</td>
 			        </tr>
 			        <tr>
 			          <th>Программа</th>
@@ -97,24 +98,51 @@ var ApplicationInfo = React.createClass({
 			        </tr>
 			        <tr>
 			          <th>Дата рождения</th>
-			          <td>{application.birthday}</td>
+			          <td>{application.person.birthday}</td>
 			        </tr>
 			        <tr>
 			          <th>Национальность</th>
-			          <td>{application.nationality}</td>
+			          <td>{application.person.nationality}</td>
 			        </tr>
 			        <tr>
 			          <th>Семейный статус</th>
-			          <td>{application.familystatus}</td>
+			          <td>{application.person.familystatus}</td>
 			        </tr>
 			        <tr>
 			          <th>Адрес проживания</th>
-			          <td>{application.address}</td>
+			          <td>{application.person.address}</td>
 			        </tr>
 			        <tr>
 			          <th>Номер телефона</th>
-			          <td>{application.phonenumber}</td>
+			          <td>{application.person.phonenumber}</td>
 			        </tr>
+			        {!_.isEmpty(application.person_guarantor) ? <div><tr>
+			        	<th colSpan="2" style={{textAlign: "center"}}>Сведения о гаранте</th>
+			        </tr>
+			        <tr>
+			          <th>ФИО</th>
+			          <td>{application.person_guarantor.lastname} {application.person_guarantor.firstname} {application.person_guarantor.middlename}</td>
+			        </tr>
+			        <tr>
+			          <th>Дата рождения</th>
+			          <td>{application.person_guarantor.birthday}</td>
+			        </tr>
+			        <tr>
+			          <th>Национальность</th>
+			          <td>{application.person_guarantor.nationality}</td>
+			        </tr>
+			        <tr>
+			          <th>Семейный статус</th>
+			          <td>{application.person_guarantor.familystatus}</td>
+			        </tr>
+			        <tr>
+			          <th>Адрес проживания</th>
+			          <td>{application.person_guarantor.address}</td>
+			        </tr>
+			        <tr>
+			          <th>Номер телефона</th>
+			          <td>{application.person_guarantor.phonenumber}</td>
+			        </tr></div> : null}
 			        <tr>
 			        	<th colSpan="2" style={{textAlign: "center"}}>Информация о доходах/расходах</th>
 			        </tr>

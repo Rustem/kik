@@ -1,132 +1,95 @@
 var gcvp = [
 {
-  "iin": "18237",
-  "firstname":"Досжан",
-  "lastname":"Кайратов",
-  "middlename":"Аманович",
-  "birthday": "01.11.1983",
-  "incomes":{
-  	"main": { 
-  	    "receipts":[
-  	      {
-  	      	"type": "salary",
-	        "date": "04.02.2015",
-	        "value": "24840"
-  	      },
-  	      {
-  	      	"type": "salary",
-  	  	    "date": "04.03.2015",
-  	  	    "value": "24840"
-  	      }
-  	    ]
-  	  }
-  	},
-  	"additional": {
-	  "receipts" : [
-  			{
-  				"type": null,
-  				"date": null,
-  				"value": null
-  			}
-  		]
-	}
-  
-},
-{
-  "iin": "92818",
-  "firstname":"Сергей",
-  "lastname":"Иванов",
-  "middlename":"Аркадьевич",
-  "birthday": "21.06.1978",
-  "income": {
-	"main" : {
-  	  "receipts":[
-  	      {
-  	      	"type": "salary",
-	        "date": "04.02.2015",
-	        "value": "32850"
-  	      },
-  	      {
-  	      	"type": "salary",
-  	  	    "date": "04.03.2015",
-  	  	    "value": "32850"
-  	      }
-  	  ]
-  	 },
-  	"additional": {
-  		"receipts" : [
-  			{
-  				"type": null,
-  				"date": null,
-  				"value": null
-  			}
-  		]
-  	  }
-  	}
-},
-{
-  "iin": "01822",
+  "iin": "12343",
   "firstname":"Мадияр",
   "lastname":"Ботбаев",
   "middlename":"Муканович ",
   "birthday": "14.07.1978",
   "income": {
-	"main" : {
-  	  "receipts":[
-  	      {
-  	      	"type": "salary",
-	        "date": "04.03.2015",
-	        "value": "43020"
-  	      },
-  	      {
-  	      	"type": "salary",
-  	  	    "date": "04.04.2015",
-  	  	    "value": "44000"
-  	      }
-  	  ]
-  	 },
-  	"additional": {
-  		"receipts" : [
-  			{
-  				"type": null,
-  				"date": null,
-  				"value": null
-  			}
-  		]
-  	  }
-  	}
+    "main" : {
+      "type": "salary",
+      "receipts":[
+          {
+            "date": "04.11.2014",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+          {
+            "date": "04.12.2014",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+          {
+            "date": "04.01.2015",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+          {
+            "date": "04.02.2015",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+          {
+            "date": "04.03.2015",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+          {
+            "date": "04.04.2015",
+            "company": "АО ШиноПодряд",
+            "value": "15000"
+          },
+      ]
+    },
+    "additional": {
+      "type": "salary",
+      "receipts" : [
+        {
+          "date": "04.03.2015",
+          "company": "АО ГромСтрой",
+          "value": "4000"
+        },
+      ]
+    }
+  }
 },
 {
-  "iin": "18237",
+  "iin": "12344",
   "firstname":"Айжан",
   "lastname":"Жумабаев",
   "middlename":"Беришевич",
   "birthday": "06.12.1969",
   "income": {
-	"main" : {
-  	  "receipts":[
-  	      {
-  	      	"type": "pension",
-	        "date": "04.03.2015",
-	        "value": "37102"
-  	      },
-  	      {
-  	      	"type": "pension",
-  	  	    "date": "04.04.2015",
-  	  	    "value": "37150"
-  	      }
-  	  ]
-  	 },
-  	"additional": {
-  		"receipts" : [
-  			{
-  				"type": null,
-  				"date": null,
-  				"value": null
-  			}
-  		]
-  	  }
-  	}
+    "main" : {
+      "type": "salary",
+      "receipts":[
+        {
+          "date": "04.01.2015",
+          "company": "АО Звезда",
+          "value": "12400"
+        },
+        {
+          "date": "04.02.2015",
+          "company": "АО Звезда",
+          "value": "12400"
+        },
+        {
+          "date": "04.03.2015",
+          "company": "АО Звезда",
+          "value": "12400"
+        },
+        {
+          "date": "04.04.2015",
+          "company": "АО Звезда",
+          "value": "12400"
+        },
+      ]
+    },
+    "additional" : {
+      "type": "salary",
+      "receipts":[]
+    },
+  },
 },
 {
   "iin": "12345",
@@ -135,112 +98,136 @@ var gcvp = [
   "middlename":"Жанибекович",
   "birthday": "11.12.1964",
   "income": {
-	  "main" : {
-  	  "type": "salary",
+    "main" : {
+      "type": "salary",
       "receipts":[
           {
             "date": "04.09.2014",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.10.2014",
-            "value": "27320"
-          },
-          {
-  	        "date": "04.11.2014",
-  	        "value": "27320"
-  	      },
-  	      {
-  	  	    "date": "04.12.2014",
-  	  	    "value": "27320"
-  	      },
-          {
-            "date": "04.01.2015",
-            "value": "27320"
-          },
-          {
-            "date": "04.02.2015",
-            "value": "27320"
-          },
-          {
-            "date": "04.03.2015",
-            "value": "27320"
-          },
-          {
-            "date": "04.04.2015",
-            "value": "27320"
-          },
-  	  ]
-  	 },
-  	"additional": {
-  		"type": "salary",
-      "receipts":[
-          {
-            "date": "04.01.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.02.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.03.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.04.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.05.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.06.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.07.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.08.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.09.2014",
-            "value": "27320"
-          },
-          {
-            "date": "04.10.2014",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.11.2014",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.12.2014",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.01.2015",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.02.2015",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.03.2015",
+            "company": "АО Победитель",
             "value": "27320"
           },
           {
             "date": "04.04.2015",
+            "company": "АО Победитель",
             "value": "27320"
           },
       ]
-  	 }
+     },
+    "additional": {
+      "type": "salary",
+      "receipts":[
+          {
+            "date": "04.01.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.02.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.03.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.04.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.05.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.06.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.07.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.08.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.09.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.10.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.11.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.12.2014",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.01.2015",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.02.2015",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.03.2015",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+          {
+            "date": "04.04.2015",
+            "company": "ТОО Роги и Копыта",
+            "value": "6380"
+          },
+      ]
+     }
   }
 },
 ]

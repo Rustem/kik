@@ -1,59 +1,30 @@
 var pkb = [ 
 {
-  "iin": "18237",
-  "firstname":"Досжан",
-  "lastname":"Кайратов",
-  "middlename":"Аманович",
-  "birthday": "01.11.1983",
-  "credits":[
-    {
-      "status": "closed",
-      "opened_date": "15.08.2013",
-      "closed_date": "20.08.2014",
-      "delay_days": "5"
-    },
-    {
-      "status": "open",
-      "opened_date": "07.06.2014",
-      "closed_date": null,
-      "delay_days": null
-    }
-  ]
-},
-
-{
-  "iin": "92818",		
-  "firstname":"Сергей",
-  "lastname":"Иванов",
-  "middlename":"Аркадьевич",
-  "birthday": "21.06.1978",
-  "credits":[
-    {
-      "status": "open",
-      "opened_date": "02.09.2014",
-      "closed_date": null,
-      "delay_days": null
-    }
-  ]
-},
-
-{
-  "iin": "01822",
+  "iin": "12343",
   "firstname":"Мадияр",
   "lastname":"Ботбаев",
-  "middlename":"Муканович ",
+  "middlename":"Муканович",
   "birthday": "14.07.1978",
   "credits":[
     {
       "status": "open",
       "opened_date": "17.01.2015",
-      "closed_date": null,
-      "delay_days": null
+      "bank": "Forte Bank",
+      "delay_days_total": 0,
+      "delay_days_max": 0,
+    },
+    {
+      "status": "closed",
+      "opened_date": "17.01.2014",
+      "closed_date": "21.12.2014",
+      "bank": "Forte Bank",
+      "delay_days_total": 0,
+      "delay_days_max": 0,
     }
   ]
 },
 {
-  "iin": "18237",
+  "iin": "12344",
   "firstname":"Айжан",
   "lastname":"Жумабаев",
   "middlename":"Беришевич",
@@ -63,13 +34,17 @@ var pkb = [
       "status": "closed",
       "opened_date": "02.01.2008",
       "closed_date": "20.01.2011",
-      "delay_days": "18"
+      "bank": "АО Kaspi банк",
+      "delay_days_total": 543,
+      "delay_days_max": 0,
     },
     {
       "status": "closed",
       "opened_date": "20.01.2011",
       "closed_date": "15.01.2012",
-      "delay_days": "0"
+      "bank": "АО Kaspi банк",
+      "delay_days_total": 519,
+      "delay_days_max": 0,
     }
   ]
 },
@@ -84,15 +59,17 @@ var pkb = [
       "status": "open",
       "opened_date": "05.11.2013",
       "closed_date": null,
+      "bank": "АО Казкоммерцбанк",
       "delay_days_total": 0,
-      "delay_days_max": 0
+      "delay_days_max": 0,
     },
     {
       "status": "open",
       "opened_date": "16.08.2014",
       "closed_date": null,
+      "bank": "АО Казкоммерцбанк",
       "delay_days_total": 0,
-      "delay_days_max": 0
+      "delay_days_max": 0,
     }
   ]
 },

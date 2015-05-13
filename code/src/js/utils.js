@@ -40,52 +40,61 @@ function makeDecision(application, gcvpData, pkbData) {
         closed_credits = _.filter(credits, {'status': 'closed'});
 
     // ============================== ОТКАЗ ===========================================================
-    var flags = [false, false, false, false, false];
+    var reject_flags = [false, false, false, false, false];
 
     // просрочки по действующим кредитам 
     var total = _.reduce(open_credits, function(total, credit) {
           return total + credit.delay_days_total;
         },0)
     if(total > 0)
-        flags[0] = true
+        reject_flags[0] = true
 
     // просрочки по завершенным кредитам более 1000 дней
     var total = _.reduce(closed_credits, function(total, credit) {
           return total + credit.delay_days_total;
         },0)
     if(total > 1000)
-        flags[1] = true
+        reject_flags[1] = true
 
     // завершенные кредиты с просрочками были закрыты после 01.01.2015
     var total = _.filter(closed_credits, function(credit) {
            return credit.delay_days_total > 0 && moment(credit.closed_date) > moment("20150101", "YYYYMMDD")
         })
     if(total.length > 0)
-        flags[2] = true
+        reject_flags[2] = true
 
     // арендатор не имеет дохода, коэффициенты платежеспособности рассчитаны за счет доходов гаранта
     if(application.income_total <= 0)
-        flags[3] = true
+        reject_flags[3] = true
 
     // коэффициенты П/Д более 65% и О/Д более 72%
     if(application.pd > 65 && application.od > 72)
-        flags[4] = true
+        reject_flags[4] = true
 
-    var total = _.reduce(flags, function(total, flag) {
+    var total = _.reduce(reject_flags, function(total, flag) {
           return total || flag;
         }, false)
     if(total)
         return {
             decision: 'reject',
-            flags: flags
+            flags: reject_flags,
+            details: {
+                gcvp: _.sortBy(gcvpData.income.main.receipts.concat(gcvpData.income.additional.receipts), function(r) {
+                            return moment(r.date)
+                        }),
+                pkb: _.sortBy(pkbData.credits, function(c) {
+                            return moment(c.opened_date)
+                        })
+            }
         }
 
+
     // ============================== ОДОБРЕНИЕ =======================================================
-    var flags = [false, false, false, false, true, true];
+    var approve_flags = [false, false, false, false, true, true];
 
     // П/Д не более 65%, О/Д не более 70% (65,01 и 70,01 считать более)
     if(application.pd <= 65 && application.od <= 70)
-        flags[0] = true
+        approve_flags[0] = true
 
     // Доходы арендатора и гаранта (если имеется) подтверждены с основного места работы за
     // последние 6 мес. отчислениями из ГЦВП, с дополнительного места работы за последние 
@@ -99,7 +108,7 @@ function makeDecision(application, gcvpData, pkbData) {
           return moment(receipt.date, "DD.MM.YYYY") > one_year_ago;
         });
     if(person_main.length >= 6 && person_additional.length >= 12)
-        flags[1] = true
+        approve_flags[1] = true
 
     // Отсутствие просрочек по действующему кредиту и максимальные дни составляли до 90
     // дней (дополнительно запросить объяснительную)
@@ -110,7 +119,7 @@ function makeDecision(application, gcvpData, pkbData) {
           return total + credit.delay_days_max;
         },0)
     if(cur_total == 0 && max_total < 90)
-        flags[2] = true
+        approve_flags[2] = true
 
     // По завершенным кредитам просрочка максимальная до 1000 дней и данные кредиты
     // закрыты до 01.01.2015 г.(дополнительно запросить объяснительную)
@@ -120,20 +129,37 @@ function makeDecision(application, gcvpData, pkbData) {
             return total + credit.delay_days_max 
         },0);
     if(total < 1000)
-        flags[3] = true
+        approve_flags[3] = true
 
-    var total = _.reduce(flags, function(total, flag) {
+    var total = _.reduce(approve_flags, function(total, flag) {
           return total && flag;
         }, true)
     if(total)
         return {
             decision: 'approve',
-            flags: flags
+            flags: approve_flags,
+            details: {
+                gcvp: _.sortBy(gcvpData.income.main.receipts.concat(gcvpData.income.additional.receipts), function(r) {
+                            return moment(r.date)
+                        }),
+                pkb: _.sortBy(pkbData.credits, function(c) {
+                            return moment(c.opened_date)
+                        })
+            }
         }
 
     // ========================== НА РАССМОТРЕНИЕ АРЕНДНОГО КОМИТЕТА ====================================
     return {
         decision: 'manual',
+        flags: approve_flags.concat(reject_flags),
+        details: {
+            gcvp: _.sortBy(gcvpData.income.main.receipts.concat(gcvpData.income.additional.receipts), function(r) {
+                        return moment(r.date)
+                    }),
+            pkb: _.sortBy(pkbData.credits, function(c) {
+                        return moment(c.opened_date)
+                    })
+        }
     }
 }
 

@@ -36,7 +36,9 @@ var appConstants = {
 		RISK: 'risk.docx',
 		// LEGAL: 'legal.docx',
 		// SECUR: 'secur.docx',
-		FULL: 'full.docx',
+		FULL_APPROVE: 'full_approve.docx',
+		FULL_REJECT: 'full_reject.docx',
+		FULL_MANUAL: 'full_manual.docx',
 		ZAYAVLENIE: 'zayavlenie.docx',
 		SOGLASIE: 'soglasie.docx',
 	}
