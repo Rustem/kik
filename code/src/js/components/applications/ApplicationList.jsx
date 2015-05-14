@@ -1,3 +1,4 @@
+var moment = require('moment');
 var Router = require('react-router');
 var Link = Router.Link;
 var constants = require('../../constants/appConstants'); 
@@ -16,6 +17,7 @@ var ApplicationListItem = React.createClass({
 			        <th scope="row">{this.props.idx+1}</th>
 			        <td>{application.person.lastname} {application.person.firstname} {application.person.middlename} </td>
 			        <td>{PROGRAMS[application.program]}</td>
+			        <td>{moment(application.date_created).format("DD.MM.YYYY")}</td>
 					<td>{APPLICATION_STATUS[application.status]}</td>
 			        <td>
 			          	<Link to="application_detail"
@@ -44,6 +46,7 @@ var ApplicationList = React.createClass({
 				          <th>#</th>
 				          <th>ФИО</th>
 				          <th>Программа</th>
+				          <th>Дата подачи заявления</th>
 				          <th>Статус</th>
 				          <th></th>
 				        </tr>
