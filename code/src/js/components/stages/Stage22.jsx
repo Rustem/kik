@@ -1,4 +1,6 @@
 var _ = require('lodash');
+var Router = require('react-router');
+var Link = Router.Link;
 var ApplicationStore = require('../../stores/ApplicationStore');
 var ConclusionStore = require('../../stores/ConclusionStore');
 var ApplicationList = require('../applications/ApplicationList.jsx');
@@ -19,20 +21,27 @@ var Stage22 = React.createClass({
 	    var other_applications_1 = _.reject(_.filter(this.state.applications, {round: 1}), { status: 2 });
 
 		var waiting_0 = [], ready_0 = [];
-		_.forEach(my_applications, function(a){
+		_.forEach(my_applications_0, function(a){
 			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.SECUR) !== undefined)
 				ready_0.push(a);
 			else
 				waiting_0.push(a);
 		});
 		var waiting_1 = [], ready_1 = [];
-		_.forEach(my_applications, function(a){
+		_.forEach(my_applications_1, function(a){
 			if(ConclusionStore.getByApplicationAndType(a, ConclusionTypes.SECUR) !== undefined)
 				ready_1.push(a);
 			else
 				waiting_1.push(a);
 		});
 		return  <div>
+					<p className='text-right'>
+			            <Link to="application_finder"
+			                className="btn btn-default">
+			                Поиск заявления
+			            </Link>
+			        </p>
+			        <br />
 					<h3 className="text-center">Первичное рассмотрение</h3>
 					<h4>Ждут заключения</h4>
 					{waiting_0.length > 0 ? 

@@ -44,6 +44,12 @@ var ApplicationStore = objectAssign({}, EventEmitter.prototype, {
     return _.where(_applications, { status: status });
   },
 
+  getByLastname: function(lastname) {
+    return  _.filter(_applications, function(a) { 
+              return a.person.lastname.indexOf(lastname) > -1
+            });
+  },
+
 });
 
 ApplicationStore.dispatchToken = AppDispatcher.register(function(payload){

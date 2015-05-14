@@ -29,6 +29,10 @@ var Stage0 = React.createClass({
             <Link to="person_finder"
                 className="btn btn-default">
                 Найти человека
+            </Link>&nbsp;
+            <Link to="application_finder"
+                className="btn btn-default">
+                Поиск заявления
             </Link>
           </p>
           <br />
